@@ -1,0 +1,82 @@
+<div class="main">
+    <div class="section">
+        <ng-container *ngIf="questionPagination | async as questions; else loading">
+            <!-- Questions section -->
+            <div class="container-row">
+                <!-- Question -->
+                <ng-container *ngIf="questions.length > 0; else nothingToShow">
+                    <div class="item bg-white" *ngFor="let question of questions" (click)="gotoQuestion(question)">
+                        <div class="img-profile-xm pt-3">
+                            <img [src]="question.studantPhoto">
+                        </div>
+                        <span class="px-3 mt-2"> {{question.studantFirstName}} {{question.studantLastName}} </span>
+                        <span class="px-3 my-2 text-disabled-1">
+                            <h5>
+                                {{question.createAt | elapsed}}
+                            </h5>
+                        </span>
+                        <div class="statistics-info">
+                            <span class="d-flex align-items-center justify-content-center mb-1"
+                                matTooltip="Respostas dos alunos">
+                                <span class="mr-2">
+                                    {{question.studantAnswerQnt}}
+                                </span>
+                                <mat-icon>face</mat-icon>
+                            </span>
+                            <span class="d-flex align-items-center justify-content-center mb-1"
+                                matTooltip="Respostas do professor">
+                                <span class="mr-2">
+                                    {{question.teacherAnswerQnt}}
+                                </span>
+                                <mat-icon>support_agent</mat-icon>
+                            </span>
+                            <span class="d-flex align-items-center justify-content-center" matTooltip="Comentários">
+                                <span class="mr-2">
+                                    {{question.commentsQnt}}
+                                </span>
+                                <mat-icon>chat_bubble</mat-icon>
+                            </span>
+                        </div>
+                        <mat-divider class="w-100"></mat-divider>
+
+                        <div class="doubt-content">
+                            <span class="bold-500 px-3 pb-3">
+                                {{question.subject}}
+                            </span>
+                        </div>
+
+                        <div class="state-info">
+                            <mat-chip-list #chipList>
+                                <mat-chip selectable="false" removable="true" disabled="false"
+                                    [matTooltip]="situations[question.situation].tip" (removed)="changeState(question)">
+                                    {{situations[question.situation].state}}
+                                    <mat-icon matChipRemove matTooltip="Alterar estado" *ngIf="isOwner">mode_edit
+                                    </mat-icon>
+                                </mat-chip>
+                            </mat-chip-list>
+                        </div>
+                    </div>
+                </ng-container>
+                <!-- End -->
+            </div>
+            <div class="center-bottom">
+                <div class="overlay">
+                    <mat-spinner color="primary" diameter=40 margin="auto" *ngIf="questionPagination?.loading">
+                    </mat-spinner>
+                </div>
+            </div>
+        </ng-container>
+    </div>
+</div>
+
+<ng-template #loading>
+    <app-loading-page></app-loading-page>
+</ng-template>
+
+<ng-template #nothingToShow>
+    <div class="w-100 d-flex justify-content-center mb-3">
+        <h4 class="text-disabled-1">
+            Sem questões de momento
+        </h4>
+    </div>
+</ng-template>

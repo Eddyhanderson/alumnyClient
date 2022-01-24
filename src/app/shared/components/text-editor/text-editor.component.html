@@ -1,0 +1,75 @@
+<div #toolbar>
+  <span class="ql-formats">
+    <select class="ql-header">
+      <option value="1"></option>
+      <option value="2"></option>
+      <option value="3"></option>
+      <option selected></option>
+    </select>
+  </span>
+
+  <span class="ql-formats">
+    <button class="ql-bold"></button>
+    <button class="ql-italic"></button>
+    <button class="ql-underline"></button>
+    <button class="ql-strike"></button>
+  </span>
+
+  <span class="ql-formats">
+    <button class="ql-blockquote"></button>
+    <button class="ql-code-block"></button>
+  </span>
+
+  <span class="ql-formats">
+    <button class="ql-list" value="ordered"></button>
+    <button class="ql-list" value="bullet"></button>
+  </span>
+
+  <span class="ql-formats">
+    <button class="ql-script" value="sub"></button>
+    <button class="ql-script" value="super"></button>
+  </span>
+
+  <span class="ql-formats">
+    <button class="ql-direction" value="rtl"></button>
+  </span>
+
+  <span class="ql-formats">
+    <select class="ql-color"></select>
+    <select class="ql-background"></select>
+    <select class="ql-font"></select>
+    <select class="ql-align"></select>
+  </span>
+  <span class="ql-formats">
+    <button class="ql-link" value="rtl"></button>
+    <button class="ql-image" value="rtl"></button>
+    <button class="ql-video" value="rtl"></button>
+  </span>
+
+  <div class="ml-3 ql-formats ql-custom">
+    <button mat-icon-button matTooltip="Salvar" [disabled]="!canSave" (click)="save()">
+      <mat-icon>
+        save
+      </mat-icon>
+    </button>
+  </div>
+
+  <div class="ql-formats ql-custom">
+    <button mat-icon-button (click)="undo()" matTooltip="Retroceder (Ctr Shift Z)">
+      <mat-icon>
+        undo
+      </mat-icon>
+    </button>
+  </div>
+
+  <div class="ql-formats ql-custom">
+    <button mat-icon-button (click)="redo()" matTooltip="Avançar (Ctr Z)">
+      <mat-icon>
+        redo
+      </mat-icon>
+    </button>
+  </div>
+
+
+</div>
+<div #editor id="editor-container"></div>

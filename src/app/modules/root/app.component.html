@@ -1,0 +1,7 @@
+<ng-container *ngIf="!logged; else build">
+    <router-outlet></router-outlet>
+</ng-container>
+<ng-template #build>    
+    <app-build></app-build>
+</ng-template>
+

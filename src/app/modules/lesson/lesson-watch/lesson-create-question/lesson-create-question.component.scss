@@ -1,0 +1,13 @@
+@import '../../../../shared/styles/standard-layout-1';
+
+.main{
+    @extend %main;
+}
+
+.container{
+    @extend %container;
+}
+
+.text-editor{
+    height: 15rem;    
+}

@@ -1,0 +1,15 @@
+@import "../../../shared/styles/standard-layout";
+
+.main{
+    @extend %main;    
+}
+
+.section{
+    @extend %section;
+}
+
+.container-row{
+    @extend %container-row;
+    justify-content: center;
+    align-items: center;
+}

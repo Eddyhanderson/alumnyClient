@@ -1,0 +1,142 @@
+.mat-form-field {
+    margin: 40px 0;
+    width: 500px !important;
+}
+
+.mat-toolbar-single-row {
+    height: auto !important;
+    background: transparent;
+}
+
+.mat-toolbar-single-row button {
+    width: 200px;
+}
+
+mat-form-field {
+    width: 100% !important;
+    margin: 0 0 1rem !important;
+}
+
+#uploadFile {
+    top: 0px;
+    left: 0px;
+    width: 100%;    
+    z-index: 9;
+    opacity: 0;
+    height: 100%;
+    cursor: pointer;
+    position: absolute;
+}
+
+.dialog-content{
+    height: 100%;
+}
+
+mat-dialog-content{
+    height: 80% !important;
+}
+
+textarea{
+    line-height: 1.2rem;
+    height: 4rem !important;
+    font-size: small;
+}
+
+.left-form-container{
+    width: 57% !important;
+}
+
+#rigth-form-container{
+    width: 28% !important;
+    position: fixed;
+    left: 57%;
+}
+
+#video-loading{
+    background-color: var(--palette-black-alpha-10);
+    border-radius: 10;
+    height: 12rem;
+}
+
+#pic-thumbnail{
+    width: 100%;
+    height: 5rem;
+    border: .1px solid rgba(1,1,1,.09);
+}
+
+#thumbnail-loading{
+    width: 50%;
+    height: 5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    @extend %loading;
+}
+
+#thumbnail-completed{
+    width: 50%;
+    height: 5rem;
+}
+
+#thumbnail-completed img{
+    width: 100%;
+    height: 100%;
+}
+
+@mixin animation-defining($animation) {
+    -webkit-animation: $animation;
+    -ms-animation: $animation;
+    -o-animation: $animation;
+    -moz-animation: $animation;
+    animation: $animation;
+}
+
+%loading {
+    background-color:var(--palette-black-alpha-4);;
+    @include animation-defining(loading-animation 1s ease-in 0s infinite alternate-reverse);
+}
+
+@-webkit-keyframes loading-animation {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: .5;
+    }
+}
+
+@-ms-keyframes loading-animation {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: .5;
+    }
+}
+
+@-o-keyframes loading-animation {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: .5;
+    }
+}
+
+@-moz-keyframes loading-animation {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: .5;
+    }
+}
+
+@keyframes loading-animation {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: .5;
+    }
+}

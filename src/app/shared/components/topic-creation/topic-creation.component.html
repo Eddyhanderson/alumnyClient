@@ -1,0 +1,80 @@
+<form [formGroup]="topicNameCtl">
+
+    <div class="d-flex flex-column">
+        <div class="irrelevant-text text-disabled-1 my-2">
+            Os tópicos servem para agrupar um conjunto de aulas
+            que abordam um mesmo tema. É uma óptima forma de ter as aulas com o mesmo propósito
+            organizadas em um único lugar.
+        </div>
+        <mat-form-field appearance="outline" class="mt-1">
+            <mat-label>
+                Insira o nome do tópico
+            </mat-label>
+            <input [formControl]="topicNameCtl" placeholder="Ex: Dinâmica dos fluidos" [matAutocomplete]="auto"
+                matInput>
+        </mat-form-field>
+        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+            <mat-option *ngFor="let disciplineTopic of disciplineTopicsFiltered$ | async " [value]="disciplineTopic">
+                {{disciplineTopic.name}}
+            </mat-option>
+        </mat-autocomplete>
+
+        <div class="irrelevant-text text-disabled-1 my-2">
+            <p>
+                Escolha uma foto de capa para este tópico
+            </p>
+        </div>
+        <mat-chip-list *ngIf="fileName">
+            <mat-chip selectable="true" removable="true" disabled="false" (removed)="removeImage()">
+                {{fileName}}
+                <mat-icon matChipRemove matTooltip="Remover foto">
+                    cancel
+                </mat-icon>
+            </mat-chip>
+        </mat-chip-list>
+        <mat-form-field appearance="outline" class="mt-1 w-25">
+            <div>
+                <mat-toolbar class="d-flex align-items-center justify-content-center">
+
+                    <input matInput readonly name="name">
+
+                    <button mat-icon-button color="primary" matTooltip="Adicionar foto">
+                        <mat-icon>
+                            add_a_photo
+                        </mat-icon>
+                    </button>
+
+                </mat-toolbar>
+                <input type="file" accept="image/*" #fileInput id="uploadFile" (change)="uploadEvt($event)"
+                    name="uploadFile">
+            </div>
+        </mat-form-field>
+
+        <div class="my-2">
+            <div class="irrelevant-text text-disabled-1 mb-1">
+                <p>
+                    Descreva em detalhes o teu objectivo com esse conjunto de aulas
+                    que pretendes iniciar. É importante ser o mais detalhista possivel
+                    pois, esta descrição ficará visivel para todos, inclusive os alunos que
+                    ainda não estão matriculados.
+                </p>
+            </div>
+            <div class="text-editor mb-4">
+                <div #editor>
+
+                </div>
+            </div>
+            <mat-error *ngIf="descriptEmpty" style="margin-top: 3rem;">
+                O campo da descrição não pode estar vazio
+            </mat-error>
+        </div>
+
+        <div class="d-flex justify-content-center mb-3 mt-4">
+            <button mat-flat-button color="accent" class="w-25 d-flex justify-content-center align-items-center"
+                style="margin: 5rem 0; height: 2rem;" [disabled]="submited" (click)="onTopicCreate()">
+                <mat-spinner color="primary" diameter=20 *ngIf="submited"></mat-spinner>
+                <span *ngIf="!submited">Criar</span>
+            </button>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,57 @@
+@import "../../../shared/styles/standard-layout-0";
+
+.main {
+    @extend %main;  
+}
+
+.container-items {
+    @extend %container-items;
+}
+
+.item {
+    width: 24.2%;
+    margin: 0 1% 1% 0;  
+}
+
+.background-image {
+    height: 50%;
+    border-radius: 1%;
+}
+.background-image a{
+    height: 100% !important;
+}
+.background-image a img {
+    border-radius: 1%;    
+}
+
+.teacher-place-item {
+    display: flex;
+    align-items: flex-start;
+    justify-content: start;
+    flex-flow: column;
+    height: 20rem;
+}
+
+.lesson-item{
+    display: flex;
+    align-items: flex-start;
+    justify-content: start;
+    flex-flow: column;
+    height: 20rem;
+}
+
+.user-item{
+    height: 15rem;
+}
+
+.section {
+    @extend %section;
+}
+
+a.selectable-item:focus {
+    outline: white auto 1px;
+}
+
+.text-ellips {
+    white-space: normal;
+}

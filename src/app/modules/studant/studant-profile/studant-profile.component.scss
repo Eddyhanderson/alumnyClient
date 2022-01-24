@@ -1,0 +1,35 @@
+@import "../../../shared/styles/standard-layout";
+
+.main {
+    @extend %main;
+}
+
+.section {
+    @extend %section;
+}
+
+.container-row {
+    @extend %container-row;
+    justify-content: space-between;
+}
+
+.item {
+    width: 40%;
+    height: 15rem;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.studant-metadata{
+    display: flex !important;
+    align-items:center;
+    justify-content: center;
+}
+
+.studant-metadata:hover #add-button {
+    opacity: 1;
+}
+
+#add-button {
+    opacity: 0;
+}

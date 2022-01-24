@@ -1,0 +1,59 @@
+<form [formGroup]="topicCtl">
+    <ng-container *ngIf="topics; else loadingItems">
+        <ng-container *ngIf="topics?.length > 0 && !topicCreation; else createTopic">
+            <div class="mb-2 d-flex align-items-center justify-content-between">
+                <div class="irrelevant-text text-disabled-1 ">
+                    Seleccione o tópico a que a aula pertence.
+                </div>
+                <div>
+                    <button mat-icon-button matTooltip="Novo tópico" class="button-bg-accent-4 ml-2"
+                        diameter="20" (click)="topicCreation = true">
+                        <mat-icon style="font-size: 22px;">
+                            bookmark_add
+                        </mat-icon>
+                    </button>
+                </div>
+            </div>
+            <mat-error *ngIf="topicCtl.touched && topicCtl.hasError('required')">
+                Deve escolher um tópico para a nova aula
+            </mat-error>
+
+            <mat-selection-list [multiple]="false" [formControl]="topicCtl" class="mt-1">
+                <mat-list-option *ngFor="let topic of topics" [value]="topic" class=" mb-2">
+                    <div class="d-flex align-items-center">
+                        <div class="img-profile-xm mr-2">
+                            <img [src]="topic.photoProfile">
+                        </div>
+                        {{topic.disciplineTopicName}}
+
+                        <div class="circle-diviser"></div>
+                        <div class="text-disabled-1">
+                            {{topic.lessonCount}} aulas
+                        </div>
+                    </div>
+                </mat-list-option>
+            </mat-selection-list>
+        </ng-container>
+    </ng-container>
+
+    <ng-template #createTopic>
+        <div class="d-flex flex-column">
+            <app-topic-creation (topicCreated)="onCreateTopic($event)"
+                [teacherPlaceId]="teacherPlaceId">
+
+            </app-topic-creation>
+            <div class="d-flex align-items-center justify-content-center w-100">
+                <button mat-stroked-button class="w-25" (click)="topicCreation = false">
+                    Cancelar
+                </button>
+            </div>
+
+        </div>
+    </ng-template>                       
+</form>
+
+<ng-template #loadingItems>
+    <div class="d-flex justify-content-center">
+        <mat-progress-spinner mode="indeterminate" color="primary" diameter=20></mat-progress-spinner>
+    </div>
+</ng-template>

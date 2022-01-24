@@ -1,0 +1,61 @@
+@mixin animation-defining($animation) {
+    -webkit-animation: $animation;
+    -ms-animation: $animation;
+    -o-animation: $animation;
+    -moz-animation: $animation;
+    animation: $animation;
+}
+
+%loading {
+    background-color: rgb(245, 244, 238);
+    @include animation-defining(loading-animation .7s ease-in 0s infinite alternate-reverse);
+}
+.loading-presentation {
+    height: 10rem;
+    @extend %loading;
+}
+
+@-webkit-keyframes loading-animation {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0.5;
+    }
+}
+
+@-ms-keyframes loading-animation {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0.5;
+    }
+}
+
+@-o-keyframes loading-animation {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0.5;
+    }
+}
+
+@-moz-keyframes loading-animation {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0.5;
+    }
+}
+
+@keyframes loading-animation {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0.5;
+    }
+}

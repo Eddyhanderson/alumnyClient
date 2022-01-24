@@ -1,0 +1,28 @@
+@import '../../../shared/styles/standard-layout';
+
+.main{
+    @extend %main;
+}
+
+.section{
+    @extend %section;
+}
+
+.container-row{
+    @extend %container-row;
+}
+
+.item{
+    display: flex;
+    flex-direction: column;   
+}
+
+.short-description{
+    text-align: justify;    
+    overflow: hidden;
+}
+
+.still-reading{
+    width: 10rem;
+    align-self: center;
+}

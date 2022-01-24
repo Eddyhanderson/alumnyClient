@@ -1,0 +1,324 @@
+<div class="main" *ngIf="!isLogin">
+    <div class="progress-section">
+        <mat-progress-bar mode="indeterminate" color="accent" *ngIf="inProgress"></mat-progress-bar>
+    </div>
+    <div class="registration-card border rounded shadow p-3">        
+        <!-- Brand image-->
+        <div class="w-100 d-flex justify-content-center mb-4">
+            <h1 class="brand d-flex align-items-center">
+                <mat-icon class="mr-2">school</mat-icon> alumny
+            </h1>
+        </div>
+        <!-- End -->
+
+        <div *ngIf="errors">
+            <div class="relevant-text-error" *ngFor="let error of errors"> {{error}}</div>
+        </div>
+
+        <mat-horizontal-stepper class="w-100" linear="true">
+            <ng-template matStepperIcon="basicInfo">
+                <mat-icon>loyalty</mat-icon>
+            </ng-template>
+            <ng-template matStepperIcon="academicInfo">
+                <mat-icon>menu_book</mat-icon>
+            </ng-template>
+            <ng-template matStepperIcon="securityInfo">
+                <mat-icon>security</mat-icon>
+            </ng-template>
+            <ng-template matStepperIcon="termConditions">
+                <mat-icon>verified_user</mat-icon>
+            </ng-template>            
+
+            <!-- Basic Information section -->
+            <mat-step [stepControl]="basicInfo" state="basicInfo">
+                <div class="w-100 d-flex align-items-center flex-column">
+                    <span class="relevant-text-title mb-2">
+                        Bem vindo ao modulo de professores !
+                    </span>
+                </div>
+                <form class="w-100" [formGroup]="basicInfo">
+                    <div class="d-flex flex-column mb-2">
+                        <div class="irrelevant-text">
+                            Como te chamas ?
+                        </div>
+
+                        <div class="d-flex">
+                            <mat-form-field class="w-100 mr-2">
+                                <mat-label>
+                                    Primeiro nome
+                                </mat-label>
+                                <input type="text" matInput formControlName="firstName">
+                                <mat-error *ngIf="firstName.touched && firstName.hasError('required')">
+                                    Precisa inserir um nome
+                                </mat-error>
+                                <mat-error *ngIf="firstName.touched && firstName.hasError('pattern')">
+                                    Formato do nome inválido
+                                </mat-error>
+                                <mat-error *ngIf="firstName.touched && firstName.hasError('maxLenght')">
+                                    Nome excede o tamanho permitido
+                                </mat-error>
+                            </mat-form-field>
+
+                            <mat-form-field class="w-100">
+                                <mat-label>
+                                    Último nome
+                                </mat-label>
+                                <input type="text" matInput formControlName="lastName">
+                                <mat-error *ngIf="lastName.touched && lastName.errors && lastName.hasError('required')">
+                                    Precisa inserir um nome
+                                </mat-error>
+                                <mat-error *ngIf="lastName.touched && lastName.hasError('pattern')">
+                                    Formato do nome inválido
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                    <div class="d-flex flex-column mb-2">
+                        <div class="irrelevant-text">
+                            Como podemos nos comunicar contigo ?
+                        </div>
+
+                        <div class="d-flex">
+                            <mat-form-field class="w-100 mr-2">
+                                <mat-label>
+                                    Telefone
+                                </mat-label>
+                                <input type="tel" matInput formControlName="phoneNumber">
+                                <mat-error
+                                    *ngIf="phoneNumber.touched && phoneNumber.errors && phoneNumber.hasError('required')">
+                                    Precisa inserir um número de telefone
+                                </mat-error>
+                            </mat-form-field>
+
+                            <mat-form-field class="w-100">
+                                <mat-label>
+                                    Email
+                                </mat-label>
+                                <input type="email" matInput formControlName="email">
+                                <mat-error *ngIf="email.touched && email.errors && email.hasError('required')">
+                                    Precisa inserir um nome
+                                </mat-error>
+                                <mat-error *ngIf="email.touched && email.errors && email.hasError('pattern')">
+                                    Formato do email inválido
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                    <div class="d-flex flex-column mb-2">
+                        <div class="irrelevant-text">
+                            Quando foi que nasceste ?
+                        </div>
+
+                        <div class="d-flex">
+                            <mat-form-field class="w-100">
+                                <input type="date" matInput formControlName="birth" color="primary">
+                                <mat-error *ngIf="birth.touched && birth.errors && birth.hasError('required')">
+                                    Precisa inserir uma data de nascimento
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                    <div class="d-flex flex-column mb-4">
+                        <div class="irrelevant-text mb-2">
+                            Qual é o teu gênero ?
+                        </div>
+
+                        <div class="d-flex">
+                            <mat-radio-group formControlName="genre">
+                                <mat-radio-button value="M" class="mr-2">
+                                    Masculino
+                                </mat-radio-button>
+
+                                <mat-radio-button value='F'>
+                                    Feminino
+                                </mat-radio-button>
+                                <mat-error *ngIf="genre.touched && genre.errors && genre.hasError('required')">
+                                    Precisa inserir o seu gênero
+                                </mat-error>
+                            </mat-radio-group>
+                        </div>
+                    </div>
+
+                    <div class="w-100 d-flex flex-column justify-content-center align-items-center">
+                        <button mat-button matStepperNext class="button-bg-accent-1 w-50 mb-2" ngSubmit>
+                            Avançar
+                        </button>
+                        <button mat-button color="warn">
+                            Cancelar
+                        </button>
+                    </div>
+                </form>
+            </mat-step>
+            <!-- End -->
+
+            <!-- academicInfo information -->
+            <mat-step [stepControl]="academicInfo" state="academicInfo">
+                <div class="w-100 d-flex justify-content-center">
+                    <span class="relevant-text-title mb-2">
+                        E sobre a tua vida acadêmica
+                    </span>
+                </div>
+                <form class="w-100" [formGroup]="academicInfo">
+                    <div class="irrelevant-text">
+                        Qual é o teu grau académico ?
+                    </div>
+                    <div class="d-flex flex-column mb-2">
+                        <mat-form-field class="w-100 mr-2">
+                            <mat-label>
+                                Grau acadêmico
+                            </mat-label>
+                            <mat-select name="schoolDegree" formControlName="academicLevel">
+                                <mat-option value="7"> Doutor </mat-option>
+                                <mat-option value="6"> Mestre </mat-option>
+                                <mat-option value="5"> Licenciado </mat-option>
+                                <mat-option value="4"> Estudante do ensino superior </mat-option>
+                                <mat-option value="3"> Estudante do ensino médio </mat-option>
+                                <mat-option value="2"> Estudante do ensino de base </mat-option>
+                                <mat-option value="1"> Estudante independente </mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="academicLevel.touched && academicLevel.hasError('required')">
+                                Precisa inserir o seu grau acadêmico
+                            </mat-error>
+                            <mat-error *ngIf="academicLevel.touched && academicLevel.hasError('touched')">
+                                Formato inválido
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="d-flex flex-column mb-2" *ngIf="academicLevel.value != 1">
+                        <div class="irrelevant-text">
+                            Qual é a instituição ?
+                        </div>
+                        <mat-form-field class="w-100 mr-2">
+                            <mat-label>
+                                Escola
+                            </mat-label>
+                            <input type="text" matInput formControlName="academyName">
+                            <mat-error *ngIf="academyName.touched && academyName.errors && academyName.hasError('required')">
+                                Precisa inserir o nome da escola
+                            </mat-error>
+                            <mat-error *ngIf="academyName.touched && academyName.errors && academyName.hasError('pattern')">
+                                Formato do nome inválido
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="d-flex flex-column mb-2">
+                        <div class="irrelevant-text">
+                            Qual é o curso ?
+                        </div>
+                        <mat-form-field class="w-100 mr-2">
+                            <mat-label>
+                                Curso
+                            </mat-label>
+                            <input type="text" matInput formControlName="courseName">
+                            <mat-error *ngIf="courseName.touched && courseName.errors && courseName.hasError('required')">
+                                Insira o nome do curso
+                            </mat-error>
+                            <mat-error *ngIf="courseName.touched && courseName.errors && courseName.hasError('pattern')">
+                                Formato do nome inválido
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="w-100 d-flex flex-column justify-content-center align-items-center">
+                        <button mat-button matStepperNext class="button-bg-accent-1 w-50 mb-2">
+                            Avançar
+                        </button>
+                        <button mat-button matStepperPrevious color="warn">
+                            Voltar
+                        </button>
+                    </div>
+                </form>
+            </mat-step>
+            <!-- End -->
+
+            <!-- Security information -->
+            <mat-step [stepControl]="securityInfo" state="securityInfo">
+                <div class="w-100 d-flex justify-content-center">
+                    <span class="relevant-text-title mb-2">
+                        Agora, falemos de segurança...
+                    </span>
+                </div>
+                <form class="w-100" [formGroup]="securityInfo">
+                    <div class="d-flex flex-column mb-2">
+                        <div class="irrelevant-text">
+                            Escolhe uma palavra passe forte
+                        </div>
+
+                        <mat-form-field class="w-100 mb-2">
+                            <mat-label>
+                                Palavra passe
+                            </mat-label>
+                            <input type="text" matInput formControlName="password">
+                            <mat-error *ngIf="password.touched &&  password.hasError('required')">
+                                Insira uma palavra passe
+                            </mat-error>
+                            <mat-error *ngIf="password.touched && password.hasError('min(5)')">
+                                Palavra passe muito curta
+                            </mat-error>               
+                        </mat-form-field>
+
+                        <mat-form-field class="w-100 mb-2">
+                            <mat-label>
+                                Confirmar
+                            </mat-label>
+                            <input type="text" matInput formControlName="cpassword">
+                            <mat-error *ngIf="cpassword.touched && cpassword.hasError('required')">
+                                Insira a palavra passe
+                            </mat-error>
+                            <mat-error *ngIf="cpassword.touched && cpassword.hasError('matched')">
+                                As palavras passes não são iguais
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="w-100 d-flex flex-column justify-content-center align-items-center">
+                        <button mat-button matStepperNext class="button-bg-accent-1 w-50 mb-2">
+                            Avançar
+                        </button>
+                        <button mat-button color="warn">
+                            Voltar
+                        </button>
+                    </div>
+                </form>
+            </mat-step>
+            <!-- End -->
+
+            <!-- Terms and conditions-->
+            <mat-step state="termConditions">
+                <div class="d-flex flex-column">
+                    <div class="w-100 d-flex justify-content-center">
+                        <span class="relevant-text-title mb-2">
+                            Terminar o registo
+                        </span>
+                    </div>
+                    <div class="irrelevant-text text-center mb-4 w-100">
+                        Ao clicares em Registar, aceitas os nossos <a href="#"> Termos e condições</a>
+                        e a <a href="#"> Política de Cookies</a>.
+                    </div>
+                    <div class="irrelevant-text text-center mb-4">
+                        Sed ut perspiciatis unde omnis iste natus error
+                        sit voluptatem accusantium doloremque laudantium,
+                        totam rem aperiam, eaque ipsa quae ab illo inventore
+                        veritatis et quasi architecto beatae vitae dicta sunt
+                        explicabo. Nemo enim ipsam voluptatem quia voluptas
+                        sit aspernatur aut odit aut fugit, sed quia consequuntur
+                        magni dolores eos qui ratione voluptatem sequi nesciunt.
+                    </div>
+                    <div class="w-100 d-flex flex-column justify-content-center align-items-center">
+                        <button mat-button matStepperNext class="button-bg-accent-1 w-100 mb-2" (click)="submit($event.target)">
+                            Registar
+                        </button>
+                    </div>
+                </div>
+            </mat-step>
+            <!-- End -->
+        </mat-horizontal-stepper>
+        
+    </div>
+
+</div>

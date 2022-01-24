@@ -1,0 +1,24 @@
+<ng-container *ngIf="loaded; else loading">
+    <div>
+        <app-toolbar [user]="user" [role]="role" [sidenav]="sidenav">
+
+        </app-toolbar>
+        <!-- End toolbar -->
+        <app-loading-determinate></app-loading-determinate>
+
+        <!-- Nav Bar Sections -->
+        <mat-sidenav-container class="nav-container h-100 p-0">
+            <mat-sidenav class="nav-sidenav" #sidenav fixedInViewport="true" fixedTopGap="50" mode="side" opened>
+                <app-navigation></app-navigation>
+            </mat-sidenav>
+            <mat-sidenav-content class="bg-lighter">
+                <router-outlet></router-outlet>
+            </mat-sidenav-content>
+        </mat-sidenav-container>
+    </div>
+</ng-container>
+<ng-template #loading>
+    <div class="w-100 h-100 d-flex align-items-center justify-content-center">
+        <mat-spinner color="primary" diameter=70></mat-spinner>
+    </div>
+</ng-template>

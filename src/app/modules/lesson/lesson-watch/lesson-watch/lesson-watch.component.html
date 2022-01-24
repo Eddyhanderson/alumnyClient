@@ -1,0 +1,161 @@
+<ng-container *ngIf="lesson">
+    <div class="video-main bg-light">
+        <!-- Video basic informations -->
+
+        <div class="context-information">
+            <div class="video-title">
+                <h1> {{lesson.title}}</h1>
+            </div>
+            <div class="teacher-place-information">
+                <div class="img-profile-xm img-profile mr-3">
+                    <img [src]="teacherPlace.profilePhotoPath">
+                </div>
+                <div>
+                    <button class="bold-400 irrelevant-text-sm" mat-flat-button
+                        [routerLink]="['/teacher-place',teacherPlace.id,'profile','lessons']">
+                        {{teacherPlace.name}}
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- End -->
+
+        <div id="video-section" class="pt-3">
+            <!-- Video section -->
+            <app-video [style.width.%]="70" [source]="lesson.manifestPath" [thumbnail]="lesson.backgroundPhotoPath"
+                *ngIf="lesson.lessonType.toUpperCase() == 'VIDEO'; else articleLesson">
+            </app-video>
+            <!-- End video section -->
+
+            <ng-template #articleLesson>
+                <!-- Article section -->
+                <div id="article-container">
+                    <div id="article-container-background">
+                        <img [src]="lesson.backgroundPhotoPath">
+                        <div class="shadow-f" style="top: 0;"></div>
+                    </div>
+                    <div class="d-flex flex-column align-items-center justify-content-center w-100"
+                        id="article-container-actions">                        
+                        <h2>
+                            {{lesson.title}}
+                        </h2>
+                        <div class="w-50 d-flex justify-content-center align-items-center mt-4">
+                            <button mat-stroked-button class="w-100" (click)="gotToArticleView(lesson)">
+                                Ler
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- End -->
+            </ng-template>
+
+            <!-- Next video section -->
+            <div id="next-videos-section" class=" bg-white d-flex flex-column justify-content-start">
+                <!-- Discipline topic information -->
+                <div id="video-metadata" class="mb-3">
+                    <span class="irrelevant-text-sm  text-disabled pl-3 pt-1">
+                        {{topic.disciplineTopicName}}
+                    </span>
+                    <span class="irrelevant-text-xm  relevant-text-principal pt-1 pl-3">
+                        @{{discipline.name}}
+                    </span>
+                    <div class="d-flex justify-content-between">
+                        <span class="irrelevant-text-xm text-disabled bold-400 pt-1 pl-3">
+                            {{lesson.sequence}}/{{topic.lessonCount}} aulas
+                        </span>
+
+                        <button mat-icon-button>
+                            <mat-icon class="text-disabled-1" matTooltip="Guardar aulas">library_add</mat-icon>
+                        </button>
+                    </div>
+                </div>
+                <!-- End -->
+                <div class="divider-x"></div>
+
+
+                <!-- List of next videos -->
+                <div id="next-videos">
+                    <ng-container *ngIf="lessons$ | async as lessons">
+                        <ng-container *ngIf="lessons?.length > 0; else nothingToShow">                        
+                            <ng-container *ngFor="let lesson of lessons">
+                                <div class="next-video mb-3" (click)="nextLesson(lesson.id)">
+                                    <div class="background-image mr-3">
+                                        <img [src]="lesson.backgroundPhotoPath">
+                                        <div class="duration-lesson" *ngIf="lesson.lessonType.toUpperCase() == 'VIDEO'">
+                                            <span class="irrelevant-text-xm bold">{{lesson.duration}}</span>
+                                        </div>
+                                    </div>
+                                    <div class="w-100 video-lesson-metadata">
+                                        <span> {{lesson.title}}</span>
+                                        <span>
+                                            <h6>
+                                                {{lesson.lessonType.toUpperCase() == 'VIDEO' ? 'Video' : 'Artigo'}}
+                                            </h6>
+                                        </span>
+                                        <span class="irrelevant-text-xm text-disabled bold-500"> Aula nº
+                                            {{lesson.sequence}}
+                                        </span>
+                                    </div>
+                                </div>
+                            </ng-container>
+                        </ng-container>
+                        <ng-template #nothingToShow>
+                            <div class="w-100 d-flex justify-content-center">
+                                <span class="text-disabled-1"> Sem Lições de momento</span>
+                            </div>
+                        </ng-template>
+                    </ng-container>
+                </div>
+                <!-- End -->
+
+            </div>
+        </div>
+
+        <!-- Navigation sections -->
+        <div class="navigation-actions pt-3">
+            <ul>
+                <li>
+                    <a class="nav-action text-disabled" [routerLink]="['/lesson','watch','about']"
+                    [queryParams]="{lesson:lesson.id, topic:topic.id}" routerLinkActive="nav-action-selected">
+                        <span> ACERCA</span>
+                    </a>
+                </li>
+                <li>
+                    <a class="nav-action text-disabled" [routerLink]="['/lesson','watch','questions']"
+                        [queryParams]="{lesson:lesson.id, topic:topic.id}"  routerLinkActive="nav-action-selected">
+                        <span> QUESTÕES</span>
+                    </a>
+                </li>
+                <li>
+                    <a class="nav-action text-disabled" routerLink="/lesson/watch/materials"
+                        routerLinkActive="nav-action-selected">
+                        <span> MATERIAIS</span>
+                    </a>
+                </li>
+                <li>
+                    <a class="nav-action text-disabled" [routerLink]="['/lesson','watch','comment']"
+                    [queryParams]="{lesson:lesson.id}" routerLinkActive="nav-action-selected">
+                        <span> COMENTÁRIOS</span>
+                    </a>
+                </li>
+                <ng-container *ngIf="role.toUpperCase() == 'STUDANT'">
+                    <li>
+                        <a class="nav-action text-disabled" [routerLink]="['/lesson','watch','question-expose']"
+                        [queryParams]="{lesson:lesson.id, topic:topic.id}" routerLinkActive="nav-action-selected">
+                            <span matTooltip="Expôr questão">                                
+                                <mat-icon style="color: black;">
+                                    help_center
+                                </mat-icon>
+                            </span>
+                        </a>
+                    </li>
+                </ng-container>
+            </ul>
+        </div>
+
+        <div class="w-100 bg-lighter">
+            <router-outlet></router-outlet>
+        </div>
+
+    </div>
+</ng-container>

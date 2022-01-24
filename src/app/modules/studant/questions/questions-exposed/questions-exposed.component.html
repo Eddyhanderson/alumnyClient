@@ -1,0 +1,147 @@
+<div class="main">
+    <div class="section">
+        <ng-container *ngIf="!questionToClassMates && questionPagination | async as questions; else loading">
+            <div class="d-flex w-100 justify-content-end mb-3">
+                <div class="d-flex justify-content-between w-100">
+                    <mat-chip-list class="p-2">
+                        <mat-chip>
+                            {{questionToClassMates ? 'Colegas' : 'Turmas'}}
+                        </mat-chip>
+                        <mat-chip *ngFor="let filter of filters" [selectable]="selectable" removable="true"
+                            (removed)="remove(filter.id, filter.type)">
+                            {{filter.name}}
+                            <mat-icon matChipRemove *ngIf="filter.type != 'questionDestination'">cancel</mat-icon>
+                        </mat-chip>
+                    </mat-chip-list>
+                    <div>
+                        <button mat-icon-button [matMenuTriggerFor]="filter_types">
+                            <mat-icon> filter_list</mat-icon>
+                        </button>
+                        <mat-menu #filter_types="matMenu">
+                            <button mat-menu-item (click)="questionToClassMates = !questionToClassMates">
+                                <mat-icon class="mr-3" *ngIf="!questionToClassMates; else iconClass">
+                                    class
+                                </mat-icon>
+                                <ng-template #iconClass>
+                                    <mat-icon class="mr-3">
+                                        comment_bank
+                                    </mat-icon>
+                                </ng-template>
+                                {{questionToClassMates ? 'Para turmas' : 'Para colegas'}}
+                            </button>
+                            <button mat-menu-item [matMenuTriggerFor]="situationsLists">
+                                Por situação
+                            </button>
+                        </mat-menu>                        
+
+                        <mat-menu #situationsLists="matMenu">
+                            <button mat-menu-item *ngFor="let situation of situationFilters"
+                                (click)="onSituationPicker(situation)">
+                                {{situation.name}}
+                            </button>
+                        </mat-menu>
+                    </div>
+                </div>
+            </div>
+            <!-- Questions section -->
+            <div class="container-row">
+                <!-- Question -->
+                <ng-container *ngIf="questions.length > 0; else nothingToShow">
+                    <div class="item bg-white" *ngFor="let question of questions" (click)="gotoQuestion(question)">
+                        <div class="d-flex">
+                            <div class="img-profile-xm mb-1">
+                                <img [src]="question.teacherPlaceBackgroundPath">
+                            </div>
+                            <div class="d-flex flex-column justify-content-center ml-2">
+                                <a class="primaryLink"
+                                    [routerLink]="['/teacher-place', question.teacherPlaceId, 'profile', 'about']">
+                                    {{question.teacherPlaceName}}
+                                </a>
+                                <a class="discretLink irrelevant-text d-flex align-items-center" [routerLink]="['/lesson','watch', 'about']"
+                                    [queryParams]="{question:lessonId, topic:question.lessonTopicId}">
+                                    <span>
+                                        {{question.lessonTitle}}
+                                    </span> 
+                                    <div class="circle-diviser"></div>
+                                    <span>
+                                        Aula nº {{question.lessonSequence}}
+                                    </span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <span class="px-3 my-2 text-disabled-1">
+                            <h5>
+                                {{question.createAt | elapsed}}
+                            </h5>
+                        </span>
+
+                        <div class="statistics-info">
+                            <span class="d-flex align-items-center justify-content-center mb-1"
+                                matTooltip="Respostas dos alunos">
+                                <span class="mr-2">
+                                    {{question.studantAnswerQnt}}
+                                </span>
+                                <mat-icon>face</mat-icon>
+                            </span>
+                            <span class="d-flex align-items-center justify-content-center mb-1"
+                                matTooltip="Respostas do professor" *ngIf="question.lessonId != null">
+                                <span class="mr-2">
+                                    {{question.teacherAnswerQnt}}
+                                </span>
+                                <mat-icon>support_agent</mat-icon>
+                            </span>
+                            <span class="d-flex align-items-center justify-content-center" matTooltip="Comentários">
+                                <span class="mr-2">
+                                    {{question.commentsQnt}}
+                                </span>
+                                <mat-icon>chat_bubble</mat-icon>
+                            </span>
+                        </div>
+
+
+
+                        <mat-divider class="w-100"></mat-divider>
+
+                        <div class="doubt-content">
+                            <span class="bold-500 px-3 pb-3">
+                                {{question.subject}}
+                            </span>
+                        </div>
+
+                        <div class="state-info">
+                            <mat-chip-list #chipList>
+                                <mat-chip selectable="false" removable="true" disabled="false"
+                                    [matTooltip]="situations[question.situation].tip" (removed)="changeState(question)">
+                                    {{situations[question.situation].state}}
+                                    <mat-icon matChipRemove matTooltip="Alterar estado" 
+                                    *ngIf="question.situation == 'Opened'">mode_edit
+                                    </mat-icon>
+                                </mat-chip>
+                            </mat-chip-list>
+                        </div>
+                    </div>
+                </ng-container>
+                <!-- End -->
+            </div>
+            <div class="center-bottom">
+                <div class="overlay">
+                    <mat-spinner color="primary" diameter=40 margin="auto" *ngIf="questionPagination?.loading">
+                    </mat-spinner>
+                </div>
+            </div>
+        </ng-container>
+    </div>
+</div>
+
+<ng-template #loading>
+    <app-loading-page></app-loading-page>
+</ng-template>
+
+<ng-template #nothingToShow>
+    <div class="w-100 d-flex justify-content-center mb-3">
+        <h4 class="text-disabled-1">
+            Não fez nenhuma questão de momento
+        </h4>
+    </div>
+</ng-template>

@@ -1,0 +1,61 @@
+<div class="main bg-lighter">
+    <div class="section">
+        <!-- Basic information -->
+        <div class="container-row justify-content-center">
+            <div class="item d-flex flex-column shadow bg-white studant-metadata">
+                <div class="d-flex justify-content-center flex-column align-items-center">
+                    <div class="img-profile-sm">
+                        <img src="../../../assets/images/pexels-jawm-ling-2748123.jpg">
+                    </div>
+                    <div class="d-flex flex-column align-items-center">
+                        <h4 class="bold-500 m-0"> Sofia Martins </h4>
+                        <span class="relevant-text-principal irrelevant-text-xm"> Estudante </span>
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-center w-100">
+                    <span class="irrelevant-text-sm">Estudante de Engenharia Informática</span>
+                </div>
+                <div class="d-flex justify-content-end w-100" id="add-button">
+                    <button mat-mini-fab color="primary" 
+                    matTooltip="Tornar colega" class="d-flex justify-content-center align-items-center">
+                        <mat-icon [style.fontSize.rem]="1.2">person_add</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- End -->
+
+        <!-- To navigate across the vary sections of teacher-place profile -->
+        <div class="navigation-actions">
+            <ul>
+                <li>
+                    <a class="nav-action text-disabled" routerLink="/studant/profile/questions"
+                        routerLinkActive="nav-action-selected">
+                        <span> Questões </span>
+                    </a>
+                </li>
+
+                <li>
+                    <a class="nav-action text-disabled" routerLink="/studant/profile/teacherPlaces"
+                        routerLinkActive="nav-action-selected">
+                        <span> Turmas </span>
+                    </a>
+                </li>
+
+                <li>
+                    <a class="nav-action text-disabled" routerLink="/studant/profile/classMates"
+                        routerLinkActive="nav-action-selected">
+                        <span> Colegas </span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="w-100 bg-lighter">
+            <router-outlet></router-outlet>
+        </div>
+        <!-- End -->
+
+
+    </div>
+</div>

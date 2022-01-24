@@ -1,0 +1,25 @@
+@import '../../../../shared/styles/standard-layout';
+
+.main{
+    @extend %main;
+    justify-items: center;
+}
+
+.progress-section{
+    width: 499px;
+}
+
+.progress-section mat-progress-bar{
+    height: 2px;
+    border-radius: 5rem;    
+}
+.registration-card{
+    width: 500px;
+    height: auto;
+    //padding: 1.5rem 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+

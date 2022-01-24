@@ -1,0 +1,58 @@
+@use '../../../shared/styles/standard-layout-0';
+
+.teacher-place-main{    
+    @extend %main;
+}
+
+.teacher-place-section {
+    @extend %section;   
+}
+
+.teacher-place-container{
+    @extend %container-items;   
+}
+
+.teacher-place-item{
+    @extend %item;
+    display: flex;
+    flex-flow: column; 
+    overflow: hidden;   
+    height: 20rem;
+}
+
+.teacher-place-item:hover .discretButton{
+    opacity: 1;
+}
+
+.bg-teacherPlace img{
+    height: 5rem;    
+    object-fit: cover;
+}
+
+.bg-none-teacherPlace div{
+    height: 5rem;
+    background-color: rgba(var(--palette-neutral-60));
+}
+
+.badge-container{
+    flex-wrap: wrap;
+}
+
+.description-teacher-place{
+    padding: 1rem;
+}
+
+.description-teacher-place p{
+    font-size: .8rem;
+}
+
+.background-image {
+    height: 50%;
+    border-radius: 1%;
+}
+.background-image a{
+    height: 100% !important;
+}
+.background-image a img {
+    border-radius: 1%;    
+}

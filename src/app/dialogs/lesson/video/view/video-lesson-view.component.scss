@@ -1,0 +1,11 @@
+.close{
+    position: absolute;
+    right: 1%;
+    top: 1%;
+    z-index: 9999;
+}
+
+::ng-deep mat-dialog-container{
+    position: relative !important;
+    padding: 0 !important;
+}

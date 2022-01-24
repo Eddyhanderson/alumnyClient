@@ -1,0 +1,76 @@
+<div class="main">
+    <div class="section">
+        <div class="container-column" *ngIf="lesson && article && post; else loadingItems">
+            <div class="p-relative close-view">
+                <button matTooltip="Terminar leitura" mat-icon-button mat-dialog-close>
+                    <mat-icon>
+                        close
+                    </mat-icon>
+                </button>
+            </div>
+            <div class="my-3">
+                <h1 style="font-size: 2rem;">
+                    {{lesson.title}}
+                </h1>
+            </div>
+            <div class="d-flex mb-3">
+                <div class="img-profile-xm mb-1">
+                    <img [src]="user.pictureProfilePath">
+                </div>
+                <div class="d-flex flex-column justify-content-center ml-2">
+                    <span class="text-disabled-1 irrelevant-text-sm">
+                        {{user.firstName}} {{user.lastName}}
+                    </span>
+                    <span class="text-disabled-1 irrelevant-text-sm">
+                        {{post.createAt | date}}
+                    </span>
+                </div>
+            </div>
+            <div class="background-image">
+                <img [src]="lesson.backgroundPhotoPath">
+            </div>
+        </div>
+        <ng-container *ngIf="article; else loadingPage">
+            <text-visualizer [content]="article.delta"></text-visualizer>
+        </ng-container>
+        
+        <mat-divider></mat-divider>
+
+        <div class="d-flex mb-4" [style.marginTop.rem]="4">
+
+            <div class="d-flex w-50" *ngIf="lesson && article && post">
+                <div class="img-profile-md mb-1">
+                    <img [src]="user.pictureProfilePath">
+                </div>
+                <div class="d-flex flex-column ml-4">
+                    <span class="text-disabled-1 irrelevant-text">
+                        Escrito por
+                    </span>
+                    <span>
+                        <h3 class="relevant-text-title-lg my-2" style="font-size: 1.4rem;">
+                            {{user.firstName}} {{user.lastName}}
+                        </h3>
+                    </span>
+                    <span class="text-disabled-1 about-user">
+                        {{user.aboutUser}}
+                    </span>
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-end flex-end w-50">
+                <button mat-stroked-button color="primary" [style.height.rem]="2">
+                    Seguir
+                </button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<ng-template #loadingItems>
+    <app-loading-item class="mb-4"></app-loading-item>
+</ng-template>
+
+<ng-template #loadingPage>
+    <app-loading-page class="w-100"></app-loading-page>
+</ng-template>

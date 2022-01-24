@@ -1,0 +1,19 @@
+@import '../../../../shared/styles/standard-layout-0';
+
+.main{
+    @extend %main;
+}
+
+.section{
+    @extend %section;
+    align-items: flex-start;
+}
+
+.item{
+    @extend %item;
+}
+
+.container-items{
+    @extend %container-items;
+}
+

@@ -1,0 +1,31 @@
+mat-sidenav-content{
+    overflow: hidden;
+}
+
+.material-toolbar {
+    height: 3rem;
+    background-color: var(--background-color);
+    border-bottom: 0.5px solid var(--border-subtle-color);
+}
+
+.actions mat-icon {
+    color: rgb(var(--palette-neutral-100), 0.6);
+}
+
+.input-group input:focus {
+    outline: none;
+    border-color: rgb(var(--palette-primary));
+    box-shadow: none;
+}
+
+.nav-container {
+    top: 3rem;
+    left: 0;
+    right: 0;
+}
+
+.nav-sidenav {
+    width: 15rem;
+    border-right: 1px solid var(--palette-black-alpha-10);
+    overflow: hidden !important;
+}

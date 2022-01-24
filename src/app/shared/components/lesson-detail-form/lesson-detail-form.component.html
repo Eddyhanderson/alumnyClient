@@ -1,0 +1,57 @@
+<div class="d-flex align-items-center justify-content-center">
+    <form [formGroup]="detailFg" *ngIf="detailFg">
+        <h3>Detalhes</h3>
+        <div class="irrelevant-text text-disabled-1 mb-1">
+            Informe aos seus alunos o assunto que a video-aula trata. Esta informação
+            funcionará como título da sua video-aula.
+        </div>
+        <mat-form-field class="mt-1" style="width: 100% !important;" appearance="outline"
+            color="accent">
+            <mat-label>
+                Sumário da aula
+            </mat-label>
+            <input matInput type="text" placeholder="A origem do cosmos" [formControl]="titleCtl">
+            <mat-error *ngIf="titleCtl.touched && titleCtl.hasError('required')">
+                Campo obrigatório
+            </mat-error>
+            <mat-error *ngIf="titleCtl.touched && titleCtl.errors?.maxlength">
+                Campo obrigatório
+            </mat-error>
+        </mat-form-field>
+
+        <div class="irrelevant-text text-disabled-1 mb-1">
+            De forma resumida descreva os aspectos mais importantes da sua video-aula, bem como
+            os seus objectivos, palavras chaves, ou alguma outra mensagem que ache oportuna.
+        </div>
+        <mat-form-field class="mt-1" style="width: 100% !important;" appearance="outline"
+            color="accent">
+            <mat-label>
+                Descrição
+            </mat-label>
+            <textarea matInput cols="10" placeholder="Fale resumidamente sobre a aula"
+                cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1"
+                cdkAutosizeMaxRows="50" [formControl]="descriptionCtl" style="line-height: 1.3rem;"> </textarea>
+            <mat-error *ngIf="descriptionCtl.touched && descriptionCtl.hasError('required')">
+                Campo obrigatório
+            </mat-error>
+        </mat-form-field>
+
+        <ng-container *ngIf="teacherPlace && teacherPlace.opened">
+            <div class="irrelevant-text text-disabled-1 mt-1">
+                {{
+                isPublic.value ?
+                'Aulas publicas podem ser assistidas por todos, inclusive quem não estiver
+                matriculado na turma
+                onde a aula fôr publicada.'
+                :
+                'Aulas privadas podem ser assistidas apenas pelos estudantes matriculados na turma
+                onde a aula fôr
+                publicada. Note que todas as aulas de uma turma fechada são privadas.'
+                }}
+            </div>
+            <mat-slide-toggle [formControl]="isPublic">
+                {{isPublic.value ? 'Aula pública' : 'Aula privada'}}
+            </mat-slide-toggle>
+        </ng-container>
+    </form>                        
+</div>

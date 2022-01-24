@@ -1,0 +1,27 @@
+.ql-toolbar-2{
+    padding-right: 0;
+    padding-left: 0;
+    border: none;
+    position: fixed;
+    z-index: 1000;
+    background-color: white;
+    width: 65vw;
+}
+
+.ql-editor-2{
+    padding-right: 0;
+    padding-left: 0;
+    height: auto;
+    padding-top: 4rem;
+    border: none;
+}
+
+.ql-custom button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#editor-container{
+    font-size: 16px;
+}

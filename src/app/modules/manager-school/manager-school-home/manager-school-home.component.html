@@ -1,0 +1,197 @@
+<div class="main">
+    <div class="section">
+        <div class="mb-2">
+            <h1 class="bold-500">
+                Painel de controle
+            </h1>
+        </div>
+        <div class="container-row">
+            <!-- Teachers requests -->
+            <div class="item teachers-requests border rounded">
+                <!-- Title card -->
+                <div class="relevant-text-title mb-2">
+                    Pedidos de professores
+                </div>
+                <!-- End -->
+
+                <div class="irrelevant-text text-disabled-1 mb-2">
+                    Professores que desejam fazer parte da {{manager.school.name}}
+                </div>
+
+                <!-- Teacher requests list-->
+                <ng-container *ngIf="teacherSchoolsPending$ | async as teacherSchoolsPending; else loadingItem">
+                    <ng-container *ngIf="teacherSchoolsPending.length > 0; else noTeacherRequests">
+                        <ng-container *ngFor="let tsPending of teacherSchoolsPending; let i = index">
+                            <!-- Teachers request list item-->
+                            <div class="d-flex mb-3">
+                                <ng-container *ngIf="tsPending.teacher.pictureProfilePath; else noTeacherPic">
+                                    <!-- Teacher image -->
+                                    <div class="img-profile-xm mr-3">
+                                        <img [src]="tsPending.teacher.pictureProfilePath">
+                                    </div>
+                                    <!-- End -->
+                                </ng-container>
+                                <ng-template #noTeacherPic>
+                                    <div class="img-profile-xm-none">
+                                        <div></div>
+                                    </div>
+                                </ng-template>
+
+                                <!-- Teacher information -->
+                                <div class="d-flex flex-column w-100">
+                                    <div class="irrelevant-text">
+                                        <a [routerLink]="['/teacher/profile', tsPending.teacher.id]" class="discretLink">
+                                            {{tsPending.teacher.firstName}} {{tsPending.teacher.lastName}}
+                                        </a>
+                                    </div>
+                                    <div class="irrelevant-text">
+                                        {{tsPending.creationAt | elapsed}}
+                                    </div>
+                                    <div class="bold-500">
+                                        <h5>
+                                            {{tsPending.teacher.academicLevelName}} em {{tsPending.teacher.courseName}}
+                                        </h5>
+                                    </div>
+                                </div>
+                                <!-- End -->
+
+                                <!-- Actions to requests -->
+                                <div class="d-flex align-items-center">
+                                    <div appMessageCallBack="acceptingRequest" mode="all"
+                                        (click)="acceptRequest(tsPending.teacher.id)">
+                                        <button mat-button class="ml-3">
+                                            Aceitar
+                                        </button>
+                                    </div>
+                                    <button mat-button color="warn">
+                                        Cancelar
+                                    </button>
+                                </div>
+                                <!-- End -->
+                            </div>
+                            <!-- End -->
+                            <ng-container *ngIf="teacherSchools.lenght > index">
+                                <mat-divider class="mb-3"></mat-divider>
+                            </ng-container>
+                        </ng-container>
+                    </ng-container>
+                    <!-- No teacher requests -->
+                    <ng-template #noTeacherRequests>
+                        <div class="irrelevant-text-xm text-disabled m-auto p-4">
+                            Sem pedidos de momento
+                        </div>
+                    </ng-template>
+                </ng-container>
+                <!-- End -->
+            </div>
+            <!-- End -->
+
+            <!-- Courses of the school -->
+            <div class="item course-school border">
+                <!-- Title card -->
+                <div class="relevant-text-title mb-2">
+                    Cursos
+                </div>
+                <!-- End -->
+
+                <!-- Create new course -->
+                <div class="d-flex w-100 justify-content-center mb-2" (click)="onCreateCourse()">
+                    <button mat-button class="relevant-text-info">
+                        ADICIONAR NOVO CURSO
+                    </button>
+                </div>
+                <!-- End -->
+
+                <ng-container *ngIf="schoolCourses$ | async as schoolCourses; else loadingItem">
+                    <ng-container *ngIf="schoolCourses.length > 0; else noCourses">
+                        <!-- Course list item -->
+                        <div *ngFor="let course of schoolCourses; let i index" class="d-flex flex-column mb-3">
+                            <div class="d-flex justify-content-start align-items-center">
+                                <div class="mr-2 w-100">
+                                    {{course.course.name}}
+                                </div>
+                                <div>
+                                    <button mat-icon-button matTooltip="Editar">
+                                        <mat-icon>
+                                            edit
+                                        </mat-icon>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End -->
+                    </ng-container>
+                    <ng-template #noCourses>
+                        <div class="irrelevant-text-xm text-disabled m-auto p-4">
+                            Sem cursos registados. Crie, para os professores conseguirem
+                            criar as suas turmas
+                        </div>
+                    </ng-template>
+                </ng-container>
+            </div>
+            <!-- End -->
+
+            <!-- Teachers of the school -->
+            <div class="item teachers-school border">
+                <!-- Title card -->
+                <div class="relevant-text-title mb-4">
+                    Professores
+                </div>  
+                <!-- End -->
+                <ng-container *ngIf="teacherSchoolsNormal$ | async as teacherSchoolsNormal; else loadingItem">
+                    <!-- If exists some teachers -->
+                    <ng-container *ngIf="teacherSchoolsNormal.length > 0; else noTeachers">
+                        <ng-container *ngFor="let tsNormal of teacherSchoolsNormal; let i index">
+                            <div class="d-flex align-items-center">
+                                <ng-container *ngIf="tsNormal.teacher.pictureProfilePath; else noPhotoProfile">
+                                    <div class="img-profile-xm mr-2">
+                                        <img [src]="tsNormal.teacher.pictureProfilePath">
+                                    </div>
+                                </ng-container>
+                                <ng-template #noPhotoProfile>
+                                    <div class="img-profile-xm-none">
+                                        <div></div>
+                                    </div>
+                                </ng-template>
+
+                                <div class="d-flex flex-column ml-2">
+                                    <div>
+                                        <a class="discretLink"
+                                            [routerLink]="['/teacher/teacher-profile',tsNormal.teacher.id]">
+                                            {{tsNormal.teacher.firstName}} {{tsNormal.teacher.lastName}}
+                                        </a>
+                                    </div>
+                                    <div class="text-color-primary">
+                                        <h5>{{tsNormal.teacher.teacherPlaceQnt}} turmas</h5>
+                                    </div>
+                                    <div>
+                                        <h5>
+                                            {{tsNormal.teacher.academicLevelName}} em {{tsNormal.teacher.courseName}} na(o)
+                                            <!--TODO: Set the school id --> <a
+                                                [routerLink]="['/school/school-profile/about']"
+                                                class="primaryLink">{{tsNormal.teacher.academyName}}</a>
+                                        </h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-container>
+                        <!-- End -->
+                    </ng-container>
+                    <!-- End If -->
+                    <!-- Else -->
+                    <ng-template #noTeachers>
+                        <div class="irrelevant-text-xm text-disabled m-auto p-4">
+                            Sem professores de momento
+                        </div>
+                    </ng-template>
+                    <!-- End Else-->
+                </ng-container>
+            </div>
+        </div>
+    </div>
+</div>
+<ng-template #loadingItem>
+    <app-loading-item>
+
+    </app-loading-item>
+</ng-template>

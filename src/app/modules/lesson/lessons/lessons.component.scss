@@ -1,0 +1,32 @@
+@use '../../../shared/styles/standard-layout-0';
+
+.lesson-main{    
+    @extend %main;
+}
+
+.lesson-section {
+    @extend %section;   
+}
+
+.lesson-container{
+    @extend %container-items;   
+}
+
+.lesson-item{
+    @extend %item;
+    display: flex;
+    flex-flow: column; 
+    height: 27rem;  
+    overflow: hidden;  
+}
+
+.background-image{
+    height: 7rem;
+}
+
+.lesson-description{
+    height: 42%;    
+    overflow: hidden;
+    font-size: .8rem !important;
+    text-align: justify;
+}

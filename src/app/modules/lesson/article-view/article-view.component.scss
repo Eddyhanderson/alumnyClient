@@ -1,0 +1,46 @@
+@import '../../../shared/styles/standard-layout';
+
+.main{
+    @extend %main;
+}
+
+.section{
+    @extend %section;
+    width: 70% !important
+}
+
+.container-row{
+    @extend %container-row;
+}
+
+.container-column{
+    @extend %container-column;
+}
+
+.background-image{
+    height: 14rem;
+}
+
+.ql-toolbar.ql-snow{
+    display: none !important;
+}
+
+#editor-container{
+    font-size: 16px;
+    margin: 0 -2% !important;
+}
+
+.ql-editor{
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.close-view button{
+    position: fixed !important;
+    left: 80%;
+    z-index: 1000;
+}
+
+.about-user{
+    line-height: 1.3rem;
+}

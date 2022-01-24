@@ -1,0 +1,65 @@
+ <!-- Video section -->
+ <div id="video-container" #videoContainer>
+    <!-- Video -->
+    <video id="video" #video preload="none" poster="poster">        
+    </video>
+
+    <!-- Button that stay behind -->
+    <div #playbackAnimation id="playback-animation" [@playBackToggle]="playBackButton ? 'open':'closed'">
+        <mat-icon> play_arrow </mat-icon>
+        <mat-icon class="hidden"> pause </mat-icon>
+    </div>
+
+    <!-- Controls of the video -->
+    <div id="video-controls" #videoControls>
+        <div id="video-progress">
+            <progress id="progress-bar" value="0" min="0" setp="1" #progressBar></progress>
+            <input id="seek" value="0" min="0" type="range" step="1" data-seek="" #seek>
+            <div id="seek-tooltip" #seekTollTip></div>
+        </div>
+        <div id="bottoms-controls">
+            <div id="left-controls">
+                <div id="play-control">
+                    <button #reprodutionControl mat-icon-button id="play-button" (click)="playToggle()">
+                        <mat-icon #playIcon matTooltip="Reproduzir" matTooltipPosition="above"> play_arrow
+                        </mat-icon>
+                        <mat-icon #pauseIcon matTooltip="Parar" matTooltipPosition="above" class="hidden">pause
+                        </mat-icon>
+                    </button>
+                </div>
+                <div id="volume-control">
+                    <button #volumeButton mat-icon-button id="volume-button" (click)="muteVideo()">
+                        <mat-icon [class]="volumeoff ? '':'hidden'" matTooltip="Activar som"
+                            matTooltipPosition="above">volume_off</mat-icon>
+                        <mat-icon [class]="volumedown ? '':'hidden'" matTooltip="Desactivar som"
+                            matTooltipPosition="above">volume_down</mat-icon>
+                        <mat-icon [class]="volumeup ? '':'hidden'" matTooltip="Desactivar som"
+                            matTooltipPosition="above">volume_up</mat-icon>
+                    </button>
+                    <input #volume type="range" id="volume" class="volume" data-mute="0.5" max="1" min="0"
+                        step="0.01">
+                </div>
+                <div id="time-control">
+                    <time #timeElapsed id="time-elapsed" datetime="00m00s">00:00</time>
+                    <span> / </span>
+                    <time #duration id="duration">00:00</time>
+                </div>
+            </div>
+
+            <div class="right-controls">
+                <button id="pip-button" #pipButton (click)="togglePip()" matTooltip="Activar som"
+                    matTooltipPosition="above">
+                    <mat-icon>branding_watermark</mat-icon>
+
+                </button>
+                <button id="fullscreen-button" #fullscreenButton>
+                    <mat-icon matTooltip="Tela completa" matTooltipPosition="above"> fullscreen</mat-icon>
+                    <mat-icon matTooltip="Tamanho normal" class="hidden">fullscreen_exit</mat-icon>
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- End-video controls -->
+</div>
+
+<!-- End video section -->

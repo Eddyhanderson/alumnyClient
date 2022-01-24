@@ -1,0 +1,229 @@
+<div class="h-100">
+    <!-- Dialog title -->
+    <div>
+        <h1 mat-dialog-title>
+            Criar turma
+        </h1>
+    </div>
+    <!-- End -->
+
+    <mat-dialog-content class="p-0 mt-3 h-100">
+
+        <!-- School choice -->
+        <mat-horizontal-stepper class="w-100 h-100" [linear]="true">
+            <mat-step [stepControl]="schoolFormGroup" class="h-100">
+                <!-- Form title-->
+                <div class="mb-3">
+                    <h3 class="relevant-text-title">
+                        De que escola será a tua turma ?
+                    </h3>
+                </div>
+                <mat-error *ngIf="schoolControl.errors && schoolControl.touched && schoolControl.hasError('required')">
+                    Precisa escolher o curso para prosseguir
+                </mat-error>
+                <form [formGroup]="schoolFormGroup" class="h-100">
+                    <mat-radio-group [formControl]="schoolControl">
+                        <ng-container *ngIf="teacherSchools$ | async as teacherSchools; else loadingItem">
+                            <ng-container *ngIf="teacherSchools != null && teacherSchools.length > 0">
+                                <ng-container *ngFor="let ts of teacherSchools">
+                                    <mat-radio-button [value]="ts.school">
+                                        <div class="d-flex align-items-center justify-content-center">
+                                            {{ts.school.name}}
+                                            <div class="img-profile-xm ml-2">
+                                                <img [src]="ts.school.profilePhotoPath">
+                                            </div>
+                                        </div>
+                                    </mat-radio-button>
+                                </ng-container>
+                            </ng-container>
+                        </ng-container>
+                    </mat-radio-group>
+                </form>
+                <div class="d-flex mt-4 w-100 justify-content-center">
+                    <button mat-button mat-dialog-close color="warn" class="mr-4">
+                        Cancelar
+                    </button>
+                    <div>
+                        <button mat-button matStepperNext (click)="onSchoolChoice()" ngSubmit>
+                            Seguinte
+                        </button>
+                    </div>
+                </div>
+            </mat-step>
+
+            <!-- Courses choice -->
+            <mat-step [stepControl]="courseFormGroup"> 
+                <!-- Form title-->
+                <div class="mb-3">
+                    <h3 class="relevant-text-title">
+                        Escolha o curso da sua turma
+                    </h3>
+                </div>
+                <mat-error *ngIf="courseControl.touched && courseControl.hasError('required')">
+                    Precisa escolher o curso para prosseguir
+                </mat-error>
+                <form [formGroup]="courseFormGroup" class="h-100">
+                    <mat-radio-group [formControl]="courseControl" class="flex-column d-flex">
+                        <ng-container *ngIf="schoolCourses$ | async as schoolCourses; else loadingItem">
+                            <ng-container *ngIf="hasCourse; else noSchoolCourse">
+                                <ng-container *ngFor="let sc of schoolCourses">
+                                    <mat-radio-button [value]="sc.course">
+                                        <div class="">
+                                            {{sc.course.name}}
+                                        </div>
+                                    </mat-radio-button>
+                                </ng-container>
+                            </ng-container>
+                            <ng-template #noSchoolCourse>
+                                Não foram encontrados cursos criados nesta escola, deve contactar
+                                o operador da escola que se adicione cursos
+                            </ng-template>
+                        </ng-container>
+                    </mat-radio-group>
+                </form>
+                <div class="d-flex mt-4 w-100 justify-content-center">
+                    <button mat-button mat-dialog-close color="warn" class="mr-4">
+                        Cancelar
+                    </button>
+                    <div>
+                        <button mat-button matStepperNext (click)="onCourseChoice()" ngSubmit [hidden]="!hasCourse">
+                            Seguinte
+                        </button>
+                    </div>
+                </div>
+            </mat-step>
+            <!-- End course choice-->
+
+            <!-- Teacher Place Identifier -->
+            <mat-step [stepControl]="teacherPlaceGroup">
+                <div>
+                    <h3> Dados da turma</h3>
+                </div>
+                <div class="d-flex flex-column align-items-center">
+                    <ng-container *ngIf="school && course">
+                        <div class="d-flex flex-column align-items-center mb-2">
+                            <div class="img-profile-sm">
+                                <img [src]="school.profilePhotoPath">
+                            </div>
+                            <span class="irrelevant-text">
+                                {{course.name}}
+                            </span>
+                            <h3>{{school.shortName}}</h3>
+                        </div>    
+                    </ng-container>
+                </div>
+                <form [formGroup]="teacherPlaceGroup" class="d-flex flex-column">
+                    <mat-form-field>
+                        <mat-label> Nome </mat-label>
+                        <input type="text" [formControl]="teacherPlaceName" placeholder="ex. Turma de Programação IV" matInput>
+                        <mat-error *ngIf="teacherPlaceName.touched && teacherPlaceName.hasError('required')">
+                            O campo não pode estar vazio
+                        </mat-error>
+                        <mat-error *ngIf="teacherPlaceName.touched && teacherPlaceName.errors?.maxlength">
+                            Nome demasiado extenso
+                        </mat-error>
+                        <mat-error *ngIf="teacherPlaceName.touched && teacherPlaceName.hasError('pattern')">
+                            Formato do nome inválido
+                        </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field>
+                        <mat-label>
+                            Qual será disciplina
+                        </mat-label>
+                        <input [formControl]="teacherPlaceDiscipline" [matAutocomplete]="auto" matInput>
+                        <mat-error
+                            *ngIf="teacherPlaceDiscipline.touched && teacherPlaceDiscipline.hasError('required')">
+                            O campo não pode estar vazio
+                        </mat-error>
+                        <mat-error *ngIf="teacherPlaceDiscipline.touched && teacherPlaceDiscipline.errors?.maxLenght">
+                            Nome demasiado extenso
+                        </mat-error>
+                        <mat-error *ngIf="teacherPlaceDiscipline.touched && teacherPlaceDiscipline.hasError('pattern')">
+                            Formato do nome inválido
+                        </mat-error>
+
+
+                    </mat-form-field>
+                    <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+                        <mat-option *ngFor="let discipline of disciplinesFiltered$ | async as disciplinesFiltered"
+                            [value]="discipline">
+                            {{discipline.name}}
+                        </mat-option>
+                    </mat-autocomplete>
+
+                    <mat-form-field>
+                        <mat-label>
+                            Qual é o objectivo da turma
+                        </mat-label>
+                        <textarea id="description-field"  [formControl]="teacherPlaceDescription" matInput></textarea>
+                        <mat-error *ngIf="teacherPlaceDescription.touched && teacherPlaceDescription.hasError('required')">
+                            O campo não pode estar vazio
+                        </mat-error>
+                        <mat-error *ngIf="teacherPlaceDescription.touched && teacherPlaceDescription.errors?.maxlength">
+                            Descrição demasiado extensa
+                        </mat-error>
+                    </mat-form-field>
+                </form>
+
+                <div class="d-flex mt-4 w-100 justify-content-center">
+                    <button mat-button mat-dialog-close color="warn" class="mr-4">
+                        Cancelar
+                    </button>
+                    <div>
+                        <button mat-button matStepperNext (click)="onTeacherPlaceCreate()" ngSubmit>
+                            Seguinte
+                        </button>
+                    </div>
+                </div>
+            </mat-step>
+            <!-- End teacher place identifier -->
+
+            <!-- Confirm teacher place creation -->
+
+            <mat-step>
+                <div class="mb-3 bold-500">
+                    <h3> Detalhes da turma </h3>
+                </div>
+                <div class="d-flex flex-column flex-start">
+                    <ng-container *ngIf="school && course">                       
+                        <div class="d-flex flex-column align-items-center mb-2 w-100 justify-content-center">
+                            <div class="img-profile-sm">
+                                <img [src]="school.profilePhotoPath">
+                            </div>
+                            <span class="irrelevant-text">
+                                {{course.name}}
+                            </span>
+                            <h3>{{school.shortName}}</h3>
+                        </div>   
+                    </ng-container>
+
+                    <div class="mb-2" *ngIf="discipline">
+                        {{discipline.name}}
+                    </div>
+                    <ng-container *ngIf="teacherPlace">
+                        <div class="mb-2">
+                            {{teacherPlace.name}}
+                        </div>
+                        <div class="mb-4">
+                            {{teacherPlace.description}}
+                        </div>
+                    </ng-container>
+                </div>
+                <div class="w-100 d-flex justify-content-center">
+                    <button mat-button mat-dialog-close color="warn">
+                        Canelar
+                    </button>
+                    <button mat-button class="button-bg-accent-1 w-50 mb-2" (click)="onConfirmTeacherPlace()">
+                        Confirmar
+                    </button>
+                </div>
+
+            </mat-step>
+        </mat-horizontal-stepper>
+    </mat-dialog-content>
+</div>
+
+<ng-template #loadingItem>
+    <app-loading-item></app-loading-item>
+</ng-template>

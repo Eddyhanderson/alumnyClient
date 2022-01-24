@@ -1,0 +1,224 @@
+<div class="main">
+    <div class="section mb-4">
+        <div class="container-row mb-4">
+            <div class="d-flex flex-column item p-3 border rounded">
+                <mat-card-title class="mb-3">
+                    Sobre
+                </mat-card-title>
+
+                <mat-card-content *ngIf="teacherPlace && teacher; else loadingItem">
+                    <text-visualizer [content]="teacherPlace.description">
+
+                    </text-visualizer>
+                </mat-card-content>
+            </div>
+            <!-- End  -->
+
+            <div class="item p-4 border rounded" >
+                <div class="d-flex flex-column" *ngIf="teacherPlace && teacher; else loadingItem">
+                    <!-- Institute Information -->
+                    <div class="d-flex justify-content-start align-items-center mb-4">
+                        <div class="img-profile-xm mr-4">
+                            <img [src]="teacherPlace.schoolPictureProfilePath">
+                        </div>
+                        <a href="#">
+                            <span>{{teacherPlace.schoolName}}</span>
+                        </a>
+                    </div>
+                    <!-- End -->
+    
+                    <!-- Teaher Data -->
+                    <span class="irrelevant-text-xm text-disabled" >
+                        Curso de {{teacherPlace.courseName}}
+                    </span>
+                    <a href="#" class="mb-2">
+                        {{teacherPlace.teacherFirstName}} {{teacherPlace.teacherLastName}}
+                    </a>
+                    <span class="irrelevant-text-xm text-disabled">
+                        {{teacher.academicLevelName}} em {{teacher.courseName}}
+                    </span>
+                    <a href="#">
+                        {{teacher.academyName}}
+                    </a>
+                    <!-- End -->
+                </div>
+            </div>
+            <!-- End  -->
+        </div>
+
+        <div class="container-row place-items-start">
+            <div class="d-flex flex-column item p-3 border rounded">
+                <mat-card-title class="mb-3">
+                    Resumo
+                </mat-card-title>
+
+                <mat-card-content class="d-flex flex-column" *ngIf="teacherPlace;else loadingItem">
+                    <span class="irrelevant-text text-disabled-1 mb-1">
+                        <span class="bold-500 relevent-text"> {{teacherPlace.studantsCount}} estudantes </span>
+                        matriculados desde Mar 2, 21
+                    </span>
+                    <span class="mb-1">
+                        <h4 class="relevant-text-principal bold-500">
+                            {{teacherPlace.name}}
+                        </h4>
+                    </span>
+                    <div class="d-flex justify-content-between">
+                        <div class="d-flex flex-column">
+                            <span class="mb-2 d-flex align-items-center">
+                                <mat-icon class="mr-3 text-disabled-1">
+                                    play_lesson
+                                </mat-icon>
+                                <span>{{teacherPlace.lessonsCount}} Aulas </span>
+                            </span>
+                            <span class="mb-2 d-flex align-items-center">
+                                <mat-icon class="mr-3 text-disabled-1">
+                                    topic
+                                </mat-icon>
+                                <span>{{teacherPlace.topicCount}} Tópicos</span>
+                            </span>
+                            <span class="mb-2 d-flex align-items-center">
+                                <mat-icon class="mr-3 text-disabled-1">
+                                    help_center
+                                </mat-icon>
+                                <span> {{teacherPlace.questionsCount}} Questões</span>
+                            </span>
+                            <span class="mb-2 d-flex align-items-center">
+                                <mat-icon class="mr-3 text-disabled-1">
+                                    feedback
+                                </mat-icon>
+                                <span> {{teacherPlace.answerCount}} Respostas</span>
+                            </span>
+                            <span class="mb-2 d-flex align-items-center">
+                                <mat-icon class="mr-3 text-disabled-1">
+                                    support_agent
+                                </mat-icon>
+                                <span> {{teacherPlace.teacherAnswerCount}} Respostas do professor</span>
+                            </span>
+                            <span class="mb-2 d-flex align-items-center">
+                                <mat-icon class="mr-3 text-disabled-1">
+                                    face
+                                </mat-icon>
+                                <span> {{teacherPlace.studantAnswerCount}} Respostas dos estudantes</span>
+                            </span>
+                            <span class="mb-2 d-flex align-items-center">
+                                <mat-icon class="mr-3 text-disabled-1">
+                                    try
+                                </mat-icon>
+                                <span> {{teacherPlace.solvedQuestionCount}} Questões resolvidas</span>
+                            </span>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-center"
+                            *ngIf="!isRegistered && !isTeacher">
+                            <button mat-icon-button matTooltip="Explorar" class="button-bg-accent-4"
+                                (click)="gotoReview()">
+                                <mat-icon>
+                                    explore
+                                </mat-icon>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- TODO: Dynamic content needed -->
+                    <div class="d-flex align-items-center">
+
+                        <span class="star-fill">
+                            <h4 class="mr-1 mb-1">
+                                3,4
+                            </h4>
+                        </span>
+                        <div class="d-flex">
+                            <mat-icon class="star-fill">
+                                star
+                            </mat-icon>
+                            <mat-icon class="star-fill">
+                                star
+                            </mat-icon>
+                            <mat-icon class="star-fill">
+                                star
+                            </mat-icon>
+                            <mat-icon class="star-unfill">
+                                star
+                            </mat-icon>
+                            <mat-icon class="star-unfill">
+                                star
+                            </mat-icon>
+                        </div>
+                    </div>
+
+                    <mat-card-footer class="d-flex justify-content-center" *ngIf="!isRegistered && !isTeacher">
+                        <button mat-flat-button color="primary" class="mb-2" (click)="onRegister()">
+                            <div class="d-flex align-items-center">
+                                <span>Matricular</span>
+                                <div class="circle-diviser"></div> {{teacherPlace.price > 0 ?
+                                '$'+teacherPlace.price+'/mês' : 'Grátis'}}
+                            </div>
+                        </button>
+                    </mat-card-footer>
+                    <mat-card-footer class="d-flex align-items-center justify-content-center w-100" *ngIf="isTeacher || isOwner">
+                        <span class="d-flex align-items-center justify-content-center">
+                            <mat-icon class="mr-3">
+                                paid
+                            </mat-icon>
+                            <h4 class="bold-500">{{teacherPlace.price > 0 ?
+                                '$'+teacherPlace.price+'/mês' : 'Grátis'}}</h4>
+                        </span>
+                    </mat-card-footer>
+                </mat-card-content>
+            </div>
+
+            <div class="item border rounded p-3">
+                <mat-card-title class="mb-3">
+                    Avaliações
+                </mat-card-title>
+                <mat-card-content>
+                    <div class="d-flex flex-column mt-3">
+                        <div class="d-flex flex-column">
+                            <div class="d-flex align-items-center">
+                                <div class="img-profile-xm">
+                                    <img src="../../../../../assets/images/pexels-luis-gomes-546819.jpg">
+                                </div>
+                                <div class="d-flex flex-column ml-2">
+                                    <span class="bold-500">
+                                        <h3>
+                                            Manuel Felipe
+                                        </h3>
+                                    </span>
+                                    <span class="irrelevant-text text-disabled-1">
+                                        há 1 semana
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="d-flex my-2">
+                                <mat-icon class="star-fill">
+                                    star
+                                </mat-icon>
+                                <mat-icon class="star-fill">
+                                    star
+                                </mat-icon>
+                                <mat-icon class="star-fill">
+                                    star
+                                </mat-icon>
+                                <mat-icon class="star-unfill">
+                                    star
+                                </mat-icon>
+                                <mat-icon class="star-unfill">
+                                    star
+                                </mat-icon>
+                            </div>
+                            <span>
+                                Eu gostei da turma, o professor responde muito rápido às questões e com uma exatidão
+                                incrivel.
+                            </span>
+                        </div>
+                    </div>
+                </mat-card-content>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Templates -->
+<ng-template #loadingItem>
+    <app-loading-item></app-loading-item>
+</ng-template>

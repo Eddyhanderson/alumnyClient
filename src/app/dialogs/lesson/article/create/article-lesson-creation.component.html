@@ -1,0 +1,104 @@
+<div class="d-flex justify-content-between">
+    <h2 mat-dialog-title>
+        Criar um artigo
+    </h2>
+    <button mat-icon-button matTooltip="Fechar" (click)="closeEditor()">
+        <mat-icon>
+            close
+        </mat-icon>
+    </button>
+</div>
+
+<mat-dialog-content class="h-75">
+    <text-editor *ngIf="!article; else lessonDetail" (articleResult)="getContent($event)"
+        (closeResult)="onClose($event)" [article]="data" [stopRequest]="!editing" [closeRequest]="close">
+    </text-editor>
+
+    <ng-template #lessonDetail>
+        <mat-vertical-stepper [linear]="true">
+            <ng-template matStepperIcon="class">
+                <mat-icon>
+                    class
+                </mat-icon>
+            </ng-template>
+            <ng-template matStepperIcon="topic">
+                <mat-icon>
+                    topic
+                </mat-icon>
+            </ng-template>
+            <ng-template matStepperIcon="details">
+                <mat-icon>
+                    panorama_fish_eye
+                </mat-icon>
+            </ng-template>            
+
+            <mat-step editable="true" label="Turma" state="class" [stepControl]="teacherPlaceCtl">
+                <app-teacher-place-picker (result)="tpPicker($event)">
+
+                </app-teacher-place-picker>
+            </mat-step>
+
+            <mat-step editable="true" label="Tópico" state="topic" linear="true" [stepControl]="topicCtl">
+                <ng-container *ngIf="teacherPlace; else loadingItems">
+                    <app-topic-picker [teacherPlace]="teacherPlace.id" (result)="tPicker($event)">
+
+                    </app-topic-picker>
+                </ng-container>
+            </mat-step>
+
+            <mat-step label="Detalhes" state="details" [stepControl]="detailFg">
+                <app-lesson-detail-form [teacherPlace]="teacherPlace" (result)="detailForm($event)">
+
+                </app-lesson-detail-form>
+
+                <div class="irrelevant-text text-disabled-1 mb-1 mt-3">
+                    Escolha uma imagem como miniatura
+                </div>
+                <div class="d-flex justify-content-start">
+                    <div class="w-25 p-relative">
+                        <div [style]="{'height':'6rem'}"
+                            class="d-flex justify-content-center align-items-center border">
+                            <mat-icon *ngIf="!imgUrl; else preview"> image </mat-icon>
+
+                            <ng-template #preview>
+                                <div class="thumbnail-preview">
+                                    <img [src]="imgUrl" alt="">
+                                </div>
+                            </ng-template>
+                        </div>
+
+                        <input *ngIf="!imgUrl" type="file" #fileInput id="uploadFile"
+                            (change)="uploadImageEvt($event)" name="uploadFile" accept="image/*" />
+                    </div>
+                </div>
+            </mat-step>            
+        </mat-vertical-stepper>
+    </ng-template>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <div class="d-flex justify-content-end w-100">
+        <button mat-flat-button (click)="stopEditing()" [hidden]="!editing" color="primary">
+            Concluido
+        </button>
+    </div>
+    <div class="d-flex justify-content-center w-100" *ngIf="detailFg && detailFg.valid">
+        <button mat-flat-button color="accent" class="w-25 d-flex justify-content-center align-items-center"
+            style="height: 2rem;" [disabled]="submited" (click)="onLessonCreate()">
+            <mat-spinner color="primary" diameter=20 *ngIf="submited"></mat-spinner>
+            <span *ngIf="!submited">Criar</span>
+        </button>
+    </div>
+</mat-dialog-actions>
+
+<ng-template #noImage>
+    <div class="img-profile-xxm-none">
+        <div></div>
+    </div>
+</ng-template>
+
+<ng-template #loadingItems>
+    <div class="w-50 h-50 d-flex justify-content-center">
+        <mat-progress-spinner mode="indeterminate" color="primary"></mat-progress-spinner>
+    </div>
+</ng-template>

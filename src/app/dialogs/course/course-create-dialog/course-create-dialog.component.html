@@ -1,0 +1,36 @@
+<h3 mat-dialog-title>
+    Criar curso
+</h3>
+<mat-dialog-content class="w-100 m-0 p-0">
+    <p class="irrelevant-text text-disabled-1">
+        A criação de um curso possibilitará aos professores desta escola a criarem
+        turmas para este curso.
+    </p>
+    <form [formGroup]="formGroup">
+        <mat-form-field class="w-100">
+            <mat-label> Insira o nome do curso </mat-label>
+            <input type="text" matInput [formControl]="courseControl" [matAutocomplete]="auto">
+            <mat-error *ngIf="courseControl.touched && courseControl.errors?.maxlength">
+                Nome demasiado extenso
+            </mat-error>
+            <mat-error *ngIf="courseControl.touched && courseControl.hasError('required')">
+                O campo não pode estar vazio
+            </mat-error>
+        </mat-form-field>
+        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+            <mat-option *ngFor="let option of filteredCourses$ | async" [value]="option">
+                {{option.name}}
+            </mat-option>
+        </mat-autocomplete>
+        <div class="d-flex">
+            <button mat-button mat-dialog-close color="warn" class="mr-4">
+                Cancelar
+            </button>
+            <div (click)="onCreateCourse()" ngSubmit>
+                <button mat-button>
+                    Confirmar
+                </button>
+            </div>
+        </div>
+    </form>
+</mat-dialog-content>

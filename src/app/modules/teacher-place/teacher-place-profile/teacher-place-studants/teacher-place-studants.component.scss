@@ -1,0 +1,25 @@
+@import '../../../../shared/styles/standard-layout';
+
+.main{
+    @extend %main;
+}
+
+.section{
+    @extend %section;
+    
+}
+
+.container-row{
+    @extend %container-row;
+    justify-content: center;
+}
+
+.item{
+    width: 50%;
+    background-color: white;
+    padding: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}

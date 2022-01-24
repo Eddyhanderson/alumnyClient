@@ -1,0 +1,102 @@
+@mixin animation-defining($animation) {
+    -webkit-animation: $animation;
+    -ms-animation: $animation;
+    -o-animation: $animation;
+    -moz-animation: $animation;
+    animation: $animation;
+}
+
+%loading {
+    background-color: rgba(238, 237, 234,.5);
+    @include animation-defining(loading-animation 1s ease-in 0s infinite alternate-reverse);
+}
+
+.loading-presentation {
+    height: 13rem;
+    width: 32%;
+    @extend %loading;
+}
+
+%loading-presentation-rounded{
+    height: 1.5rem;
+    border-radius: 5rem;
+    margin-bottom: 1rem;
+}
+
+.loading-presentation-rounded-lg{
+    width: 25rem;
+    @extend %loading-presentation-rounded;
+    @extend %loading;
+}
+
+.loading-presentation-rounded-md{
+    width: 14rem;
+    @extend %loading-presentation-rounded;
+    @extend %loading;
+}
+
+.loading-presentation-rounded-sm{
+    width: 7rem;
+    @extend %loading-presentation-rounded;
+    @extend %loading;
+}
+
+#loading-presentation-box1{
+    width: 60%;
+}
+
+#loading-presentation-box2{
+    width: 40%;
+}
+
+.loading-presentation-container{
+    width: 95%;
+    height: 39rem;
+    border-radius: 1rem;
+    @extend %loading;
+}
+
+@-webkit-keyframes loading-animation {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0.1;
+    }
+}
+
+@-ms-keyframes loading-animation {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0.1;
+    }
+}
+
+@-o-keyframes loading-animation {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0.1;
+    }
+}
+
+@-moz-keyframes loading-animation {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0.1;
+    }
+}
+
+@keyframes loading-animation {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0.1;
+    }
+}

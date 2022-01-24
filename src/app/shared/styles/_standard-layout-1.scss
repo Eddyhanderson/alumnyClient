@@ -1,0 +1,13 @@
+/* This standard is used often in profiles layouts */
+
+%main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;     
+}
+
+%container{
+    width: 94%;
+    display: flex;
+    flex-direction: column;    
+}

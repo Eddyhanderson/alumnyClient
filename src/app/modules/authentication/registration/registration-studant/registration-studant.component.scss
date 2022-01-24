@@ -1,0 +1,27 @@
+@import '../../../../shared/styles/standard-layout';
+
+.main{
+    @extend %main;
+    justify-items: center;
+}
+
+.registration-card{
+    width: 500px;
+    height: auto;
+    padding: 1.5rem 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.progress-spinner{
+    width: 50%;
+    height: 50%;
+}
+
+.progress-spinner svg{
+    height: 100%;
+    width: 100%;
+}
+

@@ -1,0 +1,49 @@
+<!-- Tool Bar Section -->
+<mat-toolbar class="material-toolbar p-4 justify-content-between fixed-top shadow-sm">
+    <div class="d-flex justfy-content-between align-items-center">
+        <button mat-icon-button class="d-flex mr-2 actions" (click)="sidenav.toggle()">
+            <span class="navbar-toggler-icon">
+                <mat-icon>menu</mat-icon>
+            </span>
+        </button>
+        <h1 class="brand d-flex align-items-center">
+            <mat-icon class="mr-2">school</mat-icon> alumny
+        </h1>
+    </div>
+    <div class="input-group align-self-center" style="width: 50%; height: 2rem;">
+        <input class="form-control" type="search" placeholder="Pesquisar" [(ngModel)]="search" [style.height.%]="100">
+
+        <button mat-icon-button class="search-suffix" (click)="gotoSearch(search)" [style.height.%]="100">
+            <mat-icon>search</mat-icon>
+        </button>
+
+    </div>
+    <div class="d-flex justfy-content-between align-items-center actions">
+        <button mat-icon-button matTooltip="Adicionar aula" matTooltipPosition="above"
+            *ngIf="role.toUpperCase()=='TEACHER'" [matMenuTriggerFor]="typeLessons">
+            <mat-icon class="text-color-primary" [style.fontSize.rem]="1.5">
+                post_add
+            </mat-icon>
+        </button>
+        <mat-menu #typeLessons="matMenu">
+            <button mat-menu-item (click)="openCreateVideoLessonDialog()">
+                <mat-icon class="text-color-primary">video_library</mat-icon>
+                Video aula
+            </button>
+            <button mat-menu-item (click)="openCreateArticleLessonDialog()">
+                <mat-icon class="text-color-primary">article</mat-icon>
+                Artigo
+            </button>
+        </mat-menu>
+        <button class="mr-4" mat-icon-button>
+            <mat-icon matBadge="9+" matBadgePosition="after" matBadgeColor="primary">notifications
+            </mat-icon>
+        </button>
+        <div class="img-profile-xm" *ngIf="user.pictureProfilePath">
+            <img [src]="user.pictureProfilePath">
+        </div>
+        <div class="img-profile-xm-none" *ngIf="!user.pictureProfilePath">
+            <div></div>
+        </div>
+    </div>
+</mat-toolbar>

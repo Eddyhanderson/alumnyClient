@@ -1,0 +1,172 @@
+<div class="main">
+    <div class="section">
+        <mat-tab-group mat-align-tabs="center" class="remove-border-bottom" #tabGroup>
+            <mat-tab label="Turmas">
+                <ng-container *ngIf="teacherPlacePagination | async as teacherPlaces; else loading">
+                    <ng-container *ngIf="teacherPlaces.length > 0;else nothingToShow">
+                        <div class="container-items">
+
+                            <div class="item teacher-place-item" *ngFor="let teacherPlace of teacherPlaces">
+                                <div class="background-image mb-2">
+                                    <a [routerLink]="['/teacher-place', teacherPlace.id, 'profile', 'about']"
+                                        class="selectable-item">
+                                        <img [src]="teacherPlace.profilePhotoPath">
+                                    </a>
+                                </div>
+
+                                <div class="d-flex w-100">
+                                    <div class="img-profile-xm mr-2" [style.width.%]="10">
+                                        <img [src]="teacherPlace.teacherPictureProfilePath">
+                                    </div>
+                                    <div class="d-flex flex-column" [style.width.%]="90">
+                                        <span class="relevant-text-normal bold-500 text-ellips">
+                                            {{teacherPlace.name}}
+                                        </span>
+                                        <div class="d-flex flex-column irrelevant-text text-disabled-1 ">
+                                            <span>
+                                                {{teacherPlace.teacherFirstName}} {{teacherPlace.teacherLastName}}
+                                            </span>
+                                            <span class="d-flex align-items-center text-ellips">
+                                                <span *ngIf="teacherPlace.opened">
+                                                    {{teacherPlace.opened ? 'Grátis' : 'Fechada'}} 
+                                                </span>
+                                                <div class="circle-diviser"></div>
+                                                {{teacherPlace.disciplineName}}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex w-100 justify-content-center align-items-center mt-1">
+                                    <button mat-stroked-button class="w-75 bold">
+                                        Matricular
+                                    </button>
+                                </div>
+                            </div>
+
+
+                            <div class="center-bottom">
+                                <div class="overlay">
+                                    <mat-spinner color="primary" diameter=40 margin="auto"
+                                        *ngIf="teacherPlacePagination.loading"></mat-spinner>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-container>
+                </ng-container>
+            </mat-tab>
+            <mat-tab label="Aulas">
+                <ng-container *ngIf="lessonPagination | async as lessons; else loading">
+                    <ng-container *ngIf="lessons.length > 0; else nothingToShow">
+                        <div class="container-items">
+                            <div class="item lesson-item" *ngFor="let lesson of lessons">
+                                <div class="background-image mb-2">
+                                    <div class="duration-lesson" *ngIf="lesson.lessonType.toUpperCase() == 'VIDEO' ">
+                                        {{lesson.duration}}
+                                    </div>
+                                    <a [routerLink]="['/lesson', 'watch', 'questions']"
+                                        [queryParams]="{lesson:lesson.id}" class="selectable-item">
+                                        <img [src]="lesson.backgroundPhotoPath">
+                                    </a>
+                                </div>
+
+                                <div class="d-flex w-100">
+                                    <div class="img-profile-xm mr-2" [style.width.%]="10">
+                                        <img [src]="lesson.teacherPlacePhotoPath">
+                                    </div>
+                                    <div class="d-flex flex-column" [style.width.%]="90">
+                                        <span class="relevant-text-normal bold-500 text-ellips">
+                                            Aula nº {{lesson.sequence}} - {{lesson.title}}
+                                        </span>
+                                        <span class="d-flex irrelevant-text-xm text-disabled-1">
+                                            {{lesson.date | elapsed}}
+                                        </span>
+                                        <div class="d-flex flex-column irrelevant-text text-disabled-1">
+                                            <span>
+                                                {{lesson.teacherPlaceName}}
+                                            </span>
+                                            <span class="d-flex align-items-center text-ellips">
+                                                {{lesson.public ? 'Aberta' : 'Fechada'}}
+                                                <div class="circle-diviser"></div>
+                                                {{lesson.disciplineTopicName}}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-container>
+                </ng-container>
+            </mat-tab>
+            <mat-tab label="Professores">
+                <ng-container *ngIf="teacherPagination | async as teachers; else loading">
+                    <ng-container *ngIf="teachers.length > 0; else nothingToShow">
+                        <div class="container-items">
+                            <div class="item user-item" *ngFor="let teacher of teachers">
+                                <div class="d-flex w-100">
+                                    <div class="img-profile-sm mr-2">
+                                        <img [src]="teacher.pictureProfilePath">
+                                    </div>
+                                    <div class="d-flex flex-column" [style.width.%]="90">
+                                        <a class="discretLink relevant-text-normal bold-500 text-ellips"
+                                            [routerLink]="['teacher', teacher.id, 'profile', 'about']">
+                                            {{teacher.firstName}} {{teacher.lastName}}
+                                        </a>
+                                        <span>
+                                            <h5 class="text-disabled-1">
+                                                {{teacher.teacherPlaceQnt}} Turmas
+                                            </h5>
+                                        </span>
+                                        <span class="irrelevant-text-sm">
+                                            {{teacher.academicLevelName}} em {{teacher.courseName}}
+                                        </span>
+                                        <span class="irrelevant-text-sm">
+                                            no {{teacher.academyName}}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-container>
+                </ng-container>
+            </mat-tab>
+            <mat-tab label="Estudantes">
+                <ng-container *ngIf="studantPagination | async as studants; else loading">
+                    <ng-container *ngIf="studants.length > 0; else nothingToShow">
+                        <div class="container-items">
+                            <div class="item user-item" *ngFor="let studant of studants">
+                                <div class="d-flex w-100">
+                                    <div class="img-profile-sm mr-2">
+                                        <img [src]="studant.pictureProfilePath">
+                                    </div>
+                                    <div class="d-flex flex-column" [style.width.%]="90">
+                                        <a class="discretLink relevant-text-normal bold-500 text-ellips"
+                                            [routerLink]="['studant', studant.id, 'profile', 'about']">
+                                            {{studant.firstName}} {{studant.lastName}}
+                                        </a>                                        
+                                        <span class="irrelevant-text-sm">
+                                            {{studant.academicLevelName}} em {{studant.courseName}}
+                                        </span>
+                                        <span class="irrelevant-text-sm">
+                                            no {{studant.academyName}}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-container>
+                </ng-container>
+            </mat-tab>
+            <ng-template #loading>
+                <app-loading-page class="w-100"></app-loading-page>
+            </ng-template>
+
+            <ng-template #nothingToShow>
+                <div class="w-100 d-flex justify-content-center mb-3">
+                    <h4 class="text-disabled-1">
+                        Pesquisa sem resultados :(
+                    </h4>
+                </div>
+            </ng-template>
+        </mat-tab-group>
+    </div>
+</div>

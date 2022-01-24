@@ -1,0 +1,46 @@
+<div class="main">
+    <div class="container">
+
+        <div class="irrelevant-text text-disabled-1 mb-1 mt-4">
+            <p>
+                Resuma a tua dúvida em uma única questão, não tendo mais que 100 letras.
+            </p>
+        </div>
+        <mat-form-field appearance="outline" color="accent">
+            <mat-label>
+                Título da questão
+            </mat-label>
+            <input matInput [formControl]="questionTitle" type="text">
+            <mat-error *ngIf="questionTitle.touched && questionTitle.hasError('required')">
+                Deve dar algum título à questão
+            </mat-error>
+            <mat-error *ngIf="questionTitle.touched && questionTitle.errors?.maxlength">
+                Título superior que 100 letras
+            </mat-error>
+        </mat-form-field>
+
+
+        <div class="irrelevant-text text-disabled-1 mb-1 mt-4">
+            <p>
+                Descreve mais detalhadamente a sua questão.
+                A clareza e a objectividade são muito prezadas para que os teus colegas percebam.
+            </p>
+        </div>
+        <div class="text-editor mb-4">
+            <div #editor>
+
+            </div>
+        </div>
+        <mat-error *ngIf="descriptEmpty" class="mt-4">
+            A questão deve ter uma descrição
+        </mat-error>
+        <div class="d-flex justify-content-center">
+            <button mat-flat-button color="accent" class="w-25 d-flex justify-content-center align-items-center" style="margin: 5rem 0; height: 2rem;" 
+            [disabled]="submited" (click)="onSubmit()">
+                <mat-spinner color="primary" diameter=20 *ngIf="submited"></mat-spinner>
+                <span *ngIf="!submited">Questionar</span>
+            </button>
+        </div>
+    </div>
+</div>
+

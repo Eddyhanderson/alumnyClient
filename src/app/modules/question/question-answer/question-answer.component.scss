@@ -1,0 +1,15 @@
+@import '../../../shared/styles/standard-layout-1';
+
+.main{
+    @extend %main;
+}
+
+.container-span{
+    @extend %container;
+    width: 100% !important;
+    padding: 0;
+}
+
+.text-editor{
+    height: 15rem;    
+}

@@ -1,0 +1,72 @@
+<div class="main bg-lighter">
+    <div class="section">
+        <!-- Some information about the studant -->
+        <div class="container-row" *ngIf="question">
+            <div class="img-profile-sm">
+                <img [src]="question?.studantPhoto">
+            </div>
+            <div class="d-flex flex-column ml-4 justify-content-center">
+                <span class="my-1">
+                    <a routerLink="/studant/profile/about/" class="discretLink">
+                        {{question.studantFirstName}} {{question.studantLastName}}
+                    </a>
+                </span>
+                <span>
+                    <a routerLink="/" class="irrelevant-text primaryLink d-flex align-items-center">
+                       {{question.lessonTitle}} <div class="circle-diviser"></div> Aula nº {{question.lessonSequence}}
+                    </a>
+                </span>
+                <span class="relevant-text-title"> {{question.subject}}</span>
+                <span class="irrelevant-text-xm">
+                    {{question.createAt | elapsed}}
+                </span>
+            </div>
+            <div class="state-info">
+                <mat-chip-list #chipList>
+                    <mat-chip selectable="false" removable="true" disabled="false"
+                        [matTooltip]="situations[question.situation].tip">
+                        {{situations[question.situation].state}}
+                    </mat-chip>
+                </mat-chip-list>
+            </div>
+        </div>
+        <!-- End -->
+
+        <!-- Content of the question -->
+        <div class="mt-4 w-100" #view>
+        </div>
+        <!-- End of question content -->
+
+        <!-- Navigation sections -->
+        <div class="navigation-actions mt-4">
+            <ul class="justify-content-evenly">
+                <li>
+                    <a class="nav-action text-disabled" [routerLink]="['/question', question?.id, 'answer']"
+                        routerLinkActive="nav-action-selected">
+                        <span matTooltip="Responder questão">
+                            <mat-icon style="color: black;">
+                                help
+                            </mat-icon>
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a class="nav-action text-disabled" [routerLink]="['/question',question?.id, 'answers']"
+                        routerLinkActive="nav-action-selected">
+                        <span> RESPOSTAS ({{question?.studantAnswerQnt + question?.teacherAnswerQnt}})</span>
+                    </a>
+                </li>
+                <li>
+                    <a class="nav-action text-disabled" routerLink="/lesson/watch/questions"
+                        routerLinkActive="nav-action-selected">
+                        <span> COMENTÁRIOS ({{question?.commentsQnt}})</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <router-outlet>
+
+        </router-outlet>
+    </div>
+
+</div>

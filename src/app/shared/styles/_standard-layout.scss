@@ -1,0 +1,32 @@
+/* To use in detail views */
+
+%main{    
+    display: flex;    
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding-top: 2rem;
+}
+  
+%section{
+    height: 100%;
+    width: 96%;
+    display: flex;
+    flex-direction: column;
+}
+
+%container-row{
+    display: flex;
+    flex-direction: row; 
+    width: 100%;    
+}
+
+%container-column{
+    display: flex;
+    flex-direction: column;
+    width: 100%;    
+}
+@mixin item-config($width) {
+    width: $width;
+}
+

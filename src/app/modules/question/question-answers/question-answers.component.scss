@@ -1,0 +1,45 @@
+@import "../../../shared/styles/standard-layout";
+
+.main {
+    @extend %main;
+}
+
+.section {
+    @extend %section;
+    width: 100%;
+}
+
+.container-column {
+    @extend %container-column;
+}
+
+.answer-content {
+    text-align: justify;
+}
+
+.text-color-success {
+    color: rgb(var(--palette-accent1-light)) !important;
+}
+
+a {
+    color: var(--text-primary-color) !important;
+}
+
+a:hover {
+    //color: var(--communication-foreground) !important;
+    color: var(--palette-black-alpha-100) !important;
+}
+
+button.answer-trigger-button {
+    background: white;
+    border: none;
+    border-bottom: 1px #ccc solid;
+    width: 50%;
+    justify-content: flex-start;
+    display: flex;
+    padding: 0.1rem;
+}
+
+button.answer-trigger-button:focus{
+    outline: none;
+}

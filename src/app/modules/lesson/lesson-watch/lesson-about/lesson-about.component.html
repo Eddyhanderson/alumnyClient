@@ -1,0 +1,153 @@
+<div class="main mb-5">
+    <div class="section" *ngIf="lesson && topic && teacher; else loading">
+        <div class="container-row">
+            <div class="about-video-lesson item bg-white rounded border">
+                <mat-card-title class="p-3">
+                    Sobre a aula
+                </mat-card-title>
+                <mat-card-content>
+                    <div class="d-flex flex-column p-3">
+                        <div>
+                            {{lesson.description}}
+                        </div>
+
+                        <div>
+                            <mat-chip-list class="p-2">
+                                <mat-chip [selectable]="false" removable="false" matTooltip="Tema da aula">
+                                    {{lesson.title}}
+                                </mat-chip>
+                                <mat-chip [selectable]="false" removable="false" matTooltip="Disciplina da aula">
+                                    {{lesson.disciplineName}}
+                                </mat-chip>
+                            </mat-chip-list>
+                        </div>
+                    </div>
+                    <mat-divider class="w-100 my-2"></mat-divider>
+
+                    <div class="d-flex flex-column text-disabled-1 p-3">
+                        <div class="d-flex">
+                            <mat-icon class="mr-2">
+                                help_center
+                            </mat-icon>
+                            {{lesson.questionCount}} questões
+
+                        </div>
+                        <div class="d-flex">
+                            <mat-icon class="mr-2">
+                                try
+                            </mat-icon>
+                            {{lesson.solvedQuestionCount}} questões resolvidas
+                        </div>
+                        <div class="d-flex">
+                            <mat-icon class="mr-2">
+                                chat
+                            </mat-icon>
+                            {{lesson.answerCount}} respostas
+                        </div>
+                        <div class="d-flex">
+                            <mat-icon class="mr-2">
+                                support_agent
+                            </mat-icon>
+                            {{lesson.teacherAnswerCount}} respostas do professor
+                        </div>                        
+                    </div>
+
+                    <mat-divider class="w-100 my-2"></mat-divider>
+                    <div class="d-flex flex-column item p-3 w-100">
+                        <span>
+                            <h5 class="bold-500">Professor</h5>
+                        </span>
+                        <!-- Teacher Identifications -->
+                        <div class="d-flex justify-content-start align-items-center mb-2">
+                            <div class="img-profile-xm mr-4">
+                                <img [src]="teacher.pictureProfilePath">
+                            </div>
+                            <a [routerLink]="['teacher', teacher.id, 'profile', 'about']">
+                                <span>{{teacher.firstName}} {{teacher.lastName}}</span>
+                            </a>
+                        </div>
+                        <!-- End -->
+
+                        <!-- Teaher Date -->
+                        <span class="irrelevant-text-xm text-disabled">
+                            {{teacher.academicLevelName}} em {{teacher.courseName}}
+                        </span>
+                        <h4>
+                            no(a) {{teacher.academyName}}
+                        </h4>
+                        <!-- End -->
+                    </div>
+                    <!-- End  -->
+                </mat-card-content>
+            </div>
+
+            <div class="item bg-white rounded border d-flex flex-column">
+                <div class="background-image topic-bg-h mb-3 p-2">
+                    <img [src]="topic.photoProfile" class="rounded">
+                </div>
+
+                <span class="irrelevant-text text-disabled-1 ml-3">
+                    {{topic.creationAt | date}}
+                </span>
+                <span class="pl-3">
+                    <h5 class="bold-500">Tópico</h5>
+                </span>
+                <mat-card-title class="p-3">
+                    {{topic.disciplineTopicName}}
+                </mat-card-title>
+
+                <text-visualizer [content]="topic.description">
+
+                </text-visualizer>
+
+                <mat-divider></mat-divider>
+                <div class="d-flex flex-column">
+                    <span class="bold-500 p-3">
+                        <h3>Comentários</h3>
+                    </span>
+                    <mat-form-field class="my-1 p-3">
+                        <mat-label> Diz o que achaste do tópico</mat-label>
+                        <textarea matInput [formControl]="commentControl"></textarea>
+                        <button matSuffix mat-icon-button (click)="comment()">
+                            <mat-icon *ngIf="!commented">
+                                send
+                            </mat-icon>
+                            <mat-spinner color="primary" diameter=20 *ngIf="commented"></mat-spinner>
+                        </button>
+                    </mat-form-field>
+
+                    <ng-container *ngIf="topicComments$ | async as comments">
+                        <div class="d-flex flex-column p-3">
+                            <div class="d-flex flex-column mb-3" *ngFor="let comment of comments">
+                                <div class="d-flex align-items-center">
+                                    <div class="img-profile-xm">
+                                        <img [src]="comment.userPhoto">
+                                    </div>
+                                    <div class="d-flex flex-column ml-2">
+                                        <span class="bold-500">
+                                            <h3>
+                                                {{comment.userFirstName}} {{comment.userLastName}}
+                                            </h3>
+                                        </span>
+                                        <span class="irrelevant-text text-disabled-1">
+                                            {{comment.createAt | elapsed}}
+                                        </span>
+                                    </div>
+                                </div>
+                                <span>
+                                    {{comment.content}}
+                                </span>
+                            </div>
+                        </div>
+                    </ng-container>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #loading>
+    <app-loading-page></app-loading-page>
+</ng-template>

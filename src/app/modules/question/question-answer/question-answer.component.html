@@ -1,0 +1,26 @@
+<div class="main">
+    <div class="container-span">
+
+        <div class="irrelevant-text text-disabled-1 mb-2 mt-4">
+            <p>
+                Não existe resposta certa ou errada. 
+                Tem tudo a ver em aprendermos todos juntos e ajudarmo-nos uns aos outros.
+            </p>
+        </div>
+        <div class="text-editor mb-4">
+            <div #editor>
+
+            </div>
+        </div> 
+        <mat-error *ngIf="descriptEmpty" class="mt-4">
+            Acho que esqueceu-se de alguma coisa 
+        </mat-error>
+        <div class="d-flex justify-content-center">
+            <button mat-flat-button color="accent" class="w-25 d-flex justify-content-center align-items-center"
+                style="margin: 5rem 0; height: 2rem;" [disabled]="submited" (click)="onSubmit()">
+                <mat-spinner color="primary" diameter=20 *ngIf="submited"></mat-spinner>
+                <span *ngIf="!submited">Responder</span>
+            </button>
+        </div>
+    </div>
+</div>

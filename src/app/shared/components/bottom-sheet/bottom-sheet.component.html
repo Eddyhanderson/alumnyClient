@@ -1,0 +1,8 @@
+<ng-container *ngIf="data && data.datas">
+    <mat-action-list>
+        <button mat-list-item *ngFor="let data of data.datas" (click)="dismiss(data.action)">
+            <span mat-line> {{data?.title}} </span>
+            <span mat-line>{{data?.description}}</span>
+        </button>
+    </mat-action-list>
+</ng-container>

@@ -1,0 +1,63 @@
+<!-- Teacher place on which will get the lesson -->
+<ng-container *ngIf="teacherPlacesGrouped; else loadingItems">
+    <div class="irrelevant-text text-disabled-1 mb-2">
+        Escolha a turma onde se destina a tua aula. Siga pela selecção
+        da escola e do curso da respectiva turma.
+    </div>
+    <mat-error *ngIf="teacherPlaceCtl.touched && teacherPlaceCtl.hasError('required')">
+        Deve escolher uma turma
+    </mat-error>
+
+    <mat-accordion class="mt-1">
+        <mat-expansion-panel *ngFor="let groupedTeacherPlace of teacherPlacesGrouped">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    <div class="d-flex align-items-center">
+                        <div class="img-profile-xm mr-2">
+                            <img [src]="groupedTeacherPlace.school.profilePhotoPath">
+                        </div>
+                        <span>
+                            {{groupedTeacherPlace.school.shortName}}
+                        </span>
+                    </div>
+                </mat-panel-title>
+                <mat-panel-description>
+                    {{groupedTeacherPlace.school.name}}
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+            <ng-template matExpansionPanelContent>
+                <mat-accordion>
+                    <mat-expansion-panel *ngFor="let courseTeacherPlaces of groupedTeacherPlace.courseTeacherPlaces"
+                        class="mat-elevation-z0">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                {{courseTeacherPlaces.course.name}}
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <ng-template matExpansionPanelContent>
+                            <mat-selection-list [multiple]="false" [formControl]="teacherPlaceCtl">
+                                <mat-list-option [value]="teacherPlace"
+                                    *ngFor="let teacherPlace of courseTeacherPlaces.teacherPlaces">
+                                    <div class="d-flex align-items-center">
+                                        <div class="img-profile-xm mr-2"
+                                            *ngIf="teacherPlace.profilePhotoPath; else noImage">
+                                            <img [src]="teacherPlace.profilePhotoPath">
+                                        </div>
+                                        <span class="irrelevant-text-sm">
+                                            {{teacherPlace.name}}
+                                        </span>
+                                    </div>
+                                </mat-list-option>
+                            </mat-selection-list>
+                        </ng-template>
+                    </mat-expansion-panel>
+                </mat-accordion>
+            </ng-template>
+        </mat-expansion-panel>
+    </mat-accordion>
+</ng-container>
+<ng-template #loadingItems>
+    <div class="d-flex justify-content-center">
+        <mat-progress-spinner mode="indeterminate" color="primary" diameter=20></mat-progress-spinner>
+    </div>
+</ng-template>

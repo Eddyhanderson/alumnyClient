@@ -1,0 +1,56 @@
+@import "../../../../shared/styles/standard-layout";
+
+a {
+    color: inherit !important;
+}
+
+a:hover {
+    color: var(--palette-black-alpha-100) !important;
+}
+
+.main {
+    @extend %main;
+}
+
+.section {
+    @extend %section;
+}
+
+::ng-deep .ql-editor{
+    padding: 12px 15px !important;
+}
+
+.container-row {
+    @extend %container-row;
+    justify-content: space-between;
+    place-items: flex-start;
+}
+
+.item {
+    @include item-config(49%);
+}
+.about-video-lesson p {
+    text-align: justify;
+}
+
+.about-video-lesson {
+    display: flex;
+    flex-direction: column;
+}
+
+.about-teacher {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.item {
+    height: auto !important;    
+    background-color: white;
+    width: 49%;
+}
+
+.topic-bg-h {
+    height: 12rem !important;
+}

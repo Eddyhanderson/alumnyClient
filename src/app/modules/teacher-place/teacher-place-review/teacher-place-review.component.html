@@ -1,0 +1,369 @@
+<div class="main">
+    <ng-container *ngIf="teacherPlace;else loadingPage">
+        <div class="wallpaper-container wallpaper-container-lg mb-4">
+            <div class="background-container">
+                <img [src]="teacherPlace.profilePhotoPath">
+                <div class="shadow-ff" style="top: 0;"></div>
+            </div>
+            <div class="wallpaper-actions d-flex flex-column align-items-center justify-content-center w-100">
+                <h1 class="bold-500 mb-4">
+                    {{teacherPlace.name}}
+                </h1>
+                <div class="d-flex flex-column align-items-start mb-4">
+                    <div class="d-flex align-items-center justify-content-start">
+                        <span class="star-fill">
+                            <h4 class="mr-1 mb-1">
+                                3,4
+                            </h4>
+                        </span>
+                        <div class="d-flex">
+                            <mat-icon class="star-fill">
+                                star
+                            </mat-icon>
+                            <mat-icon class="star-fill">
+                                star
+                            </mat-icon>
+                            <mat-icon class="star-fill">
+                                star
+                            </mat-icon>
+                            <mat-icon class="star-unfill-white">
+                                star
+                            </mat-icon>
+                            <mat-icon class="star-unfill-white">
+                                star
+                            </mat-icon>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-start mb-2">
+                        <div class="d-flex flex-column color-white">
+                            <span class="mb-2 d-flex align-items-center">
+                                <mat-icon class="mr-4">
+                                    school
+                                </mat-icon>
+                                <span>{{teacherPlace.studantsCount}} Matriculados </span>
+                            </span>
+                            <span class="mb-2 d-flex align-items-center">
+                                <mat-icon class="mr-4">
+                                    play_lesson
+                                </mat-icon>
+                                <span>{{teacherPlace.lessonsCount}} Aulas </span>
+                            </span>
+                            <span class="mb-2 d-flex align-items-center">
+                                <mat-icon class="mr-4">
+                                    topic
+                                </mat-icon>
+                                <span>{{teacherPlace.topicCount}} Tópicos</span>
+                            </span>
+                            <span class="mb-2 d-flex align-items-center">
+                                <mat-icon class="mr-4">
+                                    help_center
+                                </mat-icon>
+                                <span> {{teacherPlace.questionsCount}} Questões</span>
+                            </span>
+                            <span class="mb-2 d-flex align-items-center">
+                                <mat-icon class="mr-4">
+                                    feedback
+                                </mat-icon>
+                                <span> {{teacherPlace.answerCount}} Respostas</span>
+                            </span>
+                            <span class="mb-2 d-flex align-items-center">
+                                <mat-icon class="mr-4">
+                                    support_agent
+                                </mat-icon>
+                                <span> {{teacherPlace.teacherAnswerCount}} Respostas do professor</span>
+                            </span>
+                            <span class="mb-2 d-flex align-items-center">
+                                <mat-icon class="mr-4">
+                                    face
+                                </mat-icon>
+                                <span> {{teacherPlace.studantAnswerCount}} Respostas dos estudantes</span>
+                            </span>
+                            <span class="mb-2 d-flex align-items-center">
+                                <mat-icon class="mr-4">
+                                    try
+                                </mat-icon>
+                                <span> {{teacherPlace.solvedQuestionCount}} Questões resolvidas</span>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="d-flex align-items-center mb-2">
+                        <div class="img-profile-xm mr-2">
+                            <img [src]="teacherPlace.teacherPictureProfilePath">
+                        </div>
+                        <div class="d-flex flex-column">
+                            <a [routerLink]="['/teacher', teacherPlace.teacherId, 'profile', 'about']">
+                                {{teacherPlace.teacherFirstName}} {{teacherPlace.teacherLastName}}
+                            </a>
+                            <h5 class="bold-500">
+                                {{teacherPlace.disciplineName}}
+                            </h5>
+                            <span class="irrelevant-text color-white-dark">
+                                Criado aos {{teacherPlace.createAt | date}}
+                            </span>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="d-flex align-items-center justify-content-center">
+                    <button mat-flat-button color="primary" class="button-lg" (click)="onRegister()">
+                        <div class="d-flex align-items-center">
+                            <span>MATRICULAR</span>
+                            <div class="circle-diviser"></div> {{teacherPlace.price > 0 ? '$'+teacherPlace.price+'/mês' :
+                            'Grátis'}}
+                        </div>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="section">
+            <div class="container-row mb-4">
+                <div class="item border rounded p-3">
+                    <mat-card-title class="mb-3">
+                        Tópicos
+                    </mat-card-title>
+                    <ng-container *ngIf="topics; else loadingItems">
+                        <ng-container *ngIf="topics?.length > 0; else noHaveTopics">
+                            <mat-card-content>
+                                <mat-selection-list [formControl]="topicControl" [multiple]="false"
+                                    (selectionChange)="topicListChange($event)" [compareWith]="compare">
+                                    <mat-list-option [value]="topic" *ngFor="let topic of topics" class="mb-2">
+                                        <div class="d-flex justify-content-center flex-column">
+                                            <h3>{{topic.disciplineTopicName}}</h3>
+                                            <div class="d-flex align-items-center">
+                                                <span class="irrelevant-text-xm">
+                                                    {{topic.openLessonCount}} aulas abertas
+                                                </span>
+                                                <div class="circle-diviser"></div>
+                                                <span class="irrelevant-text-xm">
+                                                    {{topic.lessonCount}} aulas
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </mat-list-option>
+                                </mat-selection-list>
+                            </mat-card-content>
+                        </ng-container>
+                    </ng-container>
+                </div>
+                <div class="item border rounded d-flex flex-column">
+                    <ng-container *ngIf="selectedTopic; else loadingItems">
+                        <div class="background-image topic-bg-h mb-3 p-2">
+                            <img [src]="selectedTopic?.photoProfile" class="rounded">
+                        </div>
+                        <mat-card-title class="px-3 mb-2">
+                            {{selectedTopic?.disciplineTopicName}}
+                        </mat-card-title>
+
+                        <span class="irrelevant-text text-disabled-1 mx-3">
+                            {{selectedTopic?.createAt}}
+                        </span>
+
+                        <div class="p-3">
+                            <text-visualizer [content]="selectedTopic?.description">
+
+                            </text-visualizer>
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+            <div class="container-row">
+                <div class="border rounded item p-3 mb-4">
+                    <mat-card-title>
+                        <span>
+                            Conteúdo
+                        </span>
+                    </mat-card-title>
+                    <mat-card-content>
+                        <div class="topic-lessons-section mt-4">
+                            <div class="topic-lessons">
+                                <ng-container *ngIf="lessons && initLessonSelection; else loadingItems">
+                                    <ng-container *ngIf="lessons.length > 0; else noHaveLessons">
+                                        <mat-selection-list [formControl]="lessonControl" [multiple]="false"
+                                            (selectionChange)="lessonListChange($event)" [compareWith]="compare">
+                                            <mat-list-option *ngFor="let lesson of lessons" [value]="lesson"
+                                                class="h-100 d-flex align-items-center">
+                                                <div class="topic-lesson my-3">
+                                                    <div class="background-image mr-3">
+                                                        <img [src]="lesson.backgroundPhotoPath">
+                                                        <div class="duration-lesson"
+                                                            *ngIf="lesson.lessonType.toUpperCase() == 'VIDEO'">
+                                                            <span
+                                                                class="irrelevant-text-xm bold">{{lesson.duration}}</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="w-100 #topic-lessons-metadata">
+                                                        <div class="d-flex align-items-center">
+                                                            <span class="irrelevant-text-smtext-disabled bold-500">
+                                                                Aula nº {{lesson.sequence}}
+                                                            </span>
+                                                            <div class="circle-diviser"></div>
+                                                            <span class="bold-500"> {{lesson.title}} </span>
+
+                                                        </div>
+                                                        <span>
+                                                            <h6>
+                                                                {{lesson.lessonType.toUpperCase() == 'VIDEO' ? 'Video' :
+                                                                'Artigo'}}
+                                                            </h6>
+                                                        </span>
+                                                        <mat-chip-list aria-label="Fish selection">
+                                                            <mat-chip selectable="false" matTooltip="Questões"
+                                                                class="mat-chip-dark">
+                                                                <span class="irrelevant-text-xm p-2">
+                                                                    {{lesson.questionCount}} questões
+                                                                </span>
+                                                            </mat-chip>
+                                                            <mat-chip selectable="false"
+                                                                matTooltip="Questões resolvidas" class="mat-chip-dark">
+                                                                <span class="irrelevant-text-xm p-2">
+                                                                    {{lesson.solvedQuestionCount}} resolvidas
+                                                                </span>
+                                                            </mat-chip>
+                                                            <mat-chip selectable="false"
+                                                                matTooltip="Aula aberta à todos" class="mat-chip-dark">
+                                                                <span class="irrelevant-text-xm">
+                                                                    {{lesson.public ? 'Aberta' : 'Privada'}}
+                                                                </span>
+                                                            </mat-chip>
+                                                        </mat-chip-list>
+                                                    </div>
+                                                </div>
+                                            </mat-list-option>
+                                        </mat-selection-list>
+                                    </ng-container>
+                                </ng-container>
+                            </div>
+                        </div>
+                    </mat-card-content>
+                </div>
+
+                <div class="border rounded item mb-4 d-flex flex-column" *ngIf="selectedLesson">
+                    <div class="wallpaper-container wallpaper-container-md mb-4 d-flex justify-content-center">
+                        <div class="background-container bg-h-lesson mb-4">
+                            <img [src]="selectedLesson.backgroundPhotoPath">
+                            <div class="shadow-ff" style="top: 0;"></div>
+                        </div>
+                        <div *ngIf="selectedLesson.public"
+                            class="wallpaper-actions wallpaper-actions-lg d-flex h-100 justify-content-center align-items-center flex-column">
+                            <button mat-icon-button class="mb-2" [matTooltip]="selectedLesson.lessonType.toUpperCase() == 'VIDEO' ? 'Assistir' : 'Ler'" (click)="lessonView()">
+                                <ng-container
+                                    *ngIf="selectedLesson.lessonType.toUpperCase() == 'VIDEO'; else articleView">
+                                    <mat-icon>
+                                        play_circle
+                                    </mat-icon>
+                                </ng-container>
+                                <ng-template #articleView>
+                                    <mat-icon>
+                                        article
+                                    </mat-icon>
+                                </ng-template>
+                            </button>
+                            <h2>
+                                Assistir aula de graça
+                            </h2>
+                        </div>
+                    </div>
+                    <mat-card-title class="px-3 mb-2">
+                        {{selectedLesson.title}}
+                    </mat-card-title>
+                    <span class="irrelevant-text text-disabled-1 mx-3">
+                        {{selectedLesson.date | date}}
+                    </span>
+                    <mat-card-content>
+                        <div class="p-3">
+                            <p class="topic-description">
+                                {{selectedLesson.description}}
+                            </p>
+                        </div>
+                    </mat-card-content>
+                </div>
+            </div>
+
+            <div class="container-row place-items-start">
+                <div class="border rounded item p-3 mb-4">
+                    <mat-card-title>
+                        {{teacherPlace.name}}
+                    </mat-card-title>
+                    <mat-card-content>
+                        <div class="mt-3">
+                            <text-visualizer [content]="teacherPlace.description">
+
+                            </text-visualizer>
+                        </div>
+                    </mat-card-content>
+                </div>
+                <div class="border rounded item p-3 mb-4">
+                    <mat-card-title class="mb-3">
+                        Avaliações
+                    </mat-card-title>
+                    <mat-card-content>
+                        <div class="d-flex flex-column mt-3">
+                            <div class="d-flex flex-column">
+                                <div class="d-flex align-items-center">
+                                    <div class="img-profile-xm">
+                                        <img src="../../../../../assets/images/pexels-luis-gomes-546819.jpg">
+                                    </div>
+                                    <div class="d-flex flex-column ml-2">
+                                        <span class="bold-500">
+                                            <h3>
+                                                Manuel Felipe
+                                            </h3>
+                                        </span>
+                                        <span class="irrelevant-text text-disabled-1">
+                                            há 1 semana
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="d-flex my-2">
+                                    <mat-icon class="star-fill">
+                                        star
+                                    </mat-icon>
+                                    <mat-icon class="star-fill">
+                                        star
+                                    </mat-icon>
+                                    <mat-icon class="star-fill">
+                                        star
+                                    </mat-icon>
+                                    <mat-icon class="star-unfill">
+                                        star
+                                    </mat-icon>
+                                    <mat-icon class="star-unfill">
+                                        star
+                                    </mat-icon>
+                                </div>
+                                <span>
+                                    Eu gostei da turma, o professor responde muito rápido às questões e com uma exatidão
+                                    incrivel.
+                                </span>
+                            </div>
+                        </div>
+                    </mat-card-content>
+                </div>
+            </div>
+        </div>
+    </ng-container>
+</div>
+<ng-template #loadingItems>
+    <app-loading-item></app-loading-item>
+</ng-template>
+
+<ng-template #loadingPage>
+    <app-loading-page class="w-100"></app-loading-page>
+</ng-template>
+
+<ng-template #noHaveTopics>
+    <div class="d-flex w-100 justify-content-center align-items-center">
+        <span>
+            Não há tópicos de momento
+        </span>
+    </div>
+</ng-template>
+
+<ng-template #noHaveLessons>
+    <div class="d-flex w-100 justify-content-center align-items-center">
+        <span>
+            Não há aulas de momento
+        </span>
+    </div>
+</ng-template>

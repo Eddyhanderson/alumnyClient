@@ -1,0 +1,63 @@
+@import '../../../../shared/styles/standard-layout';
+
+.main{
+    @extend %main;
+}
+
+.section{
+    @extend %section;
+}
+
+.container-row{
+    @extend %container-row;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+
+.item{
+    @include item-config(49%);
+    height: 13rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 2% 2% 0;
+    position: relative;
+    color: inherit !important;
+    padding: 1rem;
+}
+
+.doubt-content{
+    padding: 1rem;
+    overflow: hidden;
+    height: 40%;
+}
+
+
+.item:nth-child(2n){
+    margin-right: 0;
+}
+
+.statistics-info{
+    position: absolute;
+    right: 2%;
+    bottom: 65%;
+    font-size: .8rem;
+    width: auto !important;
+}
+
+.statistics-info mat-icon{
+    font-size: .8rem;
+    height: auto !important;
+    width: auto !important;    
+}
+
+.state-info{
+    position: absolute;
+    right: 3%;
+    bottom: 3%;
+}
+
+.item:hover{
+    cursor: pointer;
+}
+

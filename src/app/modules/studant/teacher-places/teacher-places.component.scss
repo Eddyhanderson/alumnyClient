@@ -1,0 +1,37 @@
+@import "../../../shared/styles/standard-layout-0";
+
+.main {
+    @extend %main;  
+}
+
+.section {
+    @extend %section;
+}
+
+.container-items {
+    @extend %container-items;
+}
+
+.item {
+    width: 24.2%;
+    margin: 0 1% 1% 0;  
+}
+
+.background-image {
+    height: 50%;
+    border-radius: 1%;
+}
+.background-image a{
+    height: 100% !important;
+}
+.background-image a img {
+    border-radius: 1%;    
+}
+
+.teacher-place-item {
+    display: flex;
+    align-items: flex-start;
+    justify-content: start;
+    flex-flow: column;
+    height: 20rem;
+}

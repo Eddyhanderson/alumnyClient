@@ -1,0 +1,78 @@
+<div class="d-flex justify-content-between">
+    <h2 mat-dialog-title>
+        Matrícula
+    </h2>
+    <button mat-icon-button>
+        <mat-icon mat-dialog-close>
+            close
+        </mat-icon>
+    </button>
+</div>
+<mat-dialog-content class="h-75">
+    <div class="main">
+        <div class="section" *ngIf="teacherPlace">
+            <mat-horizontal-stepper>
+                <ng-template matStepperIcon="class">
+                    <mat-icon>class</mat-icon>
+                </ng-template>
+
+                <ng-template matStepperIcon="payments">
+                    <mat-icon>paid</mat-icon>
+                </ng-template>
+
+                <mat-step step="class" label="Duração da matrícula">
+                    <div class="container-row">
+                        <div class="d-flex flex-column">
+                            <div class="d-flex justify-content-center flex-column align-items-center">
+                                <div class="img-profile-md">
+                                    <img [src]="teacherPlace.profilePhotoPath">
+                                </div>
+                                <span>
+                                    <h4>
+                                        {{teacherPlace.name}}
+                                    </h4>
+                                </span>
+                            </div>
+                            <span class="irrelevant-text-xm text-disabled-1">
+                                {{months > 1 ? months + ' meses' : months + ' mês'}}
+                            </span>
+                            <div class="d-flex justify-content-center align-items-center">
+                                <h2>
+                                    ${{total}}
+                                </h2>
+                            </div>
+                            <mat-slider thumbLabel [displayWith]="formatLabel" tickInterval="1000" step="1" min="1"
+                                max="12" (change)="onMonthsChange($event)" aria-label="months"></mat-slider>
+                        </div>
+                    </div>
+                </mat-step>
+
+                <mat-step step="payments" label="Pagamento">
+                    <div class="irrelevant-text text-disabled-1 mb-1 mt-3">
+                        Insira o número do seu cartão, a ordem de pagamento será efectuado
+                        em menos de 24 h.
+                    </div>
+                    <mat-form-field class="w-100" appearance="outline">
+                        <mat-label>
+                            Insira o número do cartão
+                        </mat-label>
+                        <input type="number" matInput [formControl]="cardCtl">
+                        <mat-icon matSuffix>credit_card</mat-icon>
+                        <mat-error *ngIf="cardCtl.touched && cardCtl.hasError('required')">
+                            Número de cartão obrigatório
+                        </mat-error>
+                    </mat-form-field>
+                </mat-step>
+            </mat-horizontal-stepper>
+        </div>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions class="d-flex justify-content-center align-items-center" *ngIf="cardCtl.valid">
+    <button mat-flat-button color="accent" class="w-25 d-flex justify-content-center align-items-center"
+        style="height: 2rem;" [disabled]="submited" (click)="onRegistrate()">
+        <span *ngIf="!submited">
+            Matricular
+        </span>
+        <mat-spinner color="primary" diameter=20 *ngIf="submited"></mat-spinner>
+    </button>
+</mat-dialog-actions>

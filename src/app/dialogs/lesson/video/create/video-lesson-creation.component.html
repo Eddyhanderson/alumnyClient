@@ -1,0 +1,170 @@
+<div class="d-flex justify-content-between">
+    <h2 mat-dialog-title>
+        Carregar video-aula
+    </h2>
+    <button mat-icon-button>
+        <mat-icon mat-dialog-close>
+            close
+        </mat-icon>
+    </button>
+</div>
+<mat-dialog-content>
+
+    <div class="w-100 d-flex justify-content-between">
+        <div [class.left-form-container]="loadingMode">
+            <mat-vertical-stepper #stepper [linear]="true">
+                <ng-template matStepperIcon="class">
+                    <mat-icon>
+                        class
+                    </mat-icon>
+                </ng-template>
+                <ng-template matStepperIcon="topic">
+                    <mat-icon>
+                        topic
+                    </mat-icon>
+                </ng-template>
+                <ng-template matStepperIcon="videoChoice">
+                    <mat-icon>
+                        add_to_photos
+                    </mat-icon>
+                </ng-template>
+
+                <ng-template matStepperIcon="details">
+                    <mat-icon>
+                        panorama_fish_eye
+                    </mat-icon>
+                </ng-template>
+
+                <mat-step label="Turma" label="Turma" state="class" [stepControl]="teacherPlaceCtl">
+                    <app-teacher-place-picker (result)="tpPicker($event)">
+
+                    </app-teacher-place-picker>
+                </mat-step>
+
+                <mat-step editable="true" label="Tópico" state="topic" linear="true" [stepControl]="topicCtl">
+                    <ng-container *ngIf="teacherPlace; else loadingItems">
+                        <app-topic-picker [teacherPlace]="teacherPlace.id" (result)="tPicker($event)">
+
+                        </app-topic-picker>
+                    </ng-container>
+                </mat-step>
+
+                <mat-step editable="false" label="Escolher video" state="videoChoice" linear="true"
+                    [stepControl]="videoCtl">
+                    <div class="d-flex flex-column justify-content-between dialog-content">
+                        <div class="d-flex justify-content-center align-items-center mb-5">
+                            <div class="w-50 p-relative">
+                                <button mat-flat-button color="warn" class="w-100" [style]="{'height':'3rem'}">
+                                    SELECIONAR VIDEO <mat-icon class="ml-1"> video_library </mat-icon>
+                                </button>
+
+                                <!-- Fetch selected filed on change -->
+                                <input type="file" #fileInput id="uploadFile" (change)="uploadFileEvt($event)"
+                                    name="uploadFile" [formControl]="videoCtl" accept="video/mp4" />
+
+                            </div>
+                        </div>
+                        <div
+                            class="d-flex flex-column align-items-center justify-content-center irrelevant-text-sm text-disabled-1">
+                            <p>
+                                Certifique-se que o video que deseja carregar não viola as <a href="#" class="ml-1">
+                                    regras
+                                    da
+                                    comunidade Alumny</a>
+                            </p>
+                        </div>
+                    </div>
+                </mat-step>
+
+                <mat-step label="Detalhes" state="details" [stepControl]="detailFg">
+                    <app-lesson-detail-form [teacherPlace]="teacherPlace" (result)="detailForm($event)">
+
+                    </app-lesson-detail-form>
+                </mat-step>
+            </mat-vertical-stepper>
+        </div>
+
+        <div class="d-flex flex-column" id="rigth-form-container" *ngIf="loadingMode">
+            <!-- Video loading or video template will be presented -->
+            <ng-container *ngTemplateOutlet="manifest ? video : videoLoading"></ng-container>
+
+            <div class="d-flex justify-content-between mt-4">
+                <!-- The thumbnail will be chosen manually -->
+                <ng-container *ngTemplateOutlet="chooseThumbnail"></ng-container>
+
+                <!-- Thumbnail loading or thumbnail will be presented -->
+                <ng-container *ngTemplateOutlet="thumbnail ? thumbnailCompleted : thumblLoading">
+                </ng-container>
+            </div>
+        </div>
+    </div>
+    <div class="d-flex justify-content-center" *ngIf="manifest">
+        <button mat-flat-button color="accent" class="w-25 d-flex justify-content-center align-items-center"
+            style="height: 2rem;" [disabled]="submited" (click)="onLessonCreate()">
+            <mat-spinner color="primary" diameter=20 *ngIf="submited"></mat-spinner>
+            <span *ngIf="!submited">Criar</span>
+        </button>
+    </div>
+</mat-dialog-content>
+
+<ng-container *ngIf="loadingMode">
+    <mat-dialog-actions>
+        <div class=" irrelevant-text-sm text-disabled-1">
+            {{progress}} %
+        </div>
+        <mat-progress-bar [value]="progress" color="accent"></mat-progress-bar>
+    </mat-dialog-actions>
+</ng-container>
+
+<!-- Reusables templates -->
+<ng-template #video>
+    <app-video [videoSource]="manifest" [thumbnail]="thumbnail">
+    </app-video>
+</ng-template>
+
+<ng-template #videoLoading>
+    <div class="d-flex justify-content-center align-items-center text-disabled-1 w-100" id="video-loading">
+        Carregando o video...
+    </div>
+</ng-template>
+
+<ng-template #thumbnailCompleted>
+    <div id="thumbnail-completed">
+        <img [src]="thumbnail">
+    </div>
+</ng-template>
+
+<ng-template #thumblLoading>
+    <div id="thumbnail-loading">
+        <div class="text-disabled-1 irrelevant-text-xm">
+            Extraindo miniatura...
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #chooseThumbnail>
+    <div class="p-relative" style="width: 40%;">
+        <div id="pic-thumbnail" class="d-flex flex-column justify-content-center align-items-center">
+            <mat-icon>
+                add_photo_alternate
+            </mat-icon>
+            <span class="text-disabled-1 irrelevant-text-sm">
+                Carregar miniatura
+            </span>
+        </div>
+        <!-- Fetch selected filed on change -->
+        <input type="file" id="uploadFile" accept="image/*" />
+    </div>
+</ng-template>
+
+<ng-template #noImage>
+    <div class="img-profile-xxm-none">
+        <div></div>
+    </div>
+</ng-template>
+
+<ng-template #loadingItems>
+    <div class="d-flex justify-content-center">
+        <mat-progress-spinner mode="indeterminate" color="primary" diameter=20></mat-progress-spinner>
+    </div>
+</ng-template>

@@ -1,0 +1,117 @@
+<div class="main" *ngIf="teacherPlaces$ | async as teacherPlaces; else loadingPage">
+    <div class="section">
+        <div class="teacher-place-main bg-lighter">
+
+            <div class="d-flex justify-content-end mb-3 " [style.width.%]="96">
+                <div class="d-flex justify-content-between w-100">
+                    <mat-chip-list class="p-2">
+                        <mat-chip *ngFor="let filter of filters" [selectable]="selectable" removable="true"
+                            (removed)="remove(filter.id, filter.type)">
+                            {{filter.name}}
+                            <mat-icon matChipRemove>cancel</mat-icon>
+                        </mat-chip>
+                    </mat-chip-list>
+                    <div>
+                        <button mat-icon-button [matMenuTriggerFor]="filter_types">
+                            <mat-icon> filter_list</mat-icon>
+                        </button>
+                        <mat-menu #filter_types="matMenu">
+                            <button mat-menu-item [matMenuTriggerFor]="schoolsMenu" *ngIf="schools">Escolas</button>
+                            <button mat-menu-item [matMenuTriggerFor]="teachersMenu"
+                                *ngIf="teachers">Professores</button>
+                        </mat-menu>
+
+                        <mat-menu #schoolsMenu="matMenu">
+                            <ng-container *ngIf="schools?.length > 0">
+                                <button mat-menu-item *ngFor="let school of schools; trackBy:trackBy"
+                                    (click)="onSchoolPicked(school)">{{school.name}}</button>
+                            </ng-container>
+                        </mat-menu>
+
+                        <mat-menu #teachersMenu="matMenu">
+                            <button mat-menu-item *ngFor="let teacher of teachers; trackBy:trackBy"
+                                (click)="onTeacherPicked(teacher)">
+                                {{teacher.firstName}} {{teacher.lastName}}
+                            </button>
+                        </mat-menu>
+                    </div>
+                </div>
+            </div>
+            <!-- End -->
+
+            <ng-container *ngIf="teacherPlaces.length > 0; else noTeacherPlaces">
+                <!-- The teacher places lists -->
+
+                <div class="container-items">
+                    <div class="teacher-place-item  item bg-white border p-0 "
+                        *ngFor="let teacherPlace of teacherPlaces; trackBy:trackByTeacherPlaceId">
+                        <!-- Teacher Place Data -->
+                        <div class="background-image mb-2">
+                            <a [routerLink]="['/teacher-place', teacherPlace.id, 'profile', 'about']"
+                                [state]="{data:teacherPlace}" class="selectable-item">
+                                <img [src]="teacherPlace.profilePhotoPath">
+                            </a>
+                        </div>
+
+                        <div class="d-flex flex-column p-3">
+                            <span class="relevant-text-normal bold-500 text-ellips mb-2">
+                                {{teacherPlace.name}}
+                            </span>
+
+                            <span class="d-flex">
+                                <div class="img-profile-xm mr-2">
+                                    <img [src]="teacherPlace.schoolPictureProfilePath">
+                                </div>
+                                <div class="d-flex flex-column justify-content-center">
+                                    <div class="d-flex align-items-center">
+                                        <span class="bold-500">
+                                            {{teacherPlace.schoolShortName}}
+                                        </span>
+                                        <span class="mx-1"> - </span>
+                                        <span class="d-flex text-ellips">
+                                            {{teacherPlace.courseName}}
+                                        </span>
+                                    </div>
+                                    <span class="d-flex align-items-center irrelevant-text text-ellips">
+                                        <span *ngIf="teacherPlace.opened">
+                                            {{teacherPlace.opened ? 'Grátis' : 'Fechada'}}
+                                        </span>
+                                        <div class="circle-diviser"></div>
+                                        {{teacherPlace.disciplineName}}
+                                    </span>
+
+                                    <span class="irrelevant-text-xm text-disabled-1 bold-500">
+                                        {{teacherPlace.studantsCount}} Matriculados
+                                    </span>
+                                </div>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- End -->
+            </ng-container>
+            <ng-template #noTeacherPlaces>
+                <div class="irrelevant-text-xm text-disabled m-auto p-4">
+                    Não tem turmas de momento
+                </div>
+            </ng-template>
+
+        </div>
+    </div>
+</div>
+
+
+<ng-template #loadingPage>
+    <app-loading-page class="w-100"></app-loading-page>
+</ng-template>
+
+<ng-template #loadingItems>
+    <app-loading-item></app-loading-item>
+</ng-template>
+
+<ng-template #spinner>
+    <div class="d-flex justify-content-center align-items-center p-2">
+        <mat-spinner color="primary" diameter=40 margin="auto"></mat-spinner>
+    </div>
+</ng-template>

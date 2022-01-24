@@ -1,0 +1,26 @@
+@import '../../../shared/styles/standard-layout';
+
+.main{
+    @extend %main;
+    justify-items: center;
+}
+
+.login-card{
+    width: 300px;
+    height: 500px;
+    padding: 1.5rem 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.progress-section{
+    width: 300px;
+}
+
+.progress-section mat-progress-bar{
+    height: 2px;
+    border-radius: 5rem;    
+}
+

@@ -1,0 +1,105 @@
+<div class="main bg-lighter">
+
+    <div class="section">
+        <div class="d-flex flex-column">
+            <ng-container *ngIf="answerPagination | async as answers; else loading">
+                <ng-containier *ngIf="answers?.length > 0; else nothingToShow">
+                    <div class="my-4 border rounded" *ngFor="let answer of answers">
+                        <div class="container-column mb-4 p-4">
+                            <text-visualizer [content]="answer.content">
+
+                            </text-visualizer>
+                            <span class="text-disabled-1 irrelevant-text-sm mt-3 d-flex justify-content-end">
+                                {{answer.createAt | date}}
+                            </span>
+
+                            <div class="d-flex w-50 mb-3">
+                                <div class="d-flex align-items-center">
+                                    <div class="img-profile-sm mb-1">
+                                        <img [src]="answer.userPhoto">
+                                    </div>
+                                    <div class="d-flex flex-column ml-4">
+                                        <span class="text-disabled-1 irrelevant-text">
+                                            Escrito por
+                                        </span>
+                                        <span class="d-flex align-items-center">
+                                            <a href="#" class="discretLink bold-500">
+                                                <h4> {{answer.userFirstName}} {{answer.userLastName}} </h4>
+                                            </a>
+                                            <button mat-stroked-button color="primary" class="ml-4"
+                                                [style.height.rem]="2">
+                                                Seguir
+                                            </button>
+                                        </span>
+
+                                        <span class="mb-2">
+                                            <h5 class="relevant-text-principal">
+                                                {{answer.userRole.toUpperCase() == 'TEACHER' ? 'Professor' :
+                                                'Estudante'}}
+                                            </h5>
+                                        </span>
+
+                                        <span class="text-disabled-1 about-user">
+                                            {{answer.userAcademicLevel}} em {{answer.userCourse}} no(a)
+                                            {{answer.userAcademy}}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="w-100">
+                                <mat-form-field appearance="legacy" class="w-100 p-2">
+                                    <textarea matInput cols="10" cdkTextareaAutosize #autosize="cdkTextareaAutosize"
+                                        cdkAutosizeMinRows="3" cdkAutosizeMaxRows="50" >
+                                    </textarea>
+                                    <button mat-icon-button matSuffix (click)="comment(answer.commentableId, content)" matTooltip="Comentar">
+                                        <mat-icon>send</mat-icon>
+                                    </button>
+                                </mat-form-field>
+                            </div>
+
+                            <ng-container *ngIf="answer.comments?.length > 0">
+                                <span class="my-3">
+                                    <h4 class="bold-500">
+                                        Comentários
+                                    </h4>
+                                </span>
+
+                                <ng-container *ngFor="let comment of answer.comments">
+                                    <div class="d-flex border p-4">
+                                        <div class="img-profile-xm mr-3">
+                                            <img [src]="comment.userPhoto">
+                                        </div>
+                                        <div class="d-flex flex-column w-100">
+                                            <a href="#" class="discretLink mb-3 bold-500">
+                                                {{comment.userFirstName}} {{comment.userLastName}}
+                                            </a>
+                                            <p class="comment">
+                                                {{comment.Content}}
+                                            </p>
+                                            <span
+                                                class="irrelevant-text-sm bold-500 mt-3 d-flex justify-content-end w-100">
+                                                {{comment.createAt | elapsed}}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </ng-container>
+                            </ng-container>
+                        </div>
+                    </div>
+                </ng-containier>
+            </ng-container>
+        </div>
+    </div>
+</div>
+
+<ng-template #loading>
+    <app-loading-page class="w-100"></app-loading-page>
+</ng-template>
+
+<ng-template #nothingToShow>
+    <div class="w-100 d-flex justify-content-center mb-3">
+        <h4 class="text-disabled-1">
+            Sem respostas de momento
+        </h4>
+    </div>
+</ng-template>

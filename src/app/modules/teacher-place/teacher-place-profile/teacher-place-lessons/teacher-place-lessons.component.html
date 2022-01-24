@@ -1,0 +1,52 @@
+<ng-container *ngIf="topics$; else loadingItems">
+    <div class="lesson-main">
+        <div class="lesson-section">
+            <ng-container *ngIf="topics$ | async as topics">
+                <ng-container *ngIf="topics.length > 0; else nothingToShow">
+                    <!-- Set of lessons -->
+                    <div class="lesson-container">
+                        <ng-container *ngFor="let topic of topics">
+                            <a [routerLink]="['/lesson','watch', 'questions']" [queryParams]="{topic:topic?.id}"
+                                class="lesson-item item bg-white border">
+                                <!-- lesson-item -->
+                                <div class="thumbnail-lessons">
+                                    <div class="thumbnail-background">
+                                        <img [src]="topic?.photoProfile">
+                                    </div>
+                                    <div class="w-100 d-flex">
+                                        <div class="lesson-length">
+                                            <h4>{{topic.lessonCount}}</h4>
+                                            <span class="mt-2">
+                                                <mat-icon>
+                                                    library_books
+                                                </mat-icon>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-column p-3">
+                                    <span class="irrelevant-text-xm text-disabled-1">
+                                        Tópico
+                                    </span>
+                                    <span class="bold-500">
+                                        {{topic.disciplineTopicName}}
+                                    </span>
+                                </div>
+                            </a>
+                        </ng-container>
+                    </div>
+                </ng-container>
+            </ng-container>
+        </div>
+    </div>
+</ng-container>
+
+<ng-template #loadingItems>
+    <app-loading-item></app-loading-item>
+</ng-template>
+
+<ng-template #nothingToShow>
+    <h3 class="text-disabled-1">
+        Nenhuma aula de momento
+    </h3>
+</ng-template>

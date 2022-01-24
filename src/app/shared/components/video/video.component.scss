@@ -1,0 +1,250 @@
+@import "../../../shared/styles/standard-layout";
+
+#video-section {
+    display: flex;
+    height: 30rem;
+    width: 96%;
+    justify-content: space-between;
+}
+
+mat-icon:not(.mat-icon-dif) {
+    width: 28px;
+    height: 28px;
+    fill: rgb(var(--palette-neutral-0));
+    stroke: rgb(var(--palette-neutral-0));
+    color: rgb(var(--palette-neutral-0));
+    cursor: pointer;
+}
+
+/* Video style Start */
+#video-container {
+    width: 100%;
+    height: 100%;
+    border-radius: 4px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#playback-animation {
+    pointer-events: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -40px;
+    margin-top: -40px;
+    width: 80px;
+    height: 80px;
+    border-radius: 80px;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+}
+
+#video {
+    width: 100%;
+    height: 100%;
+    border-radius: 4px;
+    object-fit: cover;
+}
+
+#video-controls {
+    right: 0;
+    left: 0;
+    padding: 10px;
+    position: absolute;
+    bottom: 0;
+    transition: all 0.2s ease;
+    opacity: 0;
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5));
+}
+
+.show {
+    opacity: 1 !important;
+}
+
+.hide {
+    opacity: 0 !important;
+}
+
+#video-progress {
+    position: relative;
+    height: 8.4px;
+    margin-bottom: 10px;
+}
+
+#bottoms-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#progress-bar {
+    appearance: none;
+    border-radius: 2px;
+    width: 100%;
+    height: 8.4px;
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+}
+
+input[type="range"] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    height: 8.4px;
+    background: transparent;
+    cursor: pointer;
+}
+
+#seek-tooltip {
+    display: none;
+    position: absolute;
+    left: 258.8px;
+    top: -50px;
+    margin-left: -20px;
+    font-size: 12px;
+    padding: 3px;
+    content: attr(data-title);
+    font-weight: bold;
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+#seek:hover + #seek-tooltip {
+    display: block;
+}
+
+progress::-moz-progress-bar {
+    background: rgb(var(--palette-neutral-20));
+}
+
+progress::-webkit-progress-bar {
+    background-color: rgb(var(--palette-neutral-20));
+    border-radius: 2px;
+}
+
+progress::-webkit-progress-value {
+    background: rgb(var(--palette-primary-light));
+    border-radius: 2px;
+}
+
+progress::-moz-progress-bar {
+    border: 1px solid rgb(var(--palette-primary));
+    background: rgb(var(--palette-primary));
+}
+
+input[type="range"]:focus {
+    outline: none;
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+    width: 100%;
+    cursor: pointer;
+    border-radius: 1.3px;
+    appearance: none;
+    transition: all 0.4s ease;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    height: 16px;
+    width: 16px;
+    border-radius: 16px;
+    background: rgb(var(--palette-primary-light));
+    cursor: pointer;
+    appearance: none;
+    margin-left: -1px;
+}
+
+input[type="range"]:focus::-webkit-slider-runnable-track {
+    background: transparent;
+}
+
+input[type="range"].volume {
+    height: 5px;
+    background-color: rgb(var(--palette-neutral-0));
+}
+
+input[type="range"].volume::-webkit-slider-runnable-track {
+    background-color: transparent;
+}
+
+input[type="range"].volume::-webkit-slider-thumb {
+    margin-left: 0;
+    height: 14px;
+    width: 14px;
+    background: #fff;
+}
+
+input[type="range"]::-moz-range-track {
+    width: 100%;
+    height: 8.4px;
+    cursor: pointer;
+    border: 1px solid transparent;
+    background: transparent;
+    border-radius: 1.3px;
+}
+
+input[type="range"]::-moz-range-thumb {
+    height: 14px;
+    width: 14px;
+    border-radius: 50px;
+    border: 1px solid rgb(var(--palette-primary));
+    background: rgb(var(--palette-primary));
+    cursor: pointer;
+    margin-top: 5px;
+}
+
+input[type="range"]:focus::-moz-range-track {
+    outline: none;
+}
+
+input[type="range"].volume::-moz-range-thumb {
+    border: 1px solid #fff;
+    background: #fff;
+}
+
+#seek {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    cursor: pointer;
+    margin: 0;
+}
+
+#bottoms-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#left-controls {
+    display: flex;
+    align-items: center;
+    color: #fff;
+}
+
+button {
+    cursor: pointer;
+    position: relative;
+    margin-right: 7px;
+    font-size: 12px;
+    padding: 3px;
+    border: none;
+    outline: none;
+    background-color: transparent;
+}
+#volume-control {
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+}
+
+.hidden {
+    display: none;
+}
+

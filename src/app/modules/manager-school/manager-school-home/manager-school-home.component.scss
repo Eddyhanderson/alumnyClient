@@ -1,0 +1,52 @@
+@import '../../../shared/styles/standard-layout';
+
+$card-margin:24px;
+
+%item{
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    margin-right: $card-margin;
+    padding: 1rem;
+    height: auto;
+    width: calc(100%/3);
+}
+
+.item{
+    @extend %item;
+}
+
+.item:nth-child(3n){
+    margin-right: 0;
+}
+
+.main{
+    @extend %main;
+    height: 100vh;
+}
+
+.section{
+    @extend %section;
+}
+
+.container-row{
+    @extend %container-row;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.container-column{
+    @extend %container-column;
+}
+
+.teachers-requests{
+    @extend %item;
+}
+
+.course-school{
+    @extend %item;
+}
+
+.teachers-school{
+    @extend %item;
+}
