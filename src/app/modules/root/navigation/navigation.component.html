@@ -8,7 +8,7 @@
     </ng-template>
     <div class="relevant-text-principal">
         <h5>
-            Escola
+            Gestor
         </h5>
     </div>
     <div class="irrelevant-text bold-500">
@@ -42,6 +42,24 @@
             <mat-icon [style.fontSize.rem]="1.6"> view_compact</mat-icon>
             <span class="ml-4">
                 Painel de controlo
+            </span>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="d-flex pl-4" routerLink="/manager-school/school" routerLinkActive="nav-active"
+            [routerLinkActiveOptions]="{exact:true}">
+            <mat-icon [style.fontSize.rem]="1.6"> book</mat-icon>
+            <span class="ml-4">
+                Escolas
+            </span>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="d-flex pl-4" routerLink="/manager-school/organ" routerLinkActive="nav-active"
+            [routerLinkActiveOptions]="{exact:true}">
+            <mat-icon [style.fontSize.rem]="1.6"> work_outline</mat-icon>
+            <span class="ml-4">
+                Órgãos
             </span>
         </a>
     </li>

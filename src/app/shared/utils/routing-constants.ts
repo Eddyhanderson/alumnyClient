@@ -1,6 +1,6 @@
 export class Routes {
 
-    private static BASE_URL = "api/v1/";
+    private static BASE_URL = "https://localhost:5001/api/v1/";
 
     // Academy routes
     static ARTICLE_CREATE_ROUTE = Routes.BASE_URL + "article/create";

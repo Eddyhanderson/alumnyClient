@@ -1,26 +1,26 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { ManagerSchoolRoutingModule } from './manager-school-routing.module';
-import { ManagerSchoolHomeComponent } from './manager-school-home/manager-school-home.component';
+import { ManagerRoutingModule } from './manager-routing.module';
+import { ManagerHomeComponent } from './manager-home/manager-home.component';
 import { MaterialModule } from '../material/material.module';
 import { SharedModule } from '../../shared/shared.module';
-import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
 import { DialogsModule } from '../../dialogs/dialogs.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ManagerOrganComponent } from './manager-organ/manager-organ.component';
 
 
 
 @NgModule({
-  declarations: [ManagerSchoolHomeComponent],
+  declarations: [ManagerHomeComponent, ManagerOrganComponent],
   imports: [
     CommonModule,
-    ManagerSchoolRoutingModule,
+    ManagerRoutingModule,
     MaterialModule,
     SharedModule,
     DialogsModule,
     ReactiveFormsModule
   ] 
 })
-export class ManagerSchoolModule { }
+export class ManagerModule { }
 

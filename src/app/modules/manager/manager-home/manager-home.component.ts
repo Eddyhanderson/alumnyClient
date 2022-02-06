@@ -22,7 +22,7 @@ import { SchoolCourseQuery } from 'src/app/queries/school-course-query/school-co
   templateUrl: './manager-school-home.component.html',
   styleUrls: ['./manager-school-home.component.scss']
 })
-export class ManagerSchoolHomeComponent implements OnInit, OnDestroy {
+export class ManagerHomeComponent implements OnInit, OnDestroy {
   manager: ManagerModel;
   teacherSchoolsPending$: PaginationAdapter<TeacherSchoolsModel, TeacherSchoolQuery>;
   schoolCourses$: PaginationAdapter<SchoolCourseModel, SchoolCourseQuery>;
