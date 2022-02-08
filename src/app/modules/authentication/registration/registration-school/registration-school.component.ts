@@ -202,7 +202,7 @@ export class RegistrationSchoolComponent implements OnInit {
       email: this.managerInfo.value.email,
       birth: this.managerInfo.value.birth,
       genre: this.managerInfo.value.genre,
-      role: Constants.SCHOOL_MANAGER,
+      role: Constants.MANAGER,
       password: this.securityInfo.value.password
     };
 

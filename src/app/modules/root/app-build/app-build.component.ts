@@ -39,7 +39,7 @@ export class AppBuildComponent implements OnInit {
   private async setRoleData() {
     if (this.role.toUpperCase() === Constants.TEACHER.toUpperCase()) {
       await this.setTeacherData();
-    } else if (this.role.toUpperCase() === Constants.SCHOOL_MANAGER.toUpperCase()) {
+    } else if (this.role.toUpperCase() === Constants.MANAGER.toUpperCase()) {
       await this.setManagerData();
     } else if (this.role.toUpperCase() === Constants.STUDANT.toUpperCase()) {
       await this.setStudantData();
@@ -90,14 +90,17 @@ export class AppBuildComponent implements OnInit {
 
   private async navigateToManagerHome() {
     // TODO: Fill the case when trying to acess page other than mmanager home
-    await this.router.navigate(['/school-manager/home'])
+    if (this.router.url.match(this.loginRoute))
+      await this.router.navigate(['/manager/home'])
+
+    return this.router.navigate[this.router.url];
   }
 
   private async navigateToStudantHome() {
     if (this.router.url.match(this.loginRoute))
       await this.router.navigate(['/home'])
 
-      return this.router.navigate[this.router.url];
+    return this.router.navigate[this.router.url];
   }
 
   private async navigateToLogin() {

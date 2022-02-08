@@ -37,7 +37,7 @@
 <!-- Manager nav items -->
 <ul *ngIf="role.toUpperCase() == 'MANAGER'" class="flex-column p-0 w-100 justfy-content-start mt-1">
     <li class="nav-item">
-        <a class="d-flex pl-4" routerLink="/manager-school/home" routerLinkActive="nav-active"
+        <a class="d-flex pl-4" routerLink="/manager/home" routerLinkActive="nav-active"
             [routerLinkActiveOptions]="{exact:true}">
             <mat-icon [style.fontSize.rem]="1.6"> view_compact</mat-icon>
             <span class="ml-4">
@@ -46,7 +46,7 @@
         </a>
     </li>
     <li class="nav-item">
-        <a class="d-flex pl-4" routerLink="/manager-school/school" routerLinkActive="nav-active"
+        <a class="d-flex pl-4" routerLink="/manager/school" routerLinkActive="nav-active"
             [routerLinkActiveOptions]="{exact:true}">
             <mat-icon [style.fontSize.rem]="1.6"> book</mat-icon>
             <span class="ml-4">
@@ -55,9 +55,9 @@
         </a>
     </li>
     <li class="nav-item">
-        <a class="d-flex pl-4" routerLink="/manager-school/organ" routerLinkActive="nav-active"
+        <a class="d-flex pl-4" routerLink="/manager/organ" routerLinkActive="nav-active"
             [routerLinkActiveOptions]="{exact:true}">
-            <mat-icon [style.fontSize.rem]="1.6"> work_outline</mat-icon>
+            <mat-icon [style.fontSize.rem]="1.6"> work</mat-icon>
             <span class="ml-4">
                 Órgãos
             </span>

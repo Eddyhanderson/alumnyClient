@@ -14,6 +14,7 @@ import { ArticleLessonCreationComponent } from './lesson/article/create/article-
 import { ArticleLessonViewComponent } from './lesson/article/view/article-lesson-view.component';
 import { VideoLessonViewComponent } from './lesson/video/view/video-lesson-view.component';
 import { StudantRegistrationComponent } from './teacher-place-studants/studant-registration/studant-registration.component';
+import { CreateOrganComponent } from './manager/create-organ/create-organ.component';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { StudantRegistrationComponent } from './teacher-place-studants/studant-r
     ArticleLessonCreationComponent,
     ArticleLessonViewComponent,
     VideoLessonViewComponent,
-    StudantRegistrationComponent
+    StudantRegistrationComponent,
+    CreateOrganComponent
   ],
   imports: [
     CommonModule,
@@ -39,7 +41,8 @@ import { StudantRegistrationComponent } from './teacher-place-studants/studant-r
     SchoolRequestComponentDialog,
     TeacherPlaceCreateDialog,
     ArticleLessonCreationComponent,
-    VideoLessonViewComponent
+    VideoLessonViewComponent,
+    CreateOrganComponent
   ],
 
   providers: [

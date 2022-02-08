@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ManagerOrganComponent } from './manager-organ.component';
+import { CreateOrganComponent } from './create-organ.component';
 
-describe('OrganComponent', () => {
-  let component: ManagerOrganComponent;
-  let fixture: ComponentFixture<ManagerOrganComponent>;
+describe('CreateOrganComponent', () => {
+  let component: CreateOrganComponent;
+  let fixture: ComponentFixture<CreateOrganComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ManagerOrganComponent ]
+      declarations: [ CreateOrganComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ManagerOrganComponent);
+    fixture = TestBed.createComponent(CreateOrganComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

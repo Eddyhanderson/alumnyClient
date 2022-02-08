@@ -1,0 +1,47 @@
+
+    <div class="d-flex justify-content-between">
+        <h2 mat-dialog-title>
+            Criar curso
+        </h2>
+        <button mat-icon-button>
+            <mat-icon mat-dialog-close>
+                close
+            </mat-icon>
+        </button>
+    </div>
+    <mat-dialog-content class="w-100 justify-content-center align-items-center d-flex">
+        <form [formGroup]="formGroup" class="w-75 mt-4">
+            <div class="irrelevant-text text-disabled-1 mb-1">
+                O nome do órgão deve ser igual ao nome da direcção, centro de custo,
+                ou qualquer outra organização a que um conjunto de colaboradores pertencem, de modo que sejam
+                idenficáveis pelo sistema.
+            </div>
+            <mat-form-field class="w-100" appearance="outline" color="accent">
+                <mat-label> Insira o nome do órgão </mat-label>
+                <input type="text" matInput [formControl]="orgaoNameControl">
+                <mat-error *ngIf="orgaoNameControl.touched && orgaoNameControl.hasError('required')">
+                    O campo não pode estar vazio
+                </mat-error>
+            </mat-form-field>
+            <div class="irrelevant-text text-disabled-1 mb-1">
+                O valor alocado anual corresponde ao valor disponibilizado para a direcção por ano, podendo ser alterado
+                em qualquer momento, causando o cancelamento de
+                todos os pedidos de formação activos do respectivo órgão.
+            </div>
+            <mat-form-field class="w-100" appearance="outline" color="accent">
+                <mat-label> Insira o valor anual alocado </mat-label>
+                <input type="number" matInput [formControl]="badgetControl">
+                <mat-error *ngIf="badgetControl.touched && badgetControl.hasError('required')">
+                    O campo não pode estar vazio
+                </mat-error>
+            </mat-form-field>
+
+            <div class="d-flex w-100 justify-content-center">
+                <div (click)="onCreateOrgan()" ngSubmit>
+                    <button mat-flat-button color="accent" [style.width.rem]="8">
+                        Criar
+                    </button>
+                </div>
+            </div>
+        </form>
+    </mat-dialog-content>

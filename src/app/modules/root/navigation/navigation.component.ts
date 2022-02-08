@@ -53,7 +53,7 @@ export class NavigationComponent implements OnInit {
   private getRoleData() {
     if (this.role.toUpperCase() === Constants.TEACHER.toUpperCase()) {
       this.getTeacherData();
-    } else if (this.role.toUpperCase() === Constants.SCHOOL_MANAGER.toUpperCase()) {
+    } else if (this.role.toUpperCase() === Constants.MANAGER.toUpperCase()) {
       this.getManagerData();
     }
   }

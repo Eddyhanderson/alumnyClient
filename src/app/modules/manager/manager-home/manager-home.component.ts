@@ -19,8 +19,8 @@ import { SchoolCourseQuery } from 'src/app/queries/school-course-query/school-co
 
 @Component({
   selector: 'app-manager-school-home',
-  templateUrl: './manager-school-home.component.html',
-  styleUrls: ['./manager-school-home.component.scss']
+  templateUrl: './manager-home.component.html',
+  styleUrls: ['./manager-home.component.scss']
 })
 export class ManagerHomeComponent implements OnInit, OnDestroy {
   manager: ManagerModel;
