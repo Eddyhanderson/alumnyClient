@@ -305,14 +305,14 @@ export class RegistrationStudantComponent implements OnInit {
    */
   private getUser(): UserModel {
     let user: UserModel = {
-      firstName: this.basicInfo.value.firstName,
+      /*firstName: this.basicInfo.value.firstName,
       lastName: this.basicInfo.value.lastName,
       phoneNumber: this.basicInfo.value.phoneNumber,
       email: this.basicInfo.value.email,
       birth: this.basicInfo.value.birth,
-      genre: this.basicInfo.value.genre.toUpperCase(),
+      genre: this.basicInfo.value.genre.toUpperCase(),*/
       role: Constants.STUDANT,
-      password: this.securityInfo.value.password
+      /*password: this.securityInfo.value.password*/
     };
 
     return user;

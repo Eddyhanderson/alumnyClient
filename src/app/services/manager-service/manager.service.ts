@@ -24,7 +24,7 @@ export class ManagerService {
      * Allow registration of the certain manager
      * @param manager the data that will be persisted about the school
      */
-    create(manager: ManagerModel): Promise<any> {
+    /*create(manager: ManagerModel): Promise<any> {
         this.managerRequest = {
             id: manager.id,
             userId: manager.user.id,
@@ -32,7 +32,7 @@ export class ManagerService {
         };
 
         return this.http.post(Routes.MANAGER_CREATE_ROUTE, this.managerRequest).toPromise();
-    }
+    }*/
 
     /**
      * To persist in local storage the information about manager by user id

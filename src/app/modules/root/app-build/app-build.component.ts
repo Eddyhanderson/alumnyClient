@@ -88,8 +88,7 @@ export class AppBuildComponent implements OnInit {
     return this.router.navigate[this.router.url];
   }
 
-  private async navigateToManagerHome() {
-    // TODO: Fill the case when trying to acess page other than mmanager home
+  private async navigateToManagerHome() {    
     if (this.router.url.match(this.loginRoute))
       await this.router.navigate(['/manager/home'])
 

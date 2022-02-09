@@ -39,10 +39,10 @@
             <mat-icon matBadge="9+" matBadgePosition="after" matBadgeColor="primary">notifications
             </mat-icon>
         </button>
-        <div class="img-profile-xm" *ngIf="user.pictureProfilePath">
-            <img [src]="user.pictureProfilePath">
+        <div class="img-profile-xm" *ngIf="user.picture">
+            <img [src]="user.picture">
         </div>
-        <div class="img-profile-xm-none" *ngIf="!user.pictureProfilePath">
+        <div class="img-profile-xm-none" *ngIf="!user.picture">
             <div></div>
         </div>
     </div>

@@ -89,14 +89,14 @@ export class RegistrationSchoolComponent implements OnInit {
       if (responseK?.succeded) {
         let manager = this.getManager(responseK.data, authResult.user);
 
-        let responseX = await this.managerService.create(manager)
+        /*let responseX = await this.managerService.create(manager)
         .catch((e: HttpErrorResponse) => {
           this.setErrorsMessages(Array.of(e.message));
           return null;
-        });
-        if (!responseX.succeded) {
+        });*/
+        /*if (!responseX.succeded) {
           this.setErrorsMessages(responseX.errors);
-        }
+        }*/
         return this.router.navigateByUrl('manager-school/home');
       } else {
         this.setErrorsMessages(responseK.errors);
@@ -196,14 +196,14 @@ export class RegistrationSchoolComponent implements OnInit {
    */
   private getUser(): UserModel {
     let user: UserModel = {
-      firstName: this.managerInfo.value.firstName,
+      /*firstName: this.managerInfo.value.firstName,
       lastName: this.managerInfo.value.lastName,
       phoneNumber: this.managerInfo.value.phoneNumber,
       email: this.managerInfo.value.email,
       birth: this.managerInfo.value.birth,
       genre: this.managerInfo.value.genre,
       role: Constants.MANAGER,
-      password: this.securityInfo.value.password
+      password: this.securityInfo.value.password*/
     };
 
     return user;
@@ -230,8 +230,8 @@ export class RegistrationSchoolComponent implements OnInit {
   private getManager(school: SchoolModel, user: UserModel): ManagerModel {
 
     let manager: ManagerModel = {
-      user: user,
-      school: school
+      /*user: user,*/
+      /*school: school*/
     };
 
     return manager;

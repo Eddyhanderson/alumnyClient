@@ -20,7 +20,7 @@ export class ManagerOrganComponent implements OnInit {
   }
 
   onCreateOrgan() {
-    const dialogRef = this.dialog.open(CreateOrganComponent, { width: '40%', height: '70%' });
+    const dialogRef = this.dialog.open(CreateOrganComponent, { width: '50%', height: '70%' });
   }
 
 }

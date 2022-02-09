@@ -36,105 +36,12 @@ export class ManagerHomeComponent implements OnInit, OnDestroy {
     private router: Router) { }
 
   ngOnInit(): void {
-    this.setStrategyToReloadPage();
-    this.getManager();
-    this.getTeacherSchoolsRequests();
-    this.getTeachersSchool();
-    this.getSchoolCourses();
+    
   }
 
   ngOnDestroy(): void {
     this._reloadStrategy.unsubscribe();
   }
 
-  private getManager() {
-    this.manager = JSON.parse(localStorage.manager);
-  }
-
-  private getTeacherSchoolsRequests() {
-    let schoolId = this.manager.school.id;
-
-    let param: TeacherSchoolQuery = {
-      schoolId: schoolId,
-      situation: Constants.PENDING_MODEL_STATE
-    }
-
-    this.teacherSchoolsPending$ = new PaginationAdapter((query, param) => this.tss.getAll(query, param), param);
-  }
-
-
-  private getSchoolCourses() {
-    let param: SchoolCourseQuery = {
-      schoolId: this.manager.school.id,
-      situation: Constants.NORMAL_MODEL_STATE
-    }
-
-    this.schoolCourses$ = new PaginationAdapter((query, param) => this.scs.getAll(query, param), param);
-  }
-
-
-  private getTeachersSchool() {
-    let param: TeacherSchoolQuery = {
-      schoolId: this.manager.school.id,
-      situation: Constants.NORMAL_MODEL_STATE
-    }
-
-    this.teacherSchoolsNormal$ = new PaginationAdapter((query, param) => this.tss.getAll(query, param), param);
-  }
-
-  /* To reload component */
-  private setStrategyToReloadPage() {
-    this._reloadStrategy = this.router.events.subscribe(
-      (evt) => {
-        if (evt instanceof NavigationEnd) {
-          this.getTeacherSchoolsRequests();
-          this.getTeachersSchool();
-          this.getSchoolCourses();
-        }
-      }
-    )
-  }
-
-  private reloadComponent() {
-    this.router.navigate([this.router.url]);
-  }
-
-  // Events handlers
-  public async acceptRequest(teacherId: string) {
-    let schoolId = this.manager.school.id;
-
-    let tsModel: TeacherSchoolsModel = {
-      teacherId: teacherId,
-      schoolId: schoolId,
-      situation: Constants.NORMAL_MODEL_STATE
-    }
-
-    var updated = await this.tss.update(teacherId, schoolId, tsModel);
-
-    if (updated)
-      this.reloadComponent();
-  }
-
-  public async onCreateCourse() {
-    let dialogRef = this.matDialog.open(CourseCreateDialogComponent, {
-      width: '40%',
-      height: '40%'
-    });
-
-    dialogRef.afterClosed().subscribe(
-      async (course) => {
-        let schoolCourse: SchoolCourseModel = {
-          courseId: course.id,
-          schoolId: this.manager.school.id
-        }
-        var result = await this.scs.create(schoolCourse);
-
-        if (result.succeded) {
-
-          this.reloadComponent();
-        }
-      }
-    );
-  }
 
 }
