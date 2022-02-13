@@ -9,6 +9,7 @@ import { CourseModel } from 'src/app/models/course-model/course.model';
 import { map } from 'rxjs/operators';
 import { PaginationQuery } from "src/app/queries/pagination-query/pagination-query";
 import { SchoolQuery } from "src/app/queries/school-query/school.query";
+import { CreationResult } from "src/app/models/creation-result/creation-result";
 
 @Injectable({
     providedIn: "root"
@@ -21,9 +22,16 @@ export class SchoolService {
      * Allow registration of the certain school
      * @param school the data that will be persisted about the school
      */
-    create(school: SchoolModel): Promise<any> {
-        return this.http.post(Routes.SCHOOL_CREATE_ROUTE, school).toPromise();
-    }
+     public create(school: SchoolModel): Promise<CreationResult<SchoolModel>> {
+
+        if (school == null) return null;
+    
+        try {
+          return this.http.post<CreationResult<SchoolModel>>(Routes.SCHOOL_CREATE_ROUTE, school).toPromise();
+        } catch (error) {
+          console.log(error.message);
+        }
+      }
 
     /**
      * Get all the schools in the database
@@ -62,6 +70,43 @@ export class SchoolService {
             .set('searchValue', query.searchValue ?? '')
             .set('teacherId', params?.teacherId ?? '')
             .set('subscribed', params?.subscribed ? 'true' : 'false');
+    }
+
+    public async getSchoolByUser(userId: string): Promise<SchoolModel> {
+        try {
+          var response = await this.http.get<Response<SchoolModel>>(Routes.USER_GET_BY_USER_ROUTE.replace("{userId}", userId))
+          .toPromise();
+    
+          return response?.data;
+        } catch (error) {
+          console.log(error.message);
+        }
+      }
+
+    /**
+     * To persist in local storage the information about teacher by user id
+     * @param userId the user of the teacher
+     */
+    public async setSchoolData(userId: string): Promise<boolean> {
+
+        if (localStorage.school !== undefined) return true;
+
+        try {
+            let school = await this.getSchoolByUser(userId);
+
+            if (school) {
+                this.persistSchoolData(school);
+                return true;
+            }
+
+            return false;
+        } catch (error) {
+            console.log(error.message)
+        }
+    }
+
+    private persistSchoolData(school: SchoolModel) {
+        localStorage.school = JSON.stringify(school);
     }
 
 } 

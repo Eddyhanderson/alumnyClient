@@ -15,7 +15,7 @@ import { TeacherQuery } from 'src/app/queries/teacher-query/teacher.query';
 import { LessonService } from 'src/app/services/lesson-service/lesson.service';
 import { StudantService } from 'src/app/services/studant-service/studant.service';
 import { TeacherPlaceService } from 'src/app/services/teacher-place-service/teacher-place.service';
-import { TeacherService } from 'src/app/services/teacher-service/teacher.service';
+import { SchoolService } from 'src/app/services/school-service-3/school.service';
 import { PaginationAdapter } from 'src/app/shared/utils/pagination-adapter/pagination-adapter';
 
 @Component({
@@ -43,7 +43,7 @@ export class SearchComponent implements OnInit, OnDestroy {
   constructor(private route: ActivatedRoute,
     private tps: TeacherPlaceService,
     private ls: LessonService,
-    private ts: TeacherService,
+    private ts: SchoolService,
     private ss: StudantService) { }
 
 
@@ -76,7 +76,7 @@ export class SearchComponent implements OnInit, OnDestroy {
 
   private getTeacher() {
     let initParam: TeacherQuery;
-    this.teacherPagination = new PaginationAdapter((param, query) => this.ts.getAll(param, query), initParam);
+    /*this.teacherPagination = new PaginationAdapter((param, query) => this.ts.getAll(param, query), initParam);*/
     this.teacherPagination.setSearchValue = this.key;
   }
 

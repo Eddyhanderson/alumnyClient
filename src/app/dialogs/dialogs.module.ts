@@ -15,7 +15,8 @@ import { ArticleLessonViewComponent } from './lesson/article/view/article-lesson
 import { VideoLessonViewComponent } from './lesson/video/view/video-lesson-view.component';
 import { StudantRegistrationComponent } from './teacher-place-studants/studant-registration/studant-registration.component';
 import { CreateOrganComponent } from './manager/create-organ/create-organ.component';
-import { CreateSchoolDialogComponent } from './manager/create-school-dialog/create-school-dialog.component';
+import { CreateFormationDialogComponent } from './school/formation/create-formation-dialog/create-formation-dialog.component';
+import { CreateSchoolDialogComponent } from './school/create-school-dialog/create-school-dialog.component';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { CreateSchoolDialogComponent } from './manager/create-school-dialog/crea
     VideoLessonViewComponent,
     StudantRegistrationComponent,
     CreateOrganComponent,
-    CreateSchoolDialogComponent
+    CreateSchoolDialogComponent,
+    CreateFormationDialogComponent
   ],
   imports: [
     CommonModule,
@@ -41,10 +43,16 @@ import { CreateSchoolDialogComponent } from './manager/create-school-dialog/crea
   ],
   exports: [
     SchoolRequestComponentDialog,
+    CourseCreateDialogComponent,
     TeacherPlaceCreateDialog,
+    VideoLessonCreationComponent,
     ArticleLessonCreationComponent,
+    ArticleLessonViewComponent,
     VideoLessonViewComponent,
-    CreateOrganComponent
+    StudantRegistrationComponent,
+    CreateOrganComponent,
+    CreateSchoolDialogComponent,
+    CreateFormationDialogComponent
   ],
 
   providers: [

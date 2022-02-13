@@ -33,7 +33,7 @@ export class LessonWatchQuestionsComponent implements OnInit {
   };
 
   public isOwner: boolean;
-  public isTeacher: boolean = localStorage.userRole.toUpperCase() == Constants.TEACHER.toUpperCase();
+  public isTeacher: boolean = localStorage.userRole.toUpperCase() == Constants.SCHOOL.toUpperCase();
 
   private _reloadStrategy: Subscription;
   private lessonId: string;
@@ -122,7 +122,7 @@ export class LessonWatchQuestionsComponent implements OnInit {
 
   private async getTeacher() {
     if (this.isTeacher)
-      this.teacher = JSON.parse(localStorage.teacher);
+      this.teacher = JSON.parse(localStorage.school);
   }
 
   private checkIfIsOwner() {

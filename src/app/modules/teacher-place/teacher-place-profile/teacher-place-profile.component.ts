@@ -65,7 +65,7 @@ export class TeacherPlaceProfileComponent implements OnInit {
   }
 
   private getTeacher() {
-    this.teacher = JSON.parse(localStorage.teacher);
+    this.teacher = JSON.parse(localStorage.school);
   }
 
   private getStudant() {

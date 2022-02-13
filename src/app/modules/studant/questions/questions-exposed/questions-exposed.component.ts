@@ -46,7 +46,7 @@ export class QuestionsExposedComponent implements OnInit {
     { name: 'Em análise', value: QuestionSituations.Analyzing }]
 
   public isOwner: boolean;
-  public isTeacher: boolean = localStorage.userRole.toUpperCase() == Constants.TEACHER.toUpperCase();
+  public isTeacher: boolean = localStorage.userRole.toUpperCase() == Constants.SCHOOL.toUpperCase();
 
   private _reloadStrategy: Subscription;
   private studant: StudantModel;

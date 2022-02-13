@@ -10,7 +10,7 @@ import { TopicModel } from 'src/app/models/topic-model/topic.model';
 import { CommentQuery } from 'src/app/queries/comment-query/comment.query';
 import { CommentService } from 'src/app/services/comment-service/comment.service';
 import { LessonService } from 'src/app/services/lesson-service/lesson.service';
-import { TeacherService } from 'src/app/services/teacher-service/teacher.service';
+import { SchoolService } from 'src/app/services/school-service-3/school.service';
 import { TopicService } from 'src/app/services/topic-service/topic.service';
 import { Constants } from 'src/app/shared/utils/constants';
 import { PaginationAdapter } from 'src/app/shared/utils/pagination-adapter/pagination-adapter';
@@ -37,7 +37,7 @@ export class LessonWacthAboutComponent implements OnInit {
   constructor(private route: ActivatedRoute,
     private ls: LessonService,
     private ts: TopicService,
-    private tss: TeacherService,
+    private tss: SchoolService,
     private cs: CommentService,
     private snackBar: MatSnackBar,
     private router: Router) { }

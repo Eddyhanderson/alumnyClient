@@ -12,11 +12,11 @@ export class AppComponent {
   logged = false;
 
   constructor(private acs: AccountService, private router: Router) {
-    this.acs.logStatus.subscribe(loginState => {
-      if (!loginState) {
+    this.acs.logStatus.subscribe(isLogged => {
+      if (!isLogged) {
         this.router.navigate(['/auth/login']);
       } else {
-        this.logged = loginState;
+        this.logged = isLogged;
       }
     });
 

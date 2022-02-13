@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ManagerService } from 'src/app/services/manager-service/manager.service';
-import { SchoolService } from 'src/app/services/school-service/school.service';
-import { TeacherService } from 'src/app/services/teacher-service/teacher.service';
+import { SchoolService } from 'src/app/services/school-service-3/school.service';
+
 import { Constants } from 'src/app/shared/utils/constants';
 import { ArticleLessonCreationComponent } from '../../../dialogs/lesson/article/create/article-lesson-creation.component';
 import { VideoLessonCreationComponent } from '../../../dialogs/lesson/video/create/video-lesson-creation.component';
@@ -24,7 +24,7 @@ export class AppBuildComponent implements OnInit {
   loginRoute = /auth\/login$/;
 
   constructor(
-    private teacherService: TeacherService,
+    private schoolService: SchoolService,
     private managerService: ManagerService,
     private studantService: StudantService,
     private router: Router,
@@ -37,8 +37,8 @@ export class AppBuildComponent implements OnInit {
   }
 
   private async setRoleData() {
-    if (this.role.toUpperCase() === Constants.TEACHER.toUpperCase()) {
-      await this.setTeacherData();
+    if (this.role.toUpperCase() === Constants.SCHOOL.toUpperCase()) {
+      await this.setSchoolData();
     } else if (this.role.toUpperCase() === Constants.MANAGER.toUpperCase()) {
       await this.setManagerData();
     } else if (this.role.toUpperCase() === Constants.STUDANT.toUpperCase()) {
@@ -46,10 +46,10 @@ export class AppBuildComponent implements OnInit {
     }
   }
 
-  private async setTeacherData() {
-    let succeded = await this.teacherService.setTeacherData(this.user.id);
+  private async setSchoolData() {
+    let succeded = await this.schoolService.setSchoolData(this.user.id);
     if (succeded) {
-      await this.navigateToTeacherHome();
+      await this.navigateToSchoolHome();
       this.loaded = true;
     } else {
       this.navigateToLogin();
@@ -78,11 +78,9 @@ export class AppBuildComponent implements OnInit {
     }
   }
 
-  private async navigateToTeacherHome() {
-    let teacherId = JSON.parse(localStorage.teacher).id;
-
+  private async navigateToSchoolHome() {
     if (this.router.url.match(this.loginRoute)) {
-      return await this.router.navigate(['/teacher', teacherId, 'control-painel'])
+      return await this.router.navigate(['/school','formations',])
     }
 
     return this.router.navigate[this.router.url];

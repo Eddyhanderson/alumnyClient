@@ -1,12 +1,15 @@
-import {BadgeInformationModel} from '../badge-information-model/badge-information.model';
+import { UserModel } from "../user-model/user-model";
 
 export class SchoolModel {
-    id?: string;
-    badgeInformationId?: string;
-    nif?: string;
-    name: string;
-    shortName: string;
-    address?: string;
-    entrusted?: boolean;
-    profilePhotoPath?: string;    
+    id?:string;
+    name:string;
+    acronym:string;
+    nif:string;
+    code?:string;
+    country?:string;
+    adress?:string;
+    phoneNumber?:number;
+    email:string;   
+    userId?:string;
+    user?:UserModel;
 }

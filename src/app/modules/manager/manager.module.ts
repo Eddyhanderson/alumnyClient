@@ -7,17 +7,21 @@ import { MaterialModule } from '../material/material.module';
 import { SharedModule } from '../../shared/shared.module';
 import { DialogsModule } from '../../dialogs/dialogs.module';
 import { ReactiveFormsModule } from '@angular/forms';
-import { ManagerOrganComponent } from './manager-organ/manager-organ.component';
-import { ManagerSchoolComponent } from './manager-school/manager-school.component';
+import { ManagerOrganComponent } from '../organ/manager-organ/manager-organ.component';
+import { ManagerSchoolComponent } from '../school/manager-school/manager-school.component';
+import { OrganModule } from '../organ/organ.module';
+import { SchoolModule } from '../school/school.module';
 
 
 
 @NgModule({
-  declarations: [ManagerHomeComponent, ManagerOrganComponent, ManagerSchoolComponent],
+  declarations: [ManagerHomeComponent],
   imports: [
     CommonModule,
     ManagerRoutingModule,
     MaterialModule,
+    OrganModule,
+    SchoolModule,
     SharedModule,
     DialogsModule,
     ReactiveFormsModule

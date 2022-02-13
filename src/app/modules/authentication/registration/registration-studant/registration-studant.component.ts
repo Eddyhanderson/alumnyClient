@@ -19,7 +19,7 @@ import { AcademyService } from 'src/app/services/academy-service/academy.service
 import { AccountService } from 'src/app/services/account-service/account.service';
 import { CourseService } from 'src/app/services/course-service/course.service';
 import { StudantService } from 'src/app/services/studant-service/studant.service';
-import { TeacherService } from 'src/app/services/teacher-service/teacher.service';
+import { SchoolService } from 'src/app/services/school-service-3/school.service';
 import { Constants } from 'src/app/shared/utils/constants';
 
 @Component({

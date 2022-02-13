@@ -288,7 +288,7 @@ export class TextEditorComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   private createArticle() {
-    let teacherId = JSON.parse(localStorage.teacher).id;
+    let teacherId = JSON.parse(localStorage.school).id;
     this.article = new ArticleModel(JSON.stringify(this.lastSaved), teacherId);
     this.article.name = this.nameGen();
   }

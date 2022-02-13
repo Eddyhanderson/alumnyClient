@@ -1,0 +1,31 @@
+mat-dialog-content {
+    margin: 0 !important;
+    overflow: hidden !important;
+}
+
+form {
+    overflow: hidden !important;
+}
+
+mat-form-field{
+    width: 100% !important;
+}
+
+.amount {
+    text-align: right;
+}
+
+.amount::-webkit-outer-spin-button,
+input.eamount::-webkit-inner-spin-button {
+    display: none;
+}
+
+input.amount {
+    -moz-appearance: textfield;
+}
+
+#description-field {
+    width: 100%;
+    height: 7rem;
+    line-height: 1.2rem;
+}

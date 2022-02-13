@@ -100,7 +100,7 @@ export class LessonManagmentComponent implements OnInit {
 
     let page = new PaginationQuery();
 
-    this.schools$ = this.ss.getAll(page, schoolQuery).pipe(map((response => response.data)));
+    /*this.schools$ = this.ss.getAll(page, schoolQuery).pipe(map((response => response.data)));*/
   }
 
   public onTeacherPlaceFilterOpened() {
@@ -233,7 +233,7 @@ export class LessonManagmentComponent implements OnInit {
   }
 
   private initTeacherData() {
-    this.teacher = JSON.parse(localStorage.teacher);
+    this.teacher = JSON.parse(localStorage.school);
   }
 
   private async schoolFilterFromQuery(id: string) {
@@ -258,9 +258,9 @@ export class LessonManagmentComponent implements OnInit {
   }
 
   private async schoolFilterBuild(school: SchoolModel) {
-    this.schoolId = school.id;
+    /*this.schoolId = school.id;
     this.filters.push({ id: this.schoolFilter.id, name: this.schoolFilter.name, type: "school" });
-    this.data.setParam = { schoolId: this.schoolId };
+    this.data.setParam = { schoolId: this.schoolId };*/
   }
 
   private async topicFilterBuild(topic: TopicModel) {

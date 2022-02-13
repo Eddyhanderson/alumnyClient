@@ -22,19 +22,6 @@ import { Constants, PostTypes } from 'src/app/shared/utils/constants';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { DisciplineTopicQuery } from 'src/app/queries/discipline-topic-query/discipline-topic.query';
-import { TeacherPlaceQuery } from 'src/app/queries/teacher-place-query/teacher-places.query';
-import { PaginationQuery } from 'src/app/queries/pagination-query/pagination-query';
-import { TeacherPlaceGroup } from 'src/app/models/teacher-place-group/teacher-place.group';
-import { SchoolService } from 'src/app/services/school-service/school.service';
-import { SchoolCourseModel } from 'src/app/models/school-course-model/school-course.model';
-import { SchoolCourseService } from 'src/app/services/school-courses-service/school-course.service';
-import { SchoolQuery } from 'src/app/queries/school-query/school.query';
-import { SchoolCourseQuery } from 'src/app/queries/school-course-query/school-course.query';
-import { MatSelectionList } from '@angular/material/list';
-import { StepperSelectionEvent } from '@angular/cdk/stepper';
-import { TopicQuery } from 'src/app/queries/topic-query/topic.query';
-import { TopicService } from 'src/app/services/topic-service/topic.service';
 import { TopicModel } from 'src/app/models/topic-model/topic.model';
 
 

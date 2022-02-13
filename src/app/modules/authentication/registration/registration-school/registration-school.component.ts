@@ -214,13 +214,14 @@ export class RegistrationSchoolComponent implements OnInit {
    * @returns the user that was create
    */
   private getSchool(): SchoolModel {
-
+    /*
     let school: SchoolModel = {
       name: this.schoolInfo.value.schoolName,
       shortName: this.schoolInfo.value.shortName,
     };
 
-    return school;
+    return school;*/
+    return new SchoolModel();
   }
 
   /**

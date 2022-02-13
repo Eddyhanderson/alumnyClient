@@ -89,16 +89,6 @@ export class AccountService {
     }
   }
 
-  public async getTeacher(userId: string): Promise<TeacherModel> {
-    try {
-      var response = await this.http.get<Response<TeacherModel>>(Routes.USER_GET_TEACHER_ROUTE.replace("{id}", userId)).toPromise();
-
-      return response?.data;
-    } catch (error) {
-      console.log(error.message);
-    }
-  }
-
   public async getStudant(userId: string): Promise<StudantModel> {
     try {
       var response = await this.http.get<Response<StudantModel>>(Routes.USER_GET_STUDANT_ROUTE.replace("{id}", userId)).toPromise();

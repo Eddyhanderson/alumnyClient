@@ -184,7 +184,7 @@ export class TeacherPlaceCreateDialog implements OnInit {
       this.discipline = this.teacherPlaceDiscipline.value;
     }
 
-    this.teacherPlace = new TeacherPlaceModel(this.data.teacherId, this.school.id, this.course.id, this.discipline.id, name, description);
+    /*this.teacherPlace = new TeacherPlaceModel(this.data.teacherId, this.school.id, this.course.id, this.discipline.id, name, description);*/
   }
 
   public async onConfirmTeacherPlace() {
@@ -198,7 +198,7 @@ export class TeacherPlaceCreateDialog implements OnInit {
     if (!this.schoolFormGroup.valid) return null;
 
     this.school = this.schoolControl.value;
-    this.getAllSchoolCourse(this.school.id);
+    /*this.getAllSchoolCourse(this.school.id);*/
   }
 
   public onCourseChoice() {

@@ -7,7 +7,7 @@ import { TeacherModel } from 'src/app/models/teacher-model/teacher-model';
 import { TeacherPlaceModel } from 'src/app/models/teacher-place-model/teacher-place.model';
 import { TeacherPlaceService } from 'src/app/services/teacher-place-service/teacher-place.service';
 import { TeacherPlaceStudantsService } from 'src/app/services/teacher-place-studants-service/teacher-place-studants.service';
-import { TeacherService } from 'src/app/services/teacher-service/teacher.service';
+import { SchoolService } from 'src/app/services/school-service-3/school.service';
 import { TeacherPlaceRegistrationState, UserRoles } from 'src/app/shared/utils/constants';
 
 @Component({
@@ -27,7 +27,7 @@ export class TeacherPlaceAboutComponent implements OnInit {
   isOwner: boolean;
   isRegistered: boolean;
 
-  constructor(private ts: TeacherService,
+  constructor(private ts: SchoolService,
     private tps: TeacherPlaceService,
     private tpss: TeacherPlaceStudantsService,
     private dialog: MatDialog,
@@ -76,7 +76,7 @@ export class TeacherPlaceAboutComponent implements OnInit {
     this.teacher = await this.ts.get(this.teacherPlace?.teacherId);
   }
   private checkOwner() {
-    let teacher = localStorage.teacher;
+    let teacher = localStorage.school;
     this.isOwner = this.teacherPlace.teacherId == teacher.id;
   }
 

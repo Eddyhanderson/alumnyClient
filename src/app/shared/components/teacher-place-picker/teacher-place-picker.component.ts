@@ -57,6 +57,7 @@ export class TeacherPlacePickerComponent implements OnInit {
     if (this.schools === null) return;
 
     for (let school of this.schools) {
+      /*
       let schoolCourseQuery = new SchoolCourseQuery();
       schoolCourseQuery.schoolId = school.id;
       schoolCourseQuery.situation = Constants.NORMAL_MODEL_STATE;
@@ -87,13 +88,13 @@ export class TeacherPlacePickerComponent implements OnInit {
             courseTeacherPlaces: [{ course: schoolCourse.course, teacherPlaces: this.teacherPlaces }]
           })
         }
-      }
+      }*/
     }
 
   }
 
   private getTeacher() {
-    this.teacher = JSON.parse(localStorage.teacher);
+    this.teacher = JSON.parse(localStorage.school);
   }
 
   private listenFormChanges(){

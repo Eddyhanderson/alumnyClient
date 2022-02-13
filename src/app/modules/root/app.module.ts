@@ -10,8 +10,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthenticationInterceptor } from '../../interceptors/authentication/authentication.interceptor';
 import { AcademyService } from '../../services/academy-service/academy.service';
 import { SharedModule } from '../../shared/shared.module';
-import { TeacherService } from '../../services/teacher-service/teacher.service';
-import { SchoolService } from '../../services/school-service/school.service';
+import { SchoolService } from '../../services/school-service-3/school.service';
 import { ManagerService } from '../../services/manager-service/manager.service';
 import { DialogsModule } from '../../dialogs/dialogs.module';
 import { CommonModule } from '@angular/common';
@@ -49,7 +48,7 @@ import { UserService } from 'src/app/services/user-service/user.service';
       multi: true
     },
     AccountService,
-    TeacherService,
+    SchoolService,
     SchoolService,
     ManagerService,
     UserService

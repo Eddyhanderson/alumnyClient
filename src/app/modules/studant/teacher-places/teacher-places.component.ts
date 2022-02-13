@@ -12,10 +12,9 @@ import { PaginationQuery } from 'src/app/queries/pagination-query/pagination-que
 import { SchoolQuery } from 'src/app/queries/school-query/school.query';
 import { TeacherPlaceQuery } from 'src/app/queries/teacher-place-query/teacher-places.query';
 import { TeacherSchoolQuery } from 'src/app/queries/teacher-schools-query/teacher-school.query';
-import { SchoolService } from 'src/app/services/school-service/school.service';
+import { SchoolService } from 'src/app/services/school-service-3/school.service';
 import { TeacherPlaceService } from 'src/app/services/teacher-place-service/teacher-place.service';
 import { TeacherSchoolsService } from 'src/app/services/teacher-schools-service/teacher-schools.service';
-import { TeacherService } from 'src/app/services/teacher-service/teacher.service';
 import { PaginationAdapter } from 'src/app/shared/utils/pagination-adapter/pagination-adapter';
 
 type Filter = { id: string, name: string, type: string };
@@ -52,7 +51,7 @@ export class TeacherPlacesComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private ts: TeacherService,
+    private ts: SchoolService,
     private ss: SchoolService,
     private tps: TeacherPlaceService,
     private tss: TeacherSchoolsService) { }
@@ -175,7 +174,7 @@ export class TeacherPlacesComponent implements OnInit {
     this.schoolId = this.route.snapshot.queryParams.school;
 
     if (this.schoolId) {
-      this.school = await this.ss.get(this.schoolId);
+      //this.school = await this.ss.get(this.schoolId);
       this.schoolFilterBuild(this.school);
     }
 

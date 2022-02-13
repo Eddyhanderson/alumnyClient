@@ -28,11 +28,12 @@
     </div>
     <div class="relevant-text-principal">
         <h5>
-            {{role.toUpperCase()=='STUDANT' ? 'Estudante' : 'Professor'}}
+            {{role.toUpperCase()=='STUDANT' ? 'Estudante' : 'Escola'}}
         </h5>
     </div>
     <div class="irrelevant-text">
-        {{user.firstName}} {{user.lastName}}
+        {{role.toUpperCase() == 'STUDANT' ? user.firstName +' '+ user.lastName : school.name}}
+        
     </div>
 </div>
 
@@ -68,7 +69,7 @@
 </ul>
 <!-- End -->
 
-<!-- Studant or teacher nav items -->
+<!-- Studant or school nav items -->
 <ul class="flex-column p-0 w-100 justfy-content-start mt-1" *ngIf="role.toUpperCase() != 'MANAGER'">
     <!-- Home nav item -->
     <li class="nav-item" *ngIf="role.toUpperCase() == 'STUDANT'">
@@ -79,17 +80,9 @@
     </li>
     <!-- End -->
 
-    <!-- Schools nav item -->
-    <li class="nav-item" *ngIf="role.toUpperCase() == 'TEACHER'">
-        <a class="d-flex pl-4" [routerLink]='["/school/choice", teacher.id]' routerLinkActive="nav-active">
-            <mat-icon [style.fontSize.rem]="1.6"> school</mat-icon> <span class="ml-4">Escolas</span>
-        </a>
-    </li>
-    <!-- End -->
-
-    <!-- Control painel nav item -->
-    <li class="nav-item" *ngIf="role.toUpperCase() == 'TEACHER'">
-        <a class="d-flex pl-4" routerLink="/teacher/control-painel" routerLinkActive="nav-active"
+     <!-- Control painel nav item -->
+     <li class="nav-item" *ngIf="role.toUpperCase() == 'SCHOOL'">
+        <a class="d-flex pl-4" routerLink="/school/control-painel" routerLinkActive="nav-active"
             [routerLinkActiveOptions]="{exact:true}">
             <mat-icon [style.fontSize.rem]="1.6"> dashboard</mat-icon> <span class="ml-4">Painel de
                 controlo</span>
@@ -97,36 +90,28 @@
     </li>
     <!-- End -->
 
-    <!-- Teacher place nav item -->
-    <li class="nav-item" *ngIf="role.toUpperCase() == 'TEACHER'">
-        <a class="pl-4 d-flex" [routerLink]="['/teacher', teacher.id, 'teacher-places']" routerLinkActive="nav-active"
-            [routerLinkActiveOptions]="{exact:true}">
-            <mat-icon [style.fontSize.rem]="1.4">class</mat-icon><span class="ml-4">Turmas</span>
+    <!-- Schools nav item -->
+    <li class="nav-item" *ngIf="role.toUpperCase() == 'SCHOOL'">
+        <a class="d-flex pl-4" [routerLink]='["/school/formations"]' routerLinkActive="nav-active">
+            <mat-icon [style.fontSize.rem]="1.6"> school</mat-icon> <span class="ml-4">Formações</span>
         </a>
     </li>
     <!-- End -->
 
-    <!-- Lessons nav item -->
-    <li class="nav-item" *ngIf="role.toUpperCase() == 'TEACHER'">
-        <a class="pl-4 d-flex" routerLink="/lesson/managment" routerLinkActive="nav-active"
-            [routerLinkActiveOptions]="{exact:true}">
-            <mat-icon [style.fontSize.rem]="1.4">featured_play_list</mat-icon><span class="ml-4">Aulas</span>
-        </a>
-    </li>
-    <!-- End -->
+    
 
-    <!-- Teacher place nav item -->
+    <!-- School place nav item -->
     <li class="nav-item" *ngIf="role.toUpperCase() == 'STUDANT'">
-        <a class="pl-4 d-flex" [routerLink]="['studant', 'teacher-places']" routerLinkActive="nav-active"
+        <a class="pl-4 d-flex" [routerLink]="['studant', 'school-places']" routerLinkActive="nav-active"
             [routerLinkActiveOptions]="{exact:true}">
-            <mat-icon [style.fontSize.rem]="1.4">class</mat-icon><span class="ml-4">Turmas</span>
+            <mat-icon [style.fontSize.rem]="1.4">class</mat-icon><span class="ml-4">Formações</span>
         </a>
     </li>
     <!-- End -->
 
     <!-- Question nav item -->
-    <li class="nav-item" *ngIf="role.toUpperCase() == 'TEACHER'">
-        <a class="pl-4 d-flex" routerLink="/teacherPlaces" routerLinkActive="nav-active"
+    <li class="nav-item" *ngIf="role.toUpperCase() == 'SCHOOL'">
+        <a class="pl-4 d-flex" routerLink="/schoolPlaces" routerLinkActive="nav-active"
             [routerLinkActiveOptions]="{exact:true}">
             <mat-icon [style.fontSize.rem]="1.5">help_center</mat-icon><span class="ml-4">Questões</span>
         </a>
@@ -157,32 +142,6 @@
         </ul>
     </li>
 
-    <!-- Messages nav item -->
-    <li class="nav-item">
-        <a routerLink="/messages" routerLinkActive="nav-active" class="pl-4 d-flex"
-            [routerLinkActiveOptions]="{exact:true}">
-            <mat-icon [style.fontSize.rem]="1.4">chat</mat-icon><span class="ml-4">Chat</span>
-        </a>
-    </li>
-    <!-- End -->
-
-    <!-- Statistic nav item -->
-    <li *ngIf="role.toUpperCase() == 'TEACHER'" class="nav-item">
-        <a routerLink="/statistic" routerLinkActive="nav-active" class="pl-4 d-flex"
-            [routerLinkActiveOptions]="{exact:true}">
-            <mat-icon [style.fontSize.rem]="1.5">analytics</mat-icon><span class="ml-4">Estatística</span>
-        </a>
-    </li>
-    <!-- End -->
-
-    <!-- Finances nav item -->
-    <li class="nav-item" *ngIf="role.toUpperCase()=='TEACHER'">
-        <a routerLink="/finances" routerLinkActive="nav-active" class="pl-4 d-flex"
-            [routerLinkActiveOptions]="{exact:true}">
-            <mat-icon [style.fontSize.rem]="1.5">monetization_on</mat-icon><span class="ml-4">Finanças</span>
-        </a>
-    </li>
-    <!-- End -->
 </ul>
 <!-- End-->
 
