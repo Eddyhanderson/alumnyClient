@@ -1,10 +1,12 @@
 <div *ngIf="role.toUpperCase()=='MANAGER'"
     class="mt-1 w-100 p-3 d-flex flex-column justify-content-center align-items-center" [style.height.px]="208">
-    <div *ngIf="user.picture;else noPhoto" class="img-profile-md">
+    <div *ngIf="user.picture; else noPhoto" class="img-profile-md">
         <img [src]="user.picture">
     </div>
-    <ng-template class="img-profile-md-none" #noPhoto>
-        <div></div>
+    <ng-template #noPhoto>
+        <div class="img-profile-md-none">
+            <div></div>
+        </div>
     </ng-template>
     <div class="relevant-text-principal">
         <h5>

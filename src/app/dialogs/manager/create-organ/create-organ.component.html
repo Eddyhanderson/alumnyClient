@@ -1,6 +1,6 @@
 <div class="d-flex justify-content-between">
     <h2 mat-dialog-title>
-        Criar órgão
+        Novo Órgão
     </h2>
     <button mat-icon-button>
         <mat-icon mat-dialog-close>
@@ -9,31 +9,35 @@
     </button>
 </div>
 <mat-dialog-content class="w-100 justify-content-center align-items-center d-flex">
-    <form [formGroup]="formGroup" class="w-100 h-100 mt-4">        
-        <mat-form-field class="w-100" appearance="outline" color="accent">
-            <mat-label> Insira o nome do órgão </mat-label>
-            <input type="text" matInput [formControl]="orgaoNameControl">
-            <mat-error *ngIf="orgaoNameControl.touched && orgaoNameControl.hasError('required')">
-                O campo não pode estar vazio
-            </mat-error>
-        </mat-form-field>
-        
-        <mat-form-field class="w-100" appearance="outline" color="accent">
-            <mat-label> Insira o valor anual alocado </mat-label>
-            <input type="number" matInput [formControl]="badgetControl" min="0">
-            <mat-error *ngIf="badgetControl.touched && badgetControl.hasError('required')">
-                O campo não pode estar vazio
-            </mat-error>
-        </mat-form-field>
+    <form [formGroup]="formGroup" class="w-100 h-100 mt-4">
+        <div>
+            <label>Insira o nome do órgão</label>
+            <mat-form-field class="w-100" appearance="outline" color="accent">
+                <mat-label>Nome</mat-label>
+                <input type="text" matInput [formControl]="orgaoNameControl">
+                <mat-error *ngIf="orgaoNameControl.touched && orgaoNameControl.hasError('required')">
+                    O campo não pode estar vazio
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div>
+            <label>Insira o valor anual alocado ao órgão</label>
+            <mat-form-field class="w-100" appearance="outline" color="accent" appearance="fill">
+                <input type="number" matInput [formControl]="badgetControl" min="0" class="amount" placeholder="0">
+                <span matPrefix class="relevant-text-bold"> AOA</span>
+                <span matSuffix>.00</span>
+                <mat-error *ngIf="badgetControl.touched && badgetControl.hasError('required')">
+                    O campo não pode estar vazio
+                </mat-error>
+            </mat-form-field>
+        </div>
 
         <div class="d-flex w-100 justify-content-center">
-            <div (click)="onCreateOrgan()" ngSubmit>
-                <button mat-flat-button color="accent" class="w-25 d-flex justify-content-center align-items-center"
-                    style="height: 2rem;" [disabled]="submited" (click)="onCreateOrgan()">
-                    <mat-spinner color="primary" diameter=20 *ngIf="submited"></mat-spinner>
-                    <span *ngIf="!submited">Criar</span>
-                </button>
-            </div>
+            <button mat-flat-button color="accent" (click)="onCreateOrgan()" ngSubmit class="w-25 d-flex justify-content-center align-items-center" 
+            style="height: 2rem;" [disabled]="submited">
+                <mat-spinner color="primary" diameter=20 *ngIf="submited"></mat-spinner>
+                <span *ngIf="!submited">Criar</span>
+            </button>
         </div>
     </form>
 </mat-dialog-content>

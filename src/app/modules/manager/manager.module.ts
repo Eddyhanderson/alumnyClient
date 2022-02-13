@@ -8,11 +8,12 @@ import { SharedModule } from '../../shared/shared.module';
 import { DialogsModule } from '../../dialogs/dialogs.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ManagerOrganComponent } from './manager-organ/manager-organ.component';
+import { ManagerSchoolComponent } from './manager-school/manager-school.component';
 
 
 
 @NgModule({
-  declarations: [ManagerHomeComponent, ManagerOrganComponent],
+  declarations: [ManagerHomeComponent, ManagerOrganComponent, ManagerSchoolComponent],
   imports: [
     CommonModule,
     ManagerRoutingModule,

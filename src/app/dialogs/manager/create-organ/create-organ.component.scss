@@ -1,10 +1,23 @@
-mat-dialog-content{
+mat-dialog-content {
     margin: 0 !important;
 }
 
-form{
+form {
     overflow: hidden !important;
 }
-mat-dialog-container{
+mat-dialog-container {
     overflow: hidden;
-  }
+}
+
+.amount {
+    text-align: right;
+}
+
+.amount::-webkit-outer-spin-button,
+input.eamount::-webkit-inner-spin-button {
+    display: none;
+}
+
+input.amount {
+    -moz-appearance: textfield;
+}

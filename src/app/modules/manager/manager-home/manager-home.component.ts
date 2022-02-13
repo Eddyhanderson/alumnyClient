@@ -22,13 +22,8 @@ import { SchoolCourseQuery } from 'src/app/queries/school-course-query/school-co
   templateUrl: './manager-home.component.html',
   styleUrls: ['./manager-home.component.scss']
 })
-export class ManagerHomeComponent implements OnInit, OnDestroy {
+export class ManagerHomeComponent implements OnInit{
   manager: ManagerModel;
-  teacherSchoolsPending$: PaginationAdapter<TeacherSchoolsModel, TeacherSchoolQuery>;
-  schoolCourses$: PaginationAdapter<SchoolCourseModel, SchoolCourseQuery>;
-  teacherSchoolsNormal$: PaginationAdapter<TeacherSchoolsModel, TeacherSchoolQuery>;
-
-  private _reloadStrategy: Subscription;
 
   constructor(private tss: TeacherSchoolsService,
     private scs: SchoolCourseService,
@@ -38,10 +33,4 @@ export class ManagerHomeComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     
   }
-
-  ngOnDestroy(): void {
-    this._reloadStrategy.unsubscribe();
-  }
-
-
 }

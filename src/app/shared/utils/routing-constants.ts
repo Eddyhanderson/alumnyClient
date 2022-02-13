@@ -29,6 +29,8 @@ export class Routes {
     static SCHOOL_GET_ROUTE = Routes.BASE_URL + "school/get/{id}"
     static SCHOOL_GET_ALL_ROUTE = Routes.BASE_URL + "school/getAll";    
 
+    // School identity routes
+    static SCHOOL_IDENTITY_CREATE_ROUTE = Routes.BASE_URL + "schoolIdentity/create";
     // Manager routes
     static MANAGER_CREATE_ROUTE = Routes.BASE_URL + "manager/create";
     static MANAGER_GET_BY_USER_ROUTE = Routes.BASE_URL + "manager/getByUser/{userId}";

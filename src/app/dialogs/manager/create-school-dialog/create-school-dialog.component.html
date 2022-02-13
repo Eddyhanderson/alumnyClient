@@ -1,0 +1,108 @@
+<div class="d-flex justify-content-between">
+    <h2 mat-dialog-title>
+        Nova Escola
+    </h2>
+    <button mat-icon-button>
+        <mat-icon mat-dialog-close>
+            close
+        </mat-icon>
+    </button>
+</div>
+<mat-dialog-content class="w-100 justify-content-center align-items-center d-flex m-0">
+    <mat-horizontal-stepper class="w-100" linear="true">
+        <ng-template matStepperIcon="basicInfo">
+            <mat-icon>school</mat-icon>
+        </ng-template>
+        <ng-template matStepperIcon="securityInfo">
+            <mat-icon>security</mat-icon>
+        </ng-template>
+
+        <mat-step [stepControl]="schoolGroup" state="school" label="Dados básicos">
+            <form [formGroup]="schoolGroup" class="w-100 h-100 mt-4">
+                <div>
+                    <label>Insira o nome da escola</label>
+                    <mat-form-field class="w-100" appearance="outline" color="accent">
+                        <mat-label>Nome</mat-label>
+                        <input type="text" matInput [formControl]="nameControl">
+                        <mat-error *ngIf="nameControl.touched && nameControl.hasError('required')">
+                            O campo não pode estar vazio
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div>
+                    <label>Insira o acrônimo da escola</label>
+                    <mat-form-field class="w-100" appearance="outline" color="accent">                        
+                        <input type="text" matInput [formControl]="acronymControl" placeholder="ISPTEC">
+                        <mat-error *ngIf="acronymControl.touched && acronymControl.hasError('required')">
+                            O campo não pode estar vazio
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div>
+                    <label>Insira o NIF da escola </label>
+                    <mat-form-field class="w-100" appearance="outline" color="accent">                        
+                        <mat-label>NIF</mat-label>
+                        <input type="text" matInput [formControl]="nifControl">
+                        <mat-error *ngIf="nifControl.touched && nifControl.hasError('required')">
+                            O campo não pode estar vazio
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div class="d-flex w-100 justify-content-center">
+                    <button mat-flat-button color="accent" matStepperNext ngSubmit
+                        class="w-25 d-flex justify-content-center align-items-center" style="height: 2rem;">                        
+                        Avançar
+                    </button>
+                </div>
+            </form>
+        </mat-step>
+        <mat-step [stepControl]="identityGroup" state="security" label="Contactos">
+            <form [formGroup]="identityGroup" class="w-100 h-100 mt-4">
+                <div>
+                    <label>Insira o email da escola</label>
+                    <mat-form-field class="w-100" appearance="outline" color="accent">
+                        <mat-label>Email</mat-label>
+                        <input type="text" matInput [formControl]="emailControl">
+                        <mat-error *ngIf="emailControl.touched && emailControl.hasError('required')">
+                            O campo não pode estar vazio
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div>
+                    <label>Insira o número de telefone da escola</label>
+                    <mat-form-field class="w-100" appearance="outline" color="accent"> 
+                        <mat-label>Telefone</mat-label>                       
+                        <input type="tel" matInput [formControl]="phoneNumberControl">
+                        <mat-error *ngIf="phoneNumberControl.touched && phoneNumberControl.hasError('required')">
+                            O campo não pode estar vazio
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div>
+                    <label>Insira o endereço da escola </label>
+                    <mat-form-field class="w-100" appearance="outline" color="accent">                        
+                        <mat-label>Endereço</mat-label>
+                        <input type="text" matInput [formControl]="adressControl">
+                        <mat-error *ngIf="adressControl.touched && adressControl.hasError('required')">
+                            O campo não pode estar vazio 
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div class="d-flex w-100 justify-content-center">
+                    <button mat-flat-button color="accent" matStepperNext ngSubmit
+                        class="w-25 d-flex justify-content-center align-items-center" style="height: 2rem;" (click)="onCreateSchoolIdentity()">                        
+                        <span *ngIf="!submited">Criar</span>
+                        <mat-spinner color="primary" diameter=20 *ngIf="submited"></mat-spinner>
+                    </button>
+                </div>
+            </form>
+        </mat-step>
+
+    </mat-horizontal-stepper>
+</mat-dialog-content>
