@@ -1,6 +1,7 @@
 export class Routes {
 
     private static BASE_URL = "https://localhost:5001/api/v1/";
+    public static BASE_URL_SERVER_FILE = "https://localhost:5001/";
 
     // Academy routes
     static ARTICLE_CREATE_ROUTE = Routes.BASE_URL + "article/create";
@@ -33,6 +34,9 @@ export class Routes {
     // Manager routes
     static MANAGER_CREATE_ROUTE = Routes.BASE_URL + "manager/create";
     static MANAGER_GET_BY_USER_ROUTE = Routes.BASE_URL + "manager/getByUser/{userId}";
+
+    // Modules routes
+    static MODULE_CREATE_ROUTE = Routes.BASE_URL + "module/create"; 
 
     // Organ routes
     static ORGAN_CREATE_ROUTE = Routes.BASE_URL + "organ/create";    
@@ -84,9 +88,10 @@ export class Routes {
     // Video routes
     static VIDEO_UPLOAD_ROUTE = Routes.BASE_URL + "video/upload";
 
-    // Video routes
+    // Images Uploads routes
     static IMAGE_UPLOAD_LESSON_PROFILE = Routes.BASE_URL + "image/upload/lesson/profile";
     static IMAGE_UPLOAD_TOPIC = Routes.BASE_URL + "image/upload/topic";
+    static IMAGE_UPLOAD_MODULE = Routes.BASE_URL + "image/upload/module";
 
     // Lesson routes
     static LESSON_CREATE_ROUTE = Routes.BASE_URL + "lesson/create";

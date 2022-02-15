@@ -17,6 +17,7 @@ import { StudantRegistrationComponent } from './teacher-place-studants/studant-r
 import { CreateOrganComponent } from './manager/create-organ/create-organ.component';
 import { CreateFormationDialogComponent } from './school/formation/create-formation-dialog/create-formation-dialog.component';
 import { CreateSchoolDialogComponent } from './school/create-school-dialog/create-school-dialog.component';
+import { CreateModulesDialogComponent } from './modules/create-modules-dialog/create-modules-dialog.component';
 
 
 @NgModule({
@@ -31,7 +32,9 @@ import { CreateSchoolDialogComponent } from './school/create-school-dialog/creat
     StudantRegistrationComponent,
     CreateOrganComponent,
     CreateSchoolDialogComponent,
-    CreateFormationDialogComponent
+    CreateFormationDialogComponent,
+    CreateModulesDialogComponent,
+    CreateModulesDialogComponent
   ],
   imports: [
     CommonModule,
@@ -52,7 +55,8 @@ import { CreateSchoolDialogComponent } from './school/create-school-dialog/creat
     StudantRegistrationComponent,
     CreateOrganComponent,
     CreateSchoolDialogComponent,
-    CreateFormationDialogComponent
+    CreateFormationDialogComponent,
+    CreateModulesDialogComponent
   ],
 
   providers: [

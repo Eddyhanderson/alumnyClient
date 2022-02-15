@@ -1,0 +1,67 @@
+<div class="d-flex justify-content-between">
+    <h2 mat-dialog-title>
+        Novo módulo
+    </h2>
+    <button mat-icon-button>
+        <mat-icon mat-dialog-close>
+            close
+        </mat-icon>
+    </button>
+</div>
+<mat-dialog-content class="w-100 justify-content-center align-items-center d-flex m-0">
+    <form [formGroup]="dataFg" class="w-100 h-100 mt-4">
+        <div>
+            <label>Insira o nome do modulo</label>
+            <mat-form-field class="w-100" appearance="outline" color="accent">
+                <mat-label>Nome</mat-label>
+                <input type="text" matInput [formControl]="nameCtl">
+                <mat-error *ngIf="nameCtl.touched && nameCtl.hasError('required')">
+                    O campo não pode estar vazio
+                </mat-error>
+            </mat-form-field>
+        </div>
+
+        <div class="irrelevant-text text-disabled-1 mb-1">
+            Escolha uma imagem como miniatura
+        </div>
+        <div class="d-flex justify-content-start">
+            <div class="p-relative">
+                <div [style]="{'height':'6rem', 'width':'6rem'}"
+                    class="d-flex justify-content-center align-items-center border">
+                    <mat-icon *ngIf="!imgUrl; else preview"> image </mat-icon>
+
+                    <ng-template #preview>
+                        <div class="thumbnail-preview">
+                            <img [src]="imgUrl" alt="">
+                        </div>
+                    </ng-template>
+                </div>
+
+                <input *ngIf="!imgUrl" type="file" #fileInput id="uploadFile"
+                    (change)="uploadImageEvt($event)" name="uploadFile" accept="image/*" />
+            </div>
+        </div>
+  
+        <div class="w-100">
+            <mat-form-field class="w-100">
+                <mat-label>
+                    O que será ensinado
+                </mat-label>
+                <textarea id="description-field" [formControl]="descriptionCtl" matInput></textarea>
+                <mat-error *ngIf="descriptionCtl.touched && descriptionCtl.hasError('required')">
+                    O campo não pode estar vazio
+                </mat-error>
+                <mat-error *ngIf="descriptionCtl.touched && descriptionCtl.errors?.maxlength">
+                    Descrição demasiado extensa
+                </mat-error>
+            </mat-form-field>
+        </div>
+    </form>
+</mat-dialog-content>
+<div class="d-flex w-100 justify-content-center" mat-dialog-actions>
+    <button mat-flat-button color="accent" (click)="onCreateModule()" ngSubmit
+        class="w-25 d-flex justify-content-center align-items-center" style="height: 2rem;" [disabled]="submited">
+        <mat-spinner color="primary" diameter=20 *ngIf="submited"></mat-spinner>
+        <span *ngIf="!submited">Criar</span>
+    </button>
+</div>

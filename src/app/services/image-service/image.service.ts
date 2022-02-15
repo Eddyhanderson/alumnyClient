@@ -10,6 +10,17 @@ import { Injectable } from "@angular/core";
 export class ImageService {
     constructor(private http: HttpClient) { }
 
+    public uploadImageModule(file: File): Observable<Response<string>> {
+        var formData = new FormData();
+        formData.append('file', file);
+
+        try {
+            return this.http.post<Response<string>>(Routes.IMAGE_UPLOAD_MODULE, formData);
+        } catch (error) {
+            console.log(error.message);
+        }
+    }
+
     public uploadImageLesson(file: File): Observable<Response<string>> {
         var formData = new FormData();
         formData.append('file', file);

@@ -1,0 +1,23 @@
+@import "../../../../shared/styles/standard-layout";
+
+.main {
+    @extend %main;
+    height: 100vh;
+}
+
+.section {
+    @extend %section;
+}
+
+.mat-header-cell {
+    flex-direction: column;
+    justify-content: center;
+}
+
+.mat-cell {
+    text-align: center;
+    justify-content: center;
+}
+mat-dialog-container {
+    overflow: hidden;
+}
