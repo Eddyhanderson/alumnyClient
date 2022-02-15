@@ -14,7 +14,7 @@ import { ArticleLessonCreationComponent } from './lesson/article/create/article-
 import { ArticleLessonViewComponent } from './lesson/article/view/article-lesson-view.component';
 import { VideoLessonViewComponent } from './lesson/video/view/video-lesson-view.component';
 import { StudantRegistrationComponent } from './teacher-place-studants/studant-registration/studant-registration.component';
-import { CreateOrganComponent } from './manager/create-organ/create-organ.component';
+import { CreateOrganDialogComponent } from './organ/create-organ/create-organ.component';
 import { CreateFormationDialogComponent } from './school/formation/create-formation-dialog/create-formation-dialog.component';
 import { CreateSchoolDialogComponent } from './school/create-school-dialog/create-school-dialog.component';
 import { CreateModulesDialogComponent } from './modules/create-modules-dialog/create-modules-dialog.component';
@@ -30,7 +30,7 @@ import { CreateModulesDialogComponent } from './modules/create-modules-dialog/cr
     ArticleLessonViewComponent,
     VideoLessonViewComponent,
     StudantRegistrationComponent,
-    CreateOrganComponent,
+    CreateOrganDialogComponent,
     CreateSchoolDialogComponent,
     CreateFormationDialogComponent,
     CreateModulesDialogComponent,
@@ -53,7 +53,7 @@ import { CreateModulesDialogComponent } from './modules/create-modules-dialog/cr
     ArticleLessonViewComponent,
     VideoLessonViewComponent,
     StudantRegistrationComponent,
-    CreateOrganComponent,
+    CreateOrganDialogComponent,
     CreateSchoolDialogComponent,
     CreateFormationDialogComponent,
     CreateModulesDialogComponent

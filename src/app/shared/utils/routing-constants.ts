@@ -57,6 +57,7 @@ export class Routes {
 
     // Formation routes
     static FORMATION_CREATE_ROUTE = Routes.BASE_URL + "formation/create";
+    static FORMATION_GET_ALL_ROUTE = Routes.BASE_URL + "formation/getAll";
 
     // Teacher routes
     static TEACHER_CREATE_ROUTE = Routes.BASE_URL + "teacher/create";

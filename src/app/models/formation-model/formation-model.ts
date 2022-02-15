@@ -6,5 +6,5 @@ export class FormationModel {
     schoolId: string;
     situation?: string;
     dateSituation?: Date;
-    dateCreation?: Date;
+    dateCreation?: Date;    
 }

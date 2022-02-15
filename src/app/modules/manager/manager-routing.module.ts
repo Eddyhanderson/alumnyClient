@@ -2,13 +2,13 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { ManagerHomeComponent } from './manager-home/manager-home.component'
-import { ManagerOrganComponent } from '../organ/manager-organ/manager-organ.component';
-import { ManagerSchoolComponent } from '../school/manager-school/manager-school.component';
+import { OrganListComponent } from '../organ/organ-list/organ-list.component';
+import { SchoolListComponent } from '../school/school-list/school-list.component';
 
 const routes: Routes = [
   { path: 'home', component: ManagerHomeComponent, runGuardsAndResolvers: 'always' },
-  { path: 'organ', component: ManagerOrganComponent },
-  { path: 'school', component: ManagerSchoolComponent },
+  { path: 'organ', component: OrganListComponent },
+  { path: 'school', component: SchoolListComponent },
 ];
 
 @NgModule({

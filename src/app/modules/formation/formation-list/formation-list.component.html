@@ -10,56 +10,61 @@
 				<button mat-icon-button>
 					<mat-icon>filter_list</mat-icon>
 				</button>
-				<div class="w-100 h-100 d-flex flex-column"> 
-					<input class="form-control" #search type="text" placeholder="Pesquisar órgão">											
-				</div>		
+				<div class="w-100 h-100 d-flex flex-column">
+					<input class="form-control" #search type="text" placeholder="Pesquisar órgão">
+				</div>
 				<div class="d-flex justify-content-center align-items-center">
-					<button mat-flat-button color="accent" class="h-100 ml-2" (click)="onFormationCreate()" >
+					<button mat-flat-button color="accent" class="h-100 ml-2" (click)="onFormationCreate()">
 						Nova formação
 					</button>
-				</div>		
+				</div>
 			</div>
 
-			<mat-table [dataSource]="data">				
+			<mat-table [dataSource]="data">
 				<ng-container matColumnDef="name">
 					<mat-header-cell *matHeaderCellDef>Nome</mat-header-cell>
-					<mat-cell *matCellDef="let element">Algoritmoe Programação</mat-cell>
+					<mat-cell *matCellDef="let element">{{element.theme}}</mat-cell>
 				</ng-container>
-				
+
 				<ng-container matColumnDef="initial_date">
 					<mat-header-cell *matHeaderCellDef> Data de inicio </mat-header-cell>
-					<mat-cell *matCellDef="let element"> 2022/08/01 </mat-cell>
+					<mat-cell *matCellDef="let element"> N/A </mat-cell>
 				</ng-container>
 
 				<ng-container matColumnDef="final_date">
 					<mat-header-cell *matHeaderCellDef> Data final </mat-header-cell>
-					<mat-cell *matCellDef="let element">2022/08/10</mat-cell>
+					<mat-cell *matCellDef="let element">N/A</mat-cell>
 				</ng-container>
 
-                <ng-container matColumnDef="price">
+				<ng-container matColumnDef="price">
 					<mat-header-cell *matHeaderCellDef> Preço </mat-header-cell>
-					<mat-cell *matCellDef="let element">15000 AOA</mat-cell>
+					<mat-cell *matCellDef="let element">{{element.price}} AOA</mat-cell>
 				</ng-container>
 
-                <ng-container matColumnDef="inscrits">
+				<ng-container matColumnDef="inscrits">
 					<mat-header-cell *matHeaderCellDef> Inscritos </mat-header-cell>
-					<mat-cell *matCellDef="let element">20</mat-cell>
+					<mat-cell *matCellDef="let element">N/A</mat-cell>
+				</ng-container>
+
+				<ng-container matColumnDef="category">
+					<mat-header-cell *matHeaderCellDef> Categoria </mat-header-cell>
+					<mat-cell *matCellDef="let element">{{element.category}}</mat-cell>
 				</ng-container>
 
 				<ng-container matColumnDef="status">
 					<mat-header-cell *matHeaderCellDef> Estado </mat-header-cell>
-					<mat-cell *matCellDef="let element">Normal</mat-cell>
+					<mat-cell *matCellDef="let element">{{element.situation}}</mat-cell>
 				</ng-container>
-				
+
 				<mat-header-row *matHeaderRowDef="displayedColumns">
 				</mat-header-row>
 				<mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
 			</mat-table>
 
-			<!--<mat-paginator *ngIf="data.dataSource$ | async as page" [length]="page.totalElements"
+			<mat-paginator *ngIf="data.dataSource$ | async as page" [length]="page.totalElements"
 				[pageSize]="page.data.length" [pageIndex]="page.pageNumber - 1" [hidePageSize]="true"
 				(page)="data.fetch($event.pageIndex)">
-			</mat-paginator>-->
+			</mat-paginator>
 		</div>
 	</div>
 </div>

@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ManagerOrganComponent } from './manager-organ/manager-organ.component';
+import { OrganListComponent } from './organ-list/organ-list.component';
 import { MaterialModule } from '../material/material.module';
 
 
 
 @NgModule({
-  declarations: [ManagerOrganComponent],
-  exports: [ManagerOrganComponent],
+  declarations: [OrganListComponent],
+  exports: [OrganListComponent],
   imports: [
     CommonModule,
     MaterialModule

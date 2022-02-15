@@ -10,7 +10,7 @@ import { OrganService } from 'src/app/services/organ-service/organ.service';
   templateUrl: './create-organ.component.html',
   styleUrls: ['./create-organ.component.scss']
 })
-export class CreateOrganComponent implements OnInit {
+export class CreateOrganDialogComponent implements OnInit {
   submited: boolean = false;
   orgaoNameControl: FormControl = new FormControl('', [Validators.required]);
   badgetControl: FormControl = new FormControl('', [Validators.required])
@@ -19,7 +19,7 @@ export class CreateOrganComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
     private snackBar: MatSnackBar,
-    private dialogRef: MatDialogRef<CreateOrganComponent>,
+    private dialogRef: MatDialogRef<CreateOrganDialogComponent>,
     private service: OrganService) { }
 
   ngOnInit(): void {

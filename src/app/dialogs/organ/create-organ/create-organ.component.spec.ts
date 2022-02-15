@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ManagerSchoolComponent } from './manager-school.component';
+import { CreateOrganDialogComponent } from './create-organ.component';
 
-describe('ManagerSchoolComponent', () => {
-  let component: ManagerSchoolComponent;
-  let fixture: ComponentFixture<ManagerSchoolComponent>;
+describe('CreateOrganComponent', () => {
+  let component: CreateOrganDialogComponent;
+  let fixture: ComponentFixture<CreateOrganDialogComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ManagerSchoolComponent ]
+      declarations: [ CreateOrganDialogComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ManagerSchoolComponent);
+    fixture = TestBed.createComponent(CreateOrganDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

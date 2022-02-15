@@ -7,8 +7,8 @@ import { MaterialModule } from '../material/material.module';
 import { SharedModule } from '../../shared/shared.module';
 import { DialogsModule } from '../../dialogs/dialogs.module';
 import { ReactiveFormsModule } from '@angular/forms';
-import { ManagerOrganComponent } from '../organ/manager-organ/manager-organ.component';
-import { ManagerSchoolComponent } from '../school/manager-school/manager-school.component';
+import { OrganListComponent } from '../organ/organ-list/organ-list.component';
+import { SchoolListComponent } from '../school/school-list/school-list.component';
 import { OrganModule } from '../organ/organ.module';
 import { SchoolModule } from '../school/school.module';
 

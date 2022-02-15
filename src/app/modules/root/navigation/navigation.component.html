@@ -92,7 +92,7 @@
 
     <!-- Schools nav item -->
     <li class="nav-item" *ngIf="role.toUpperCase() == 'SCHOOL'">
-        <a class="d-flex pl-4" [routerLink]='["/school/formations"]' routerLinkActive="nav-active">
+        <a class="d-flex pl-4" [routerLink]='["/formations", school.id]' routerLinkActive="nav-active">
             <mat-icon [style.fontSize.rem]="1.6"> school</mat-icon> <span class="ml-4">Formações</span>
         </a>
     </li>

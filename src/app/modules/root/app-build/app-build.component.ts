@@ -80,7 +80,8 @@ export class AppBuildComponent implements OnInit {
 
   private async navigateToSchoolHome() {
     if (this.router.url.match(this.loginRoute)) {
-      return await this.router.navigate(['/school','formations',])
+      var schoolId = JSON.parse(localStorage.school).id;
+      return await this.router.navigate(['formations', schoolId])
     }
 
     return this.router.navigate[this.router.url];
