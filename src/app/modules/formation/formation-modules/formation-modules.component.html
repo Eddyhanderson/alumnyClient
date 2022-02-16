@@ -1,11 +1,11 @@
 <div class="main">
     <div class="section">
-        <div class="mb-2 ">
-            <h1 class="bold-500">
-                Algoritmos e programação
+        <div class="mb-2 w-100 align-items-start ">
+            <h1 class="bold-500" *ngIf="formation">
+                {{formation.theme}}
             </h1>
         </div>
-        <div class="mat-elevation-z4">
+        <div class="border w-100 mb-4">
             <div class="d-flex ml-2 mr-4 my-3">
                 <button mat-icon-button>
                     <mat-icon>filter_list</mat-icon>
@@ -20,5 +20,84 @@
                 </div>
             </div>
         </div>
+        <ng-container *ngIf="modules$ | async as modules; else loadingPage">
+            <ng-container *ngIf="modules.length > 0; else noModules">
+                <!-- Modules lists -->
+                <div class="section">
+                    <div class="container-row">
+                        <div class="item bg-white border p-0 " *ngFor="let module of modules;">
+                            <!-- Modules Data -->
+                            <div class="background-image mb-2">
+                                <img [src]="buildImageUrl(module.picture)">
+                            </div>
+
+                            <div class="d-flex flex-column p-3">
+                                <span class="relevant-text-normal bold-500 text-ellips mb-2">
+                                    <a [rounterLink]="" class="primaryLink">
+                                        Módulo 1 - {{module.name}}
+                                    </a>
+                                </span>
+                                <div class="d-flex w-100">
+                                    <div class="d-flex flex-column w-100 align-items-end">
+                                        <div class="d-flex align-items-center 
+                                        justify-content-between w-100">
+                                            <span class="irrelevant-text-sm text-disabled-1">
+                                                7 aulas
+                                            </span>
+                                            <div class="d-flex justify-content-center">
+                                                <button mat-button mat-stroked-button [matMenuTriggerFor]="lessonType">
+                                                    Nova aula <mat-icon>expand_more</mat-icon>
+                                                </button>
+                                                <mat-menu #lessonType="matMenu">
+                                                    <button mat-menu-item>
+                                                        <mat-icon class="text-color-primary">video_library</mat-icon>
+                                                        Vídeo-aula
+                                                    </button>
+
+                                                    <button mat-menu-item>
+                                                        <mat-icon class="text-color-primary">article</mat-icon>
+                                                        Artigo
+                                                    </button>
+                                                </mat-menu>
+                                            </div>
+                                        </div>
+                                        <span class="mt-2 text-disabled-1">
+                                            <button mat-button mat-icon-button>
+                                                <mat-icon>
+                                                    more_vert
+                                                </mat-icon>
+                                            </button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End -->
+            </ng-container>
+        </ng-container>
+        <ng-template #loadingPage>
+            <app-loading-page class="w-100"></app-loading-page>
+        </ng-template>
     </div>
 </div>
+
+
+<ng-template #noModules>
+    <div class="d-flex align-items-center justify-content-center w-100 h-100">
+        <a class="primaryLink" (clik)="onCreateModules()">
+            Para poder adicionar aulas, crie um módulo
+        </a>
+    </div>
+</ng-template>
+
+<ng-template #loadingItems>
+    <app-loading-item></app-loading-item>
+</ng-template>
+
+<ng-template #spinner>
+    <div class="d-flex justify-content-center align-items-center p-2">
+        <mat-spinner color="primary" diameter=40 margin="auto"></mat-spinner>
+    </div>
+</ng-template>

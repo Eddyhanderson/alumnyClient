@@ -1,4 +1,4 @@
-@import "../../../shared/styles/standard-layout";
+@import "../../../shared/styles/standard-layout-0";
 
 .main {
     @extend %main;
@@ -9,15 +9,7 @@
     @extend %section;
 }
 
-.mat-header-cell {
-    flex-direction: column;
-    justify-content: center;
+.item{
+    @extend %item;
 }
 
-.mat-cell {
-    text-align: center;
-    justify-content: center;
-}
-mat-dialog-container {
-    overflow: hidden;
-}

@@ -7,7 +7,7 @@ const routes: Routes = [
     {
       path: ':id', children: [
         { path: '', component: FormationListComponent },
-        { path: 'modules', component: FormationModulesComponent }
+        { path: 'modules/:id', component: FormationModulesComponent }
       ]
     }
   ];

@@ -37,6 +37,7 @@ export class Routes {
 
     // Modules routes
     static MODULE_CREATE_ROUTE = Routes.BASE_URL + "module/create"; 
+    static MODULE_GET_ALL_ROUTE = Routes.BASE_URL + "module/getAll";
 
     // Organ routes
     static ORGAN_CREATE_ROUTE = Routes.BASE_URL + "organ/create";    
@@ -57,6 +58,7 @@ export class Routes {
 
     // Formation routes
     static FORMATION_CREATE_ROUTE = Routes.BASE_URL + "formation/create";
+    static FORMATION_GET_ROUTE = Routes.BASE_URL + "formation/get/{id}";
     static FORMATION_GET_ALL_ROUTE = Routes.BASE_URL + "formation/getAll";
 
     // Teacher routes
@@ -93,6 +95,7 @@ export class Routes {
     static IMAGE_UPLOAD_LESSON_PROFILE = Routes.BASE_URL + "image/upload/lesson/profile";
     static IMAGE_UPLOAD_TOPIC = Routes.BASE_URL + "image/upload/topic";
     static IMAGE_UPLOAD_MODULE = Routes.BASE_URL + "image/upload/module";
+    
 
     // Lesson routes
     static LESSON_CREATE_ROUTE = Routes.BASE_URL + "lesson/create";

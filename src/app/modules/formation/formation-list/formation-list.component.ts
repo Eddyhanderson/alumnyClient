@@ -28,11 +28,13 @@ export class FormationListComponent implements OnInit {
 
   private initDataSource() {
     this.setQueryField();
-    let initialLessonQuery: FormationQuery = {
+    let initialFormationQuery: FormationQuery = {
       schoolId : this.schoolId
     }
 
-    this.data = new TablePaginationAdapter<FormationModel, FormationQuery>((query, param) => this.service.getAll(query, param), initialLessonQuery);
+    console.dir(initialFormationQuery);
+
+    this.data = new TablePaginationAdapter<FormationModel, FormationQuery>((query, param) => this.service.getAll(query, param), initialFormationQuery);
   }
 
   public onFormationCreate() {
@@ -40,7 +42,7 @@ export class FormationListComponent implements OnInit {
   }
 
   private setQueryField(){
-    this.schoolId = this.route.snapshot.paramMap.get('schoolId');
+    this.schoolId = this.route.snapshot.paramMap.get('id');
   }
 
 

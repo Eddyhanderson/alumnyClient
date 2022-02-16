@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Response } from 'src/app/models/response/response';
 import { Observable } from 'rxjs/internal/Observable';
 import { CreationResult } from 'src/app/models/creation-result/creation-result';
 import { FormationModel } from 'src/app/models/formation-model/formation-model';
@@ -23,7 +24,7 @@ export class FormationService {
   }
   
   public getAll(query: PaginationQuery, param: FormationQuery): Observable<PageResponse<FormationModel>> {
-
+    
     try {
       return this.http.get<PageResponse<FormationModel>>(Routes.FORMATION_GET_ALL_ROUTE, {
         params: {
@@ -38,4 +39,12 @@ export class FormationService {
     }
   }
 
+  public async get(id: string): Promise<FormationModel> {
+    try {
+      let response = await this.http.get<Response<FormationModel>>(Routes.FORMATION_GET_ROUTE.replace('{id}', id)).toPromise();
+      return response.data;
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
 }

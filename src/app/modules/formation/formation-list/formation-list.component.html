@@ -11,7 +11,7 @@
 					<mat-icon>filter_list</mat-icon>
 				</button>
 				<div class="w-100 h-100 d-flex flex-column">
-					<input class="form-control" #search type="text" placeholder="Pesquisar órgão">
+					<input class="form-control" #search type="text" placeholder="Pesquisar formação">
 				</div>
 				<div class="d-flex justify-content-center align-items-center">
 					<button mat-flat-button color="accent" class="h-100 ml-2" (click)="onFormationCreate()">
@@ -23,7 +23,11 @@
 			<mat-table [dataSource]="data">
 				<ng-container matColumnDef="name">
 					<mat-header-cell *matHeaderCellDef>Nome</mat-header-cell>
-					<mat-cell *matCellDef="let element">{{element.theme}}</mat-cell>
+					<mat-cell *matCellDef="let element">
+						<a [routerLink]="['./modules', element.id]" class="primaryLink">
+							{{element.theme}}
+						</a>
+					</mat-cell>
 				</ng-container>
 
 				<ng-container matColumnDef="initial_date">
