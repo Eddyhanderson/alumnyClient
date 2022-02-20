@@ -38,6 +38,9 @@ export class TextEditorComponent implements OnInit, AfterViewInit, OnDestroy {
   @Input('article')
   article: ArticleModel;
 
+  @Input("moduleId")
+  moduleId: string;
+
   @Output('closeResult')
   closeResult = new EventEmitter<DocumentLeave>();
 
@@ -105,7 +108,7 @@ export class TextEditorComponent implements OnInit, AfterViewInit, OnDestroy {
     this.toolbar.nativeElement.classList.add('ql-toolbar-2');
     this._quill = new Quill(this.editor.nativeElement, {
       theme: 'snow',
-      placeholder: 'Força, tu és capaz !',
+      placeholder: 'Escrever conteúdo !',
       modules: {
         toolbar: {
           container: this.toolbar.nativeElement,
@@ -152,7 +155,7 @@ export class TextEditorComponent implements OnInit, AfterViewInit, OnDestroy {
 
     if (result?.data != null) {
       this.article = result.data;
-      console.dir(result.data);
+
       this.snackBar.open("Documento salvo");
       this.canSave = false;
     } else {
@@ -222,13 +225,13 @@ export class TextEditorComponent implements OnInit, AfterViewInit, OnDestroy {
     })
   }
 
-  private _preventQuillJump(){
+  private _preventQuillJump() {
     document.querySelectorAll(".ql-picker").forEach(tool => {
-      tool.addEventListener("mousedown", function(event) {
-          event.preventDefault();
-          event.stopPropagation();
+      tool.addEventListener("mousedown", function (event) {
+        event.preventDefault();
+        event.stopPropagation();
       });
-  });
+    });
   }
 
   private onClose() {
@@ -287,9 +290,8 @@ export class TextEditorComponent implements OnInit, AfterViewInit, OnDestroy {
     })
   }
 
-  private createArticle() {
-    let teacherId = JSON.parse(localStorage.school).id;
-    this.article = new ArticleModel(JSON.stringify(this.lastSaved), teacherId);
+  private createArticle() {    
+    this.article = new ArticleModel(JSON.stringify(this.lastSaved), this.moduleId);
     this.article.name = this.nameGen();
   }
 

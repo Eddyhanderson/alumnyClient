@@ -1,4 +1,4 @@
-export class ModulesModel {
+export class ModuleModel {
     id?:string;
     name:string;
     description:string;

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ModulesModel } from 'src/app/models/module-model/modules.model';
+import { ModuleModel } from 'src/app/models/module-model/modules.model';
 import { ImageService } from 'src/app/services/image-service/image.service';
 import { ModuleService } from 'src/app/services/module-service/module.service';
 import { Constants } from 'src/app/shared/utils/constants';
@@ -15,7 +15,7 @@ import { Routes } from 'src/app/shared/utils/routing-constants';
 })
 export class CreateModulesDialogComponent implements OnInit {
   // Models
-  public modules: ModulesModel;
+  public modules: ModuleModel;
   public imgUrl: string;
   public imgDir:string;
 

@@ -35,23 +35,5 @@
                 Campo obrigatório
             </mat-error>
         </mat-form-field>
-
-        <ng-container *ngIf="teacherPlace && teacherPlace.opened">
-            <div class="irrelevant-text text-disabled-1 mt-1">
-                {{
-                isPublic.value ?
-                'Aulas publicas podem ser assistidas por todos, inclusive quem não estiver
-                matriculado na turma
-                onde a aula fôr publicada.'
-                :
-                'Aulas privadas podem ser assistidas apenas pelos estudantes matriculados na turma
-                onde a aula fôr
-                publicada. Note que todas as aulas de uma turma fechada são privadas.'
-                }}
-            </div>
-            <mat-slide-toggle [formControl]="isPublic">
-                {{isPublic.value ? 'Aula pública' : 'Aula privada'}}
-            </mat-slide-toggle>
-        </ng-container>
     </form>                        
 </div>

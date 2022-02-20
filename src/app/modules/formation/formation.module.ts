@@ -4,6 +4,7 @@ import { FormationListComponent } from './formation-list/formation-list.componen
 import { FormationModulesComponent } from './formation-modules/formation-modules.component';
 import { MaterialModule } from '../material/material.module';
 import { FormationRoutingModule } from './formation-routing.module';
+import { ModuleModule } from '../module/module.module';
 
 
 
@@ -13,7 +14,8 @@ import { FormationRoutingModule } from './formation-routing.module';
   imports: [
     CommonModule,
     MaterialModule,
-    FormationRoutingModule
+    FormationRoutingModule,
+    ModuleModule
   ]
 })
 export class FormationModule { }

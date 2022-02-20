@@ -3,31 +3,13 @@ export class LessonModel {
 
     title: string;
 
-    teacherPlaceId: string;
-
-    teacherPlaceName?: string;
-
-    teacherPlacePhotoPath?: string;
-
-    teacherId?:string;
-
-    schoolId?: string;
+    moduleId: string;
 
     schoolName?: string;
 
     postId?: string;
 
-    discpilineTopicId?: string;
-
-    topicId?:string;
-
-    disciplineTopicName?: string;
-
-    disciplineId?: string;
-
-    disciplineName?: string;
-
-    backgroundPhotoPath?: string;
+    picture?: string;
 
     description: string;
 
@@ -45,15 +27,5 @@ export class LessonModel {
 
     date?: Date;
 
-    public: boolean;
-
     duration?: string;
-
-    questionCount?:number;
-
-    solvedQuestionCount?:number;
-
-    teacherAnswerCount?:number;
-
-    answerCount?:number;
 }

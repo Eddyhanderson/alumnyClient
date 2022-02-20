@@ -31,7 +31,7 @@ export class ArticleService {
    */
   public async create(article: ArticleModel): Promise<CreationResult<ArticleModel>> {
     if (article == null) return null;
-
+    
     try {
       var result = await this.http.post<CreationResult<ArticleModel>>(Routes.ARTICLE_CREATE_ROUTE, article).toPromise();
       return result;

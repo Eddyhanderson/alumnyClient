@@ -11,43 +11,19 @@
 
 <mat-dialog-content class="h-75">
     <text-editor *ngIf="!article; else lessonDetail" (articleResult)="getContent($event)"
-        (closeResult)="onClose($event)" [article]="data" [stopRequest]="!editing" [closeRequest]="close">
+        (closeResult)="onClose($event)" [article]="data.article" [moduleId]="data.moduleId" [stopRequest]="!editing" [closeRequest]="close">
     </text-editor>
 
     <ng-template #lessonDetail>
         <mat-vertical-stepper [linear]="true">
-            <ng-template matStepperIcon="class">
-                <mat-icon>
-                    class
-                </mat-icon>
-            </ng-template>
-            <ng-template matStepperIcon="topic">
-                <mat-icon>
-                    topic
-                </mat-icon>
-            </ng-template>
             <ng-template matStepperIcon="details">
                 <mat-icon>
                     panorama_fish_eye
                 </mat-icon>
             </ng-template>            
 
-            <mat-step editable="true" label="Turma" state="class" [stepControl]="teacherPlaceCtl">
-                <app-teacher-place-picker (result)="tpPicker($event)">
-
-                </app-teacher-place-picker>
-            </mat-step>
-
-            <mat-step editable="true" label="Tópico" state="topic" linear="true" [stepControl]="topicCtl">
-                <ng-container *ngIf="teacherPlace; else loadingItems">
-                    <app-topic-picker [teacherPlace]="teacherPlace.id" (result)="tPicker($event)">
-
-                    </app-topic-picker>
-                </ng-container>
-            </mat-step>
-
             <mat-step label="Detalhes" state="details" [stepControl]="detailFg">
-                <app-lesson-detail-form [teacherPlace]="teacherPlace" (result)="detailForm($event)">
+                <app-lesson-detail-form (result)="detailForm($event)">
 
                 </app-lesson-detail-form>
 
@@ -78,8 +54,8 @@
 
 <mat-dialog-actions>
     <div class="d-flex justify-content-end w-100">
-        <button mat-flat-button (click)="stopEditing()" [hidden]="!editing" color="primary">
-            Concluido
+        <button mat-flat-button (click)="stopEditing()" [hidden]="!editing" color="accent">
+            Criar
         </button>
     </div>
     <div class="d-flex justify-content-center w-100" *ngIf="detailFg && detailFg.valid">

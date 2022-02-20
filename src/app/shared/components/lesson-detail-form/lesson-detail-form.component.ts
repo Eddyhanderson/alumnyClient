@@ -17,9 +17,6 @@ export class LessonDetailFormComponent implements OnInit {
 
   constructor(private fb: FormBuilder) { }
 
-  @Input("teacherPlace")
-  teacherPlace: TeacherPlaceModel;
-
   @Output("result")
   pickResult = new EventEmitter<FormGroup>();
 

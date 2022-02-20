@@ -1,5 +1,5 @@
 import { HttpEvent, HttpEventType } from '@angular/common/http';
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatStep, MatStepper } from '@angular/material/stepper';
 import { VideoModel } from 'src/app/models/video-model/video.model';
@@ -19,10 +19,11 @@ import { LessonModel } from 'src/app/models/lesson-model/lesson.model';
 import { map, startWith } from 'rxjs/operators';
 import { DisciplineTopicService } from 'src/app/services/discipline-topic-service/discipline-topic.service';
 import { Constants, PostTypes } from 'src/app/shared/utils/constants';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { TopicModel } from 'src/app/models/topic-model/topic.model';
+import { Routes } from 'src/app/shared/utils/routing-constants';
 
 
 @Component({
@@ -53,10 +54,6 @@ export class VideoLessonCreationComponent implements OnInit {
   public isPublic: boolean = true;
   public video: VideoModel;
 
-
-  // Keys
-  private teacherPlaceId: string;
-
   // To handle with video upload 
   public progress: number = 0;
   public manifest: string;
@@ -68,26 +65,22 @@ export class VideoLessonCreationComponent implements OnInit {
   // To handle with video detail forms
   public titleCtl: FormControl = new FormControl('', [Validators.required, Validators.maxLength(100)])
   public descriptionCtl: FormControl = new FormControl('', Validators.required);
-  public teacherPlaceCtl: FormControl = new FormControl('', Validators.required);
   detailFg: FormGroup;
-
-  // To handle with topic
-  public topicCtl: FormControl = new FormControl('', [Validators.required]);
-
-
 
   // flags
   public loadingMode: boolean = false;
   public submited: boolean = false;
+  thumbnailPath: string;
 
   constructor(
     public dialogRef: MatDialogRef<VideoLessonCreationComponent>,
-    
+
     private vs: VideoService,
     private vus: VideoUploadSignalR,
     private ls: LessonService,
     private router: Router,
-    private snackBar: MatSnackBar) { }
+    private snackBar: MatSnackBar,
+    @Inject(MAT_DIALOG_DATA) private data: any) { }
 
 
   ngOnInit(): void {
@@ -110,7 +103,7 @@ export class VideoLessonCreationComponent implements OnInit {
           this.progress = Math.round(((event.loaded * 100.0) / event.total) / 2.0);
           break;
         case HttpEventType.Response:
-          this.video = event.body.data;
+          this.video = event.body.data;      
           await this.vus.onInit();
           await this.vus.videoUploadWatch(this.video);
           break;
@@ -123,16 +116,15 @@ export class VideoLessonCreationComponent implements OnInit {
       this.submited = true;
 
       let lesson: LessonModel = {
-        public: this.detailFg.value.isPublic,
-        backgroundPhotoPath: this.thumbnail,
+        picture: this.thumbnailPath,
         description: this.detailFg.value.description,
-        topicId: this.topic.id,
-        teacherPlaceId: this.teacherPlace.id,
         title: this.detailFg.value.title,
         videoId: this.video.id,
-        lessonType: PostTypes.Video
+        lessonType: PostTypes.Video,
+        moduleId: this.data.moduleId
       }
 
+      console.dir(lesson);
       let stt = await this.createLesson(lesson);
 
       if (stt?.succeded) {
@@ -147,8 +139,8 @@ export class VideoLessonCreationComponent implements OnInit {
 
         this.dialogRef.close(true);
       } else {
-        this.snackBar.open(Constants.FAIL_OPERATION_MESSAGE);    
-        this.submited = false;    
+        this.snackBar.open(Constants.FAIL_OPERATION_MESSAGE);
+        this.submited = false;
       }
     }
   }
@@ -159,24 +151,12 @@ export class VideoLessonCreationComponent implements OnInit {
     return this.ls.create(lesson);
   }
 
-  public tpPicker(formState: FormControl) {
-    this.teacherPlaceCtl = formState;
-    if (this.teacherPlaceCtl.valid)
-      this.teacherPlace = this.teacherPlaceCtl.value[0];
 
-  }
 
-  public tPicker(formState: FormControl) {
-    this.topicCtl = formState;
-    if (this.topicCtl.valid)
-      this.topic = this.topicCtl.value[0];
-  }
-
-  public detailForm(group:FormGroup){
+  public detailForm(group: FormGroup) {
     this.detailFg = group;
   }
 
-  
 
   private initVideoDataObserver() {
     // to get video compression progress
@@ -186,7 +166,8 @@ export class VideoLessonCreationComponent implements OnInit {
 
     // to get thumbnail location
     this.vus.thumbnail.subscribe((data) => {
-      this.thumbnail = data;
+      this.thumbnailPath = data;
+      this.thumbnail = Routes.BASE_URL_SERVER_FILE + data;
     })
 
     // to get video manifest location

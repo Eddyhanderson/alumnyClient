@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import * as dashjs from 'dashjs';
 import { BehaviorSubject, fromEvent, Observable } from 'rxjs';
 import { MediaPlayerClass } from 'dashjs';
+import { Routes } from '../../utils/routing-constants';
 
 interface VideoElement extends HTMLVideoElement {
   requestPictureInPicture(): any;
@@ -40,7 +41,7 @@ export class VideoComponent implements OnInit, AfterViewInit, OnDestroy {
   private _url = new BehaviorSubject<string>('');
   @Input("source")
   set source(value) {
-    this._url.next(value);
+    this._url.next(Routes.BASE_URL_SERVER_FILE + value);
   }
 
   get source() {
@@ -268,7 +269,7 @@ export class VideoComponent implements OnInit, AfterViewInit, OnDestroy {
   private initPlayer() {
     var player = dashjs.MediaPlayer().create();
     if (this.url) {
-      player.initialize(this.el.nativeElement.querySelector('#video'), this.url, true);
+      player.initialize(this.el.nativeElement.querySelector('#video'), Routes.BASE_URL_SERVER_FILE + this.url, true);
     } else {
       this.initDynamicUrl(player);
     }

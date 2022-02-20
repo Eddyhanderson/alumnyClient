@@ -1,0 +1,15 @@
+@import "../../../shared/styles/standard-layout-0";
+
+.main {
+    @extend %main;
+    height: 100vh;
+}
+
+.section {
+    @extend %section;
+}
+
+.item{
+    @extend %item;
+}
+

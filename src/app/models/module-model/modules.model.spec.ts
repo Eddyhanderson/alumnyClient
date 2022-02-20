@@ -1,7 +1,7 @@
-import { ModulesModel } from './modules.model';
+import { ModuleModel } from './modules.model';
 
 describe('Modules.Model', () => {
   it('should create an instance', () => {
-    expect(new ModulesModel()).toBeTruthy();
+    expect(new ModuleModel()).toBeTruthy();
   });
 });

@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { CreationResult } from 'src/app/models/creation-result/creation-result';
-import { ModulesModel as ModuleModel } from 'src/app/models/module-model/modules.model';
+import { ModuleModel as ModuleModel } from 'src/app/models/module-model/modules.model';
 import { PageResponse } from 'src/app/models/page-response/page-response';
 import { ModuleQuery } from 'src/app/queries/module-query/module-query';
 import { PaginationQuery } from 'src/app/queries/pagination-query/pagination-query';

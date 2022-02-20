@@ -59,11 +59,11 @@ export class ArticleLessonCreationComponent implements OnInit {
     public snackBar: MatSnackBar,
     public dialogRef: MatDialogRef<ArticleLessonCreationComponent>,
     public router: Router,
-    @Inject(MAT_DIALOG_DATA) public data: ArticleModel
+    @Inject(MAT_DIALOG_DATA) public data: any
   ) { }
 
   ngOnInit(): void {
-
+    console.dir(this.data);
   }
 
   public async uploadImageEvt(event) {
@@ -82,22 +82,10 @@ export class ArticleLessonCreationComponent implements OnInit {
     }
   }
 
-  public stopEditing() {    
-    this.getTeacher();
+  public stopEditing() {     
+    console.log("Entreiii")   ;
     this.editing = false;
   }
-
-  public tpPicker(formState: FormControl) {
-    this.teacherPlaceCtl = formState;
-    if (this.teacherPlaceCtl.valid)
-      this.teacherPlace = this.teacherPlaceCtl.value[0];
-  }
-
-  public tPicker(formState: FormControl) {
-    this.topicCtl = formState;
-    if (this.topicCtl.valid)
-      this.topic = this.topicCtl.value[0];
-  }  
 
   public detailForm(group:FormGroup){
     this.detailFg = group;
@@ -108,13 +96,11 @@ export class ArticleLessonCreationComponent implements OnInit {
       this.submited = true;
       
       let lesson: LessonModel = {
-        public: this.detailFg.value.isPublic,
-        backgroundPhotoPath: this.imgUrl,
+        picture: this.imgUrl,
         description: this.detailFg.value.description,
-        topicId: this.topic.id,
-        teacherPlaceId: this.teacherPlace.id,
         title: this.detailFg.value.title,
         articleId: this.article.id,
+        moduleId: this.data.moduleId,
         lessonType: PostTypes.Article
       }
 
@@ -125,12 +111,12 @@ export class ArticleLessonCreationComponent implements OnInit {
       if (stt?.succeded) {
         let snackBarRef = this.snackBar.open('Parabéns! Artigo publicado com sucesso');
 
-        snackBarRef.afterDismissed().subscribe(() => this.router.navigate(["lesson/managment"], {
+        /*snackBarRef.afterDismissed().subscribe(() => this.router.navigate(["lesson/managment"], {
           queryParams: {
             'teacherPlaceId': this.teacherPlace.id,
             'topicId': this.topic.id
           }
-        }));
+        }));*/
 
         this.dialogRef.close(true);
       } else {
@@ -139,11 +125,6 @@ export class ArticleLessonCreationComponent implements OnInit {
       }
     }
   }
-
-  private getTeacher() {
-    this.teacher = JSON.parse(localStorage.school);
-  }
-
 
   private createLesson(lesson: LessonModel) {
     if (lesson == null || lesson == undefined) return null;

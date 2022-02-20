@@ -1,9 +1,9 @@
 export class ArticleModel {
-    constructor(delta: string, teacherId: string, id?:string, name?:string, lastChange?:Date,situation?:string) {
+    constructor(delta: string, moduleId: string, id?:string, name?:string, lastChange?:Date,situation?:string) {
         this.id = id;
         this.delta = delta;
-        this.teacherId = teacherId;
-        this.draft = false;
+        this.moduleId = moduleId;
+        this.draft = true;
         this.name = name;
         this.lastChange = lastChange;
         this.situation = situation;
@@ -15,7 +15,7 @@ export class ArticleModel {
 
     delta: string;
 
-    teacherId: string;
+    moduleId: string;
 
     situation: string;
 

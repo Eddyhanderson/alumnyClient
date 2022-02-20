@@ -13,16 +13,6 @@
     <div class="w-100 d-flex justify-content-between">
         <div [class.left-form-container]="loadingMode">
             <mat-vertical-stepper #stepper [linear]="true">
-                <ng-template matStepperIcon="class">
-                    <mat-icon>
-                        class
-                    </mat-icon>
-                </ng-template>
-                <ng-template matStepperIcon="topic">
-                    <mat-icon>
-                        topic
-                    </mat-icon>
-                </ng-template>
                 <ng-template matStepperIcon="videoChoice">
                     <mat-icon>
                         add_to_photos
@@ -35,26 +25,12 @@
                     </mat-icon>
                 </ng-template>
 
-                <mat-step label="Turma" label="Turma" state="class" [stepControl]="teacherPlaceCtl">
-                    <app-teacher-place-picker (result)="tpPicker($event)">
-
-                    </app-teacher-place-picker>
-                </mat-step>
-
-                <mat-step editable="true" label="Tópico" state="topic" linear="true" [stepControl]="topicCtl">
-                    <ng-container *ngIf="teacherPlace; else loadingItems">
-                        <app-topic-picker [teacherPlace]="teacherPlace.id" (result)="tPicker($event)">
-
-                        </app-topic-picker>
-                    </ng-container>
-                </mat-step>
-
                 <mat-step editable="false" label="Escolher video" state="videoChoice" linear="true"
                     [stepControl]="videoCtl">
                     <div class="d-flex flex-column justify-content-between dialog-content">
                         <div class="d-flex justify-content-center align-items-center mb-5">
                             <div class="w-50 p-relative">
-                                <button mat-flat-button color="warn" class="w-100" [style]="{'height':'3rem'}">
+                                <button mat-flat-button color="accent" class="w-100" [style]="{'height':'3rem'}">
                                     SELECIONAR VIDEO <mat-icon class="ml-1"> video_library </mat-icon>
                                 </button>
 
@@ -77,7 +53,7 @@
                 </mat-step>
 
                 <mat-step label="Detalhes" state="details" [stepControl]="detailFg">
-                    <app-lesson-detail-form [teacherPlace]="teacherPlace" (result)="detailForm($event)">
+                    <app-lesson-detail-form (result)="detailForm($event)">
 
                     </app-lesson-detail-form>
                 </mat-step>
