@@ -117,7 +117,7 @@ export class LessonWatchQuestionsComponent implements OnInit {
   }
 
   private async getTeacherPlace() {
-    this.teacherPlace = await this.tps.get(this.lesson.teacherPlaceId);
+    /*this.teacherPlace = await this.tps.get(this.lesson.teacherPlaceId);*/
   }
 
   private async getTeacher() {

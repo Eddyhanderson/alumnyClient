@@ -5,25 +5,13 @@ export class StudantModel {
 
     id?: string;
 
-    firstName?: string;
-
-    lastName?: string;
-
     userId?: string;
 
-    pictureProfilePath?: string;
+    organId: string;
 
-    academicLevelId?: string;
+    firstName: string;
 
-    academicLevelName?: string;
-
-    academyId?: string;
-
-    academyName?: string;
-
-    courseId?: string;
-
-    courseName?: string;
+    lastName: string;
 
     studantCode?: string;
 }

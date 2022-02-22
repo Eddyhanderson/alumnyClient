@@ -19,17 +19,19 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TeacherPlacePickerComponent } from './components/teacher-place-picker/teacher-place-picker.component';
 import { TopicPickerComponent } from './components/topic-picker/topic-picker.component';
 import { LessonDetailFormComponent } from './components/lesson-detail-form/lesson-detail-form.component';
+import { LessonTypePipe } from './pipes/lesson-type-pipe/lesson-type.pipe';
+import { ImgUrlPipe } from './pipes/img-url-pipe/img-url.pipe';
 
 
 @NgModule({
   declarations: [
-    VideoComponent, 
-    ProgressBarComponent, 
-    DataFormaterDirective, 
-    MessageCallBackDirective, 
-    LoadingPageComponent, 
-    LoadingItemComponent, 
-    LoadingDeterminateComponent, 
+    VideoComponent,
+    ProgressBarComponent,
+    DataFormaterDirective,
+    MessageCallBackDirective,
+    LoadingPageComponent,
+    LoadingItemComponent,
+    LoadingDeterminateComponent,
     TextEditorComponent,
     ElapsedTimePipe,
     BottomSheetComponent,
@@ -37,14 +39,16 @@ import { LessonDetailFormComponent } from './components/lesson-detail-form/lesso
     TopicCreationComponent,
     TeacherPlacePickerComponent,
     TopicPickerComponent,
-    LessonDetailFormComponent],
-  exports:[
+    LessonDetailFormComponent,
+    LessonTypePipe,
+    ImgUrlPipe],
+  exports: [
     TextEditorComponent,
-    VideoComponent, 
-    ProgressBarComponent, 
-    DataFormaterDirective, 
-    MessageCallBackDirective, 
-    LoadingPageComponent,     
+    VideoComponent,
+    ProgressBarComponent,
+    DataFormaterDirective,
+    MessageCallBackDirective,
+    LoadingPageComponent,
     LoadingItemComponent,
     LoadingDeterminateComponent,
     ElapsedTimePipe,
@@ -53,7 +57,9 @@ import { LessonDetailFormComponent } from './components/lesson-detail-form/lesso
     TopicCreationComponent,
     TeacherPlacePickerComponent,
     TopicPickerComponent,
-    LessonDetailFormComponent],
+    LessonDetailFormComponent,
+    LessonTypePipe,
+    ImgUrlPipe],
   imports: [
     CommonModule,
     MaterialModule,

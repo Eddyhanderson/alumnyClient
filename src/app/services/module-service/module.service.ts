@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { CreationResult } from 'src/app/models/creation-result/creation-result';
+import { Response } from 'src/app/models/response/response';
 import { ModuleModel as ModuleModel } from 'src/app/models/module-model/modules.model';
 import { PageResponse } from 'src/app/models/page-response/page-response';
 import { ModuleQuery } from 'src/app/queries/module-query/module-query';
@@ -42,6 +43,15 @@ export class ModuleService {
       })
     } catch (error) {
       console.log(error.message)
+    }
+  }
+
+  public async get(id: string): Promise<ModuleModel> {
+    try {
+      let response = await this.http.get<Response<ModuleModel>>(Routes.MODULE_GET_ROUTE.replace('{id}', id)).toPromise();
+      return response.data;
+    } catch (error) {
+      console.log(error.message);
     }
   }
 }

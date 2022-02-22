@@ -14,8 +14,7 @@ export class Routes {
     static ANSWER_GET_ALL_ROUTE = Routes.BASE_URL + "answer/getAll";
     static ANSWER_GET_ROUTE = Routes.BASE_URL + "answer/get/{answerId}";
 
-    // User routes
-    static USER_REGISTER_ROUTE = Routes.BASE_URL + "user/registration";
+    // User routes    
     static USER_LOGIN_ROUTE = Routes.BASE_URL + "user/login";
     static USER_GET_ROUTE = Routes.BASE_URL + "user/get/{id}";
     
@@ -38,9 +37,11 @@ export class Routes {
     // Modules routes
     static MODULE_CREATE_ROUTE = Routes.BASE_URL + "module/create"; 
     static MODULE_GET_ALL_ROUTE = Routes.BASE_URL + "module/getAll";
+    static MODULE_GET_ROUTE = Routes.BASE_URL + "module/get/{id}";
 
     // Organ routes
     static ORGAN_CREATE_ROUTE = Routes.BASE_URL + "organ/create";    
+    static ORGAN_GET_ALL_ROUTE = Routes.BASE_URL + "organ/getAll";    
 
     // Academy routes
     static ACADEMY_CREATE_ROUTE = Routes.BASE_URL + "academy/create";
@@ -67,7 +68,7 @@ export class Routes {
     static TEACHER_GET_ALL_ROUTE = Routes.BASE_URL + "teacher/getAll";
 
     // Studant routes
-    static STUDANT_CREATE_ROUTE = Routes.BASE_URL + "studant/create";
+    static STUDANT_REGISTER_ROUTE = Routes.BASE_URL + "studant/create";
     static STUDANT_GET_ROUTE = Routes.BASE_URL + "studant/get/{id}";
     static STUDANT_GET_ALL_ROUTE = Routes.BASE_URL + "studant/getAll";
 

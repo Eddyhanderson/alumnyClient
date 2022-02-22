@@ -7,9 +7,17 @@ export class LessonModel {
 
     schoolName?: string;
 
+    schoolAcronymName?:string;
+
+    formationTheme?: string;
+
+    moduleName?: string;
+
     postId?: string;
 
     picture?: string;
+
+    schoolPicture?: string;
 
     description: string;
 
@@ -28,4 +36,6 @@ export class LessonModel {
     date?: Date;
 
     duration?: string;
+
+    questionCount?: number;
 }

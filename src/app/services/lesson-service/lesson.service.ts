@@ -42,7 +42,6 @@ export class LessonService {
   }
 
   public getAll(query: PaginationQuery, param: LessonQuery): Observable<PageResponse<LessonModel>> {
-
     try {
       return this.http.get<PageResponse<LessonModel>>(Routes.LESSON_GET_ALL_ROUTE, {
         params: {

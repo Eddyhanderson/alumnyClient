@@ -11,6 +11,8 @@ import { PageResponse } from 'src/app/models/page-response/page-response';
 import { AccountService } from '../account-service/account.service';
 import { PaginationQuery } from 'src/app/queries/pagination-query/pagination-query';
 import { StudantQuery } from 'src/app/queries/studant-query/studant.query';
+import { StudantRegistration } from 'src/app/models/studant-registration/studant-registration';
+import { AuthResult } from 'src/app/models/auth-result/auth-result';
 
 
 @Injectable(
@@ -18,31 +20,21 @@ import { StudantQuery } from 'src/app/queries/studant-query/studant.query';
 )
 export class StudantService {
 
-    constructor(private http: HttpClient, private as: AccountService) { }
-
-    private teacherLoged = new BehaviorSubject<TeacherModel>(null);
+    constructor(private http: HttpClient, private accs: AccountService) { }
 
     /**
-     * Registration of teacher
-     * @param studant the teacher who will be persisted
-     */
-    public async create(studant: StudantModel): Promise<CreationResult<StudantModel>> {
+   * To register the new user
+   * @param newStudant the studant that we are trying to register
+   */
+    public async registration(newStudant: StudantRegistration): Promise<CreationResult<StudantModel>> {
+        if (newStudant == null) return null;
 
         try {
-
-            let creationResult = await this.http.post<CreationResult<StudantModel>>(Routes.STUDANT_CREATE_ROUTE, studant)
-                .toPromise();
-
-            if (creationResult.succeded) {
-                this.persistStudantData(creationResult.data);
-                return creationResult;
-            }
+            let cretResult = await this.http.post<CreationResult<StudantModel>>(Routes.STUDANT_REGISTER_ROUTE, newStudant).toPromise();
+            return cretResult;
         } catch (error) {
-            console.log(error.message)
+            console.log(error.message);
         }
-
-
-        return null;
     }
 
     /**
@@ -92,7 +84,7 @@ export class StudantService {
         if (localStorage['studant'] !== undefined) return true;
 
         try {
-            let studant = await this.as.getStudant(userId);
+            let studant = await this.accs.getStudant(userId);
 
             if (studant) {
                 this.persistStudantData(studant);

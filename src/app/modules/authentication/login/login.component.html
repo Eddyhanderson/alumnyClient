@@ -70,25 +70,9 @@
         <!-- Registrate -->
         <mat-divider class="w-100 my-2"></mat-divider>
         <div class="w-100 d-flex justify-content-center">
-            <button mat-button color="accent" [matMenuTriggerFor]="registerType">
+            <button mat-button color="accent" (click)="gotoRegistrationStudant()">
                 Registar
             </button>
-            <mat-menu #registerType="matMenu">
-                <button mat-menu-item (click)="gotoRegistrationStudant()">
-                    <mat-icon>face</mat-icon>
-                    Como estudante
-                </button>
-
-                <button mat-menu-item (click)="gotoRegistrationTeacher()">
-                    <mat-icon>support_agent</mat-icon>
-                    Como professor
-                </button>
-
-                <button mat-menu-item (click)="gotoRegistrationSchool()">
-                    <mat-icon>school</mat-icon>
-                    A minha escola
-                </button>
-            </mat-menu>
         </div>
         <!-- End -->
     </div>

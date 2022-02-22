@@ -12,6 +12,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { TeacherModel } from 'src/app/models/teacher-model/teacher-model';
 import { StudantModel } from 'src/app/models/studant-model/studant.model';
+import { StudantRegistration } from 'src/app/models/studant-registration/studant-registration';
 
 export interface LoginRequest {
   email: string;
@@ -31,31 +32,7 @@ export class AccountService {
   constructor(private http: HttpClient, private router: Router) { }
   private loginReq: LoginRequest;
 
-  private loginStatus = new BehaviorSubject<boolean>(this.checkLogStatus());
-
-  /**
-   * To register the new user
-   * @param newUser the user that we are trying register
-   */
-  public async registration(newUser: UserModel): Promise<AuthResult> {
-    if (newUser == null) return null;
-
-    try {
-      let authResult = await this.http.post<AuthResult>(Routes.USER_REGISTER_ROUTE, newUser).toPromise();
-
-      if (authResult?.authenticated) {
-        this.persistAuthData(authResult);
-        this.persistUserData(authResult.user);
-        this.loginStatus.next(true);
-      }
-
-
-
-      return authResult;
-    } catch (error) {
-      console.log(error.message);
-    }
-  }
+  public loginStatus = new BehaviorSubject<boolean>(this.checkLogStatus());
 
   /**
    * 
@@ -111,7 +88,7 @@ export class AccountService {
   /**
    * To check if the user are log in
    */
-  private checkLogStatus(): boolean {
+  public checkLogStatus(): boolean {
     if (localStorage.getItem('logStatus') === "1")
       return true;
     return false;
@@ -120,7 +97,7 @@ export class AccountService {
   /**
    * Set the user who are loged in
    */
-  private persistUserData(user: UserModel): boolean {
+  public persistUserData(user: UserModel): boolean {
     if (localStorage['logStatus'] === "1") {
       localStorage.user = JSON.stringify(user);
       return true;
@@ -132,7 +109,7 @@ export class AccountService {
    * Set the values on local storage when user is log in
    * @param result the authentication configuration response to the request
    */
-  private persistAuthData(authResult: AuthResult) {
+  public persistAuthData(authResult: AuthResult) {
     localStorage.setItem('token', authResult.authConfigTokens.tokenValue);
     localStorage.setItem('refreshToken', authResult.authConfigTokens.refreshToken);
     localStorage.setItem('userId', authResult.user.id);
@@ -143,7 +120,7 @@ export class AccountService {
   /**
    * Remove the values on local storage when user is log out 
    */
-  private removeAuthDataPersisted() {
+  public removeAuthDataPersisted() {
     localStorage.clear()
   }
 

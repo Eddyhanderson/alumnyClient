@@ -33,7 +33,7 @@
     </div>
     <div class="irrelevant-text">
         {{role.toUpperCase() == 'STUDANT' ? user.firstName +' '+ user.lastName : school.name}}
-        
+
     </div>
 </div>
 
@@ -78,17 +78,7 @@
             <mat-icon [style.fontSize.rem]="1.6"> home</mat-icon> <span class="ml-4">Inicío</span>
         </a>
     </li>
-    <!-- End -->
-
-     <!-- Control painel nav item -->
-     <li class="nav-item" *ngIf="role.toUpperCase() == 'SCHOOL'">
-        <a class="d-flex pl-4" routerLink="/school/control-painel" routerLinkActive="nav-active"
-            [routerLinkActiveOptions]="{exact:true}">
-            <mat-icon [style.fontSize.rem]="1.6"> dashboard</mat-icon> <span class="ml-4">Painel de
-                controlo</span>
-        </a>
-    </li>
-    <!-- End -->
+    <!-- End -->    
 
     <!-- Schools nav item -->
     <li class="nav-item" *ngIf="role.toUpperCase() == 'SCHOOL'">
@@ -98,7 +88,15 @@
     </li>
     <!-- End -->
 
-    
+    <!-- Lessons nav item -->
+    <li class="nav-item" *ngIf="role.toUpperCase() == 'SCHOOL'">
+        <a class="d-flex pl-4" [routerLink]='["/lesson/managment"]' routerLinkActive="nav-active">
+            <mat-icon [style.fontSize.rem]="1.6"> featured_play_list</mat-icon> <span class="ml-4">Aulas</span>
+        </a>
+    </li>
+    <!-- End -->
+
+
 
     <!-- School place nav item -->
     <li class="nav-item" *ngIf="role.toUpperCase() == 'STUDANT'">
@@ -109,14 +107,6 @@
     </li>
     <!-- End -->
 
-    <!-- Question nav item -->
-    <li class="nav-item" *ngIf="role.toUpperCase() == 'SCHOOL'">
-        <a class="pl-4 d-flex" routerLink="/schoolPlaces" routerLinkActive="nav-active"
-            [routerLinkActiveOptions]="{exact:true}">
-            <mat-icon [style.fontSize.rem]="1.5">help_center</mat-icon><span class="ml-4">Questões</span>
-        </a>
-    </li>
-    <!-- End -->
 
 
     <li class="d-flex flex-column" *ngIf="role.toUpperCase() == 'STUDANT'" style="height: auto;">
@@ -126,7 +116,7 @@
         </button>
 
         <ul class="w-100 p-0 d-flex flex-column box-collapsable" [class.box-collapsable-opened]="questionOpened">
-            <li class="nav-item d-flex flex-column w-100" >
+            <li class="nav-item d-flex flex-column w-100">
                 <a class="d-flex w-100" routerLink="/studant/questions/exposed" routerLinkActive="nav-active"
                     [routerLinkActiveOptions]="{exact:true}" style="padding-left: 1.8rem;">
                     <mat-icon [style.fontSize.rem]="1.5">face</mat-icon><span class="ml-4">Expostas</span>

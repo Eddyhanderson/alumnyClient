@@ -1,6 +1,5 @@
 export interface LessonQuery {
-    teacherPlaceId?: string,
-    schoolId?:string,
-    topicId?:string,
-    teacherId?:string
+    moduleId?: string;
+    formationId?: string;
+    schoolId?: string;
 }

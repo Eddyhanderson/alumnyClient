@@ -34,8 +34,10 @@
                             <div class="d-flex flex-column p-3">
                                 <div
                                     class="relevant-text-normal bold-500 text-ellips mb-2 d-flex justify-content-between align-items-center">
-                                    <a [rounterLink]="[lessons, module.id]" class="primaryLink">
-                                        Módulo 1 - {{module.name}}
+                                    <a routerLink="/lesson/managment"
+                                        [queryParams]="{formationId:module.formationId, moduleId:module.id}"
+                                        class="primaryLink">
+                                        Módulo {{module.sequence}} - {{module.name}}
                                     </a>
                                     <div class="text-disabled-1">
                                         <button mat-button mat-icon-button>

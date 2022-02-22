@@ -93,7 +93,7 @@ export class LessonWacthAboutComponent implements OnInit {
   }
 
   private async getTeacher() {
-    this.teacher = await this.tss.get(this.lesson.teacherId);
+    /*this.teacher = await this.tss.get(this.lesson.teacherId);*/
   }
 
   private async getTopicComments() {

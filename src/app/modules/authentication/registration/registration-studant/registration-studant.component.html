@@ -30,13 +30,13 @@
             <mat-step [stepControl]="basicInfo" state="basicInfo">
                 <div class="w-100 d-flex justify-content-center">
                     <span class="relevant-text-title mb-2">
-                        Comecemos por nos apresentarmos
+                        Dados básicos
                     </span>
                 </div>
                 <form class="w-100" [formGroup]="basicInfo">
                     <div class="d-flex flex-column mb-2">
                         <div class="irrelevant-text">
-                            Como te chamas ?
+                            Insira o seu nome
                         </div>
 
                         <div class="d-flex">
@@ -73,7 +73,7 @@
 
                     <div class="d-flex flex-column mb-2">
                         <div class="irrelevant-text">
-                            Como podemos nos comunicar contigo ?
+                            Insira o seu número de telefone
                         </div>
 
                         <div class="d-flex">
@@ -105,7 +105,7 @@
 
                     <div class="d-flex flex-column mb-2">
                         <div class="irrelevant-text">
-                            Quando foi que nasceste ?
+                            Insira a data de nascimento
                         </div>
 
                         <div class="d-flex">
@@ -120,7 +120,7 @@
 
                     <div class="d-flex flex-column mb-4">
                         <div class="irrelevant-text mb-2">
-                            Qual é o teu gênero ?
+                            Escolha o seu gênero
                         </div>
 
                         <div class="d-flex">
@@ -152,81 +152,61 @@
             <!-- End -->
 
             <!-- academicInfo information -->
-            <mat-step [stepControl]="academicInfo" state="academicInfo">
+            <mat-step [stepControl]="profInfo" state="profInfo">
                 <div class="w-100 d-flex justify-content-center">
                     <span class="relevant-text-title mb-2">
-                        E sobre a tua vida acadêmica
+                        Dados profissionais
                     </span>
                 </div>
-                <form class="w-100" [formGroup]="academicInfo">
+                <form class="w-100" [formGroup]="profInfo">
                     <div class="irrelevant-text">
-                        Qual é o teu grau académico ?
+                        Insira o seu mecanográfico
                     </div>
                     <div class="d-flex flex-column mb-2">
+                        <mat-form-field class="w-100">
+                            <input type="text" matInput [formControl]="mec" color="primary">
+                            <mat-error *ngIf="mec.touched && birth.errors && mec.hasError('required')">
+                                Precisa inserir o seu mecanográfico
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="d-flex flex-column mb-2">
+                        <div class="irrelevant-text">
+                            Escolha o órgão a que pertence
+                        </div>
                         <mat-form-field class="w-100 mr-2">
                             <mat-label>
-                                Eu sou
+                                Órgão
                             </mat-label>
-                            <mat-select name="schoolDegree" formControlName="academicLevel">
-                                <mat-option value="7"> Doutor </mat-option>
-                                <mat-option value="6"> Mestre </mat-option>
-                                <mat-option value="5"> Licenciado </mat-option>
-                                <mat-option value="4"> Estudante do ensino superior </mat-option>
-                                <mat-option value="3"> Estudante do ensino médio </mat-option>
-                                <mat-option value="2"> Estudante do ensino de base </mat-option>
-                                <mat-option value="1"> Estudante independente </mat-option>
+                            <mat-select [formControl]="organ">
+                                <ng-container *ngFor="let organ of organs$ | async as organs">
+                                    <mat-option [value]="organ.id">{{organ.name}}</mat-option>
+                                </ng-container>
                             </mat-select>
+                            <mat-error *ngIf="organ.touched && organ.errors && organ.hasError('required')">
+                                Insira o nome órgão
+                            </mat-error>
                         </mat-form-field>
                     </div>
 
-                    <div class="d-flex flex-column mb-2" *ngIf="academicLevel.value != 1">
-                        <div class="irrelevant-text">
-                            Qual é a instituição ?
-                        </div>
-                        <mat-form-field class="w-100 mr-2">
-                            <mat-label>
-                                Escola
-                            </mat-label>
-                            <input type="text" matInput formControlName="academyName" [matAutocomplete]="auto">
-                            <mat-error
-                                *ngIf="academyName.touched && academyName.errors && academyName.hasError('required')">
-                                Precisa inserir o nome da escola
-                            </mat-error>
-                            <mat-error
-                                *ngIf="academyName.touched && academyName.errors && academyName.hasError('pattern')">
-                                Formato do nome inválido
-                            </mat-error>
-                        </mat-form-field>
-                        <mat-autocomplete #auto="matAutocomplete">
-                            <mat-option *ngFor="let academy of academies$ | async" [value]="academy.name">
-                                {{academy.name}}
-                            </mat-option>
-                        </mat-autocomplete>
+                    <div class="irrelevant-text">
+                        Ocupa algum cargo de coordenação da área ?
                     </div>
-
                     <div class="d-flex flex-column mb-2">
-                        <div class="irrelevant-text">
-                            Qual é o curso ?
-                        </div>
-                        <mat-form-field class="w-100 mr-2">
-                            <mat-label>
-                                Curso
-                            </mat-label>
-                            <input type="text" matInput formControlName="courseName" [matAutocomplete]="auto">
+                        <mat-radio-group [formControl]="responsable">
+                            <mat-radio-button value="1" class="mr-2">
+                                Sim
+                            </mat-radio-button>
+
+                            <mat-radio-button value='0'>
+                                Não
+                            </mat-radio-button>
                             <mat-error
-                                *ngIf="courseName.touched && courseName.errors && courseName.hasError('required')">
-                                Insira o nome do curso
+                                *ngIf="responsable.touched && responsable.errors && responsable.hasError('required')">
+                                Precisa escolher uma opção
                             </mat-error>
-                            <mat-error
-                                *ngIf="courseName.touched && courseName.errors && courseName.hasError('pattern')">
-                                Formato do nome inválido
-                            </mat-error>
-                        </mat-form-field>
-                        <mat-autocomplete #auto="matAutocomplete">
-                            <mat-option *ngFor="let course of courses$ | async" [value]="course.name">
-                                {{course.name}}
-                            </mat-option>
-                        </mat-autocomplete>
+                        </mat-radio-group>
                     </div>
 
                     <div class="w-100 d-flex flex-column justify-content-center align-items-center">
@@ -245,7 +225,7 @@
             <mat-step [stepControl]="securityInfo" state="securityInfo">
                 <div class="w-100 d-flex justify-content-center">
                     <span class="relevant-text-title mb-2">
-                        Agora, falemos de segurança...
+                        Dados de Segurança
                     </span>
                 </div>
                 <form class="w-100" [formGroup]="securityInfo">
@@ -315,10 +295,11 @@
                         magni dolores eos qui ratione voluptatem sequi nesciunt.
                     </div>
                     <div class="w-100 d-flex flex-column justify-content-center align-items-center">
-                        <button mat-button matStepperNext
+                        <button mat-flat-button
                             class="button-bg-accent-1 w-100 mb-2 d-flex justify-content-center align-items-center"
-                            (click)="submit($event.target)">
-                            Registar
+                            style="height: 2rem;" [disabled]="inProgress" (click)="submit($event.target)">
+                            <mat-spinner color="primary" diameter=20 *ngIf="inProgress"></mat-spinner>
+                            <span *ngIf="!inProgress">Registar</span>
                         </button>
                     </div>
                 </div>

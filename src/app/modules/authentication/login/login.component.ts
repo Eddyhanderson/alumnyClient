@@ -30,15 +30,7 @@ export class LoginComponent implements OnInit {
 
   gotoRegistrationStudant() {
     this.router.navigate(['auth/registration/studant']);
-  }
-
-  gotoRegistrationTeacher() {
-    this.router.navigate(['auth/registration/teacher']);
-  }
-
-  gotoRegistrationSchool() {
-    this.router.navigate(['auth/registration/school']);
-  }
+  } 
 
   public async onSubmit() {
     this.inProgress = true;

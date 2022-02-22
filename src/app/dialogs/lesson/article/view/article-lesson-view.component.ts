@@ -34,24 +34,12 @@ export class ArticleLessonViewComponent implements OnInit {
   public async ngOnInit() {
     if (this.lesson == null) throw Error("Lesson is required");
     await this.getArticle();
-    await this.getPost();
-    await this.getUser();
   }
 
   private async getArticle() {
     if (this.lesson?.articleId != null) {
-      this.article = await this.as.get(this.lesson.articleId);
+      this.article = await this.as.get(this.lesson.articleId);      
     }
   }
 
-  private async getPost() {
-    if (this.lesson?.postId != null) {
-      this.post = await this.ps.get(this.lesson.postId);
-    }
-  }
-
-
-  private async getUser() {
-    this.user = await this.us.get(this.post.userId);
-  }
 }

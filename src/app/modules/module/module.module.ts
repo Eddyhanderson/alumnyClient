@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { ModuleRoutingModule } from './module-routing.module';
 import { ModuleListComponent } from './module-list/module-list.component';
 import { MaterialModule } from '../material/material.module';
+import { LessonModule } from '../lesson/lesson.module';
 
 
 @NgModule({
@@ -12,7 +13,8 @@ import { MaterialModule } from '../material/material.module';
   imports: [
     CommonModule,
     ModuleRoutingModule,
-    MaterialModule
+    MaterialModule,
+    LessonModule
   ]
 })
 export class ModuleModule { }

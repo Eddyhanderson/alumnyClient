@@ -245,7 +245,7 @@ export class RegistrationSchoolComponent implements OnInit {
   private userRegister(user: UserModel): Promise<any> {
     if (user == null) return null;
 
-    return this.accountService.registration(user);
+    /*return this.accountService.registration(user);*/
   }
 
 }

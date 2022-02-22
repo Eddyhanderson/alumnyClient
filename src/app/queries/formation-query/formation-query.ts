@@ -1,3 +1,6 @@
 export class FormationQuery {
-    public schoolId?:string;
+    constructor(schoolId: string) {
+        this.schoolId = schoolId;
+    }
+    public schoolId?: string;
 }

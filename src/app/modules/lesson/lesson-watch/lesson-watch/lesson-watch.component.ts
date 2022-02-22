@@ -83,7 +83,7 @@ export class LessonWatchComponent implements OnInit {
 
 
     let lessonQuery: LessonQuery = {
-      topicId: this.topic.id
+     /* topicId: this.topic.id*/
     }
 
     this.lessons$ = new PaginationAdapter((query, param) => this.ls.getAll(query, param), lessonQuery);

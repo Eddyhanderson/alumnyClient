@@ -18,7 +18,7 @@ import { DisciplineTopicModel } from 'src/app/models/discipline-topic-model/disc
 import { LessonModel } from 'src/app/models/lesson-model/lesson.model';
 import { map, startWith } from 'rxjs/operators';
 import { DisciplineTopicService } from 'src/app/services/discipline-topic-service/discipline-topic.service';
-import { Constants, PostTypes } from 'src/app/shared/utils/constants';
+import { Constants, LessonTypes } from 'src/app/shared/utils/constants';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -120,8 +120,9 @@ export class VideoLessonCreationComponent implements OnInit {
         description: this.detailFg.value.description,
         title: this.detailFg.value.title,
         videoId: this.video.id,
-        lessonType: PostTypes.Video,
-        moduleId: this.data.moduleId
+        lessonType: LessonTypes.Video,
+        moduleId: this.data.moduleId,
+        manifestPath: this.manifest        
       }
 
       console.dir(lesson);

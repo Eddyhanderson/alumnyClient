@@ -21,7 +21,7 @@ import { DisciplineTopicService } from 'src/app/services/discipline-topic-servic
 import { ImageService } from 'src/app/services/image-service/image.service';
 import { LessonService } from 'src/app/services/lesson-service/lesson.service';
 import { TeacherPlaceService } from 'src/app/services/teacher-place-service/teacher-place.service';
-import { Constants, DocumentLeave, PostTypes } from 'src/app/shared/utils/constants';
+import { Constants, DocumentLeave, LessonTypes } from 'src/app/shared/utils/constants';
 
 @Component({
   selector: 'app-article-lesson-creation',
@@ -101,7 +101,7 @@ export class ArticleLessonCreationComponent implements OnInit {
         title: this.detailFg.value.title,
         articleId: this.article.id,
         moduleId: this.data.moduleId,
-        lessonType: PostTypes.Article
+        lessonType: LessonTypes.Article
       }
 
       console.dir(lesson);

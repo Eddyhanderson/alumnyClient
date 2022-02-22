@@ -49,7 +49,7 @@ export class Constants {
     static FAIL_OPERATION_MESSAGE = "Algo correu mal. Por favor, tente novamente mais tarde";
 }
 
-export enum PostTypes {
+export enum LessonTypes {
     Video = "Video",
     Article = "Article"
 }

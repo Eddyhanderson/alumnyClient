@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from '../../shared/shared.module';
-import {LessonWatchComponent } from './lesson-watch/lesson-watch/lesson-watch.component';
+import { LessonWatchComponent } from './lesson-watch/lesson-watch/lesson-watch.component';
 import { LessonRoutingModule } from './lesson-routing.module';
 import { LessonsComponent } from './lessons/lessons.component';
 import { MaterialModule } from '../material/material.module';
@@ -21,8 +21,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     LessonWatchQuestionsComponent,
     LessonManagmentComponent,
     LessonWatchCreateQuestionComponent,
-    ArticleViewComponent    
+    ArticleViewComponent
   ],
+  exports: [LessonManagmentComponent],
   imports: [
     CommonModule,
     MaterialModule,

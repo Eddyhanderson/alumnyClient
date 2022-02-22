@@ -97,7 +97,7 @@ export class TeacherPlaceReviewComponent implements OnInit {
 
   private async getAllLessons() {
     if (this.selectedTopic) {
-      let query: LessonQuery = { topicId: this.selectedTopic.id };
+      let query: LessonQuery = { /*topicId: this.selectedTopic.id */};
       let pagination = new PaginationQuery(1, -1);
 
       let response = await this.ls.getAll(pagination, query).toPromise();
