@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
+import { CreateFormationEventComponent } from 'src/app/dialogs/formation-event/create-formation-event/create-formation-event.component';
 import { ArticleLessonCreationComponent } from 'src/app/dialogs/lesson/article/create/article-lesson-creation.component';
 import { VideoLessonCreationComponent } from 'src/app/dialogs/lesson/video/create/video-lesson-creation.component';
 import { CreateModulesDialogComponent } from 'src/app/dialogs/modules/create-modules-dialog/create-modules-dialog.component';
@@ -17,7 +18,7 @@ import { Routes } from 'src/app/shared/utils/routing-constants';
   templateUrl: './module-list.component.html',
   styleUrls: ['./module-list.component.scss']
 })
-export class ModuleListComponent implements OnInit {
+export class ModuleListComponent implements AfterViewInit {
 
   // Models
   formationId: string;
@@ -29,7 +30,7 @@ export class ModuleListComponent implements OnInit {
     private ms: ModuleService,
     private fs: FormationService) { }
 
-  ngOnInit(): void {
+    ngAfterViewInit(): void {
     this.getFormation();
     this.initDataSource();
   }
@@ -60,6 +61,10 @@ export class ModuleListComponent implements OnInit {
   // Events
   public onCreateModules() {
     this.matDialog.open(CreateModulesDialogComponent);
+  }
+
+  public onPublishFormation() {
+    this.matDialog.open(CreateFormationEventComponent, { data: this.formationId });
   }
 
   public onCreateArticle(moduleId: string) {

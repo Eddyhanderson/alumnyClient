@@ -15,9 +15,10 @@ import { ArticleLessonViewComponent } from './lesson/article/view/article-lesson
 import { VideoLessonViewComponent } from './lesson/video/view/video-lesson-view.component';
 import { StudantRegistrationComponent } from './teacher-place-studants/studant-registration/studant-registration.component';
 import { CreateOrganDialogComponent } from './organ/create-organ/create-organ.component';
-import { CreateFormationDialogComponent } from './school/formation/create-formation-dialog/create-formation-dialog.component';
+import { CreateFormationDialogComponent } from './formation/create-formation-dialog/create-formation-dialog.component';
 import { CreateSchoolDialogComponent } from './school/create-school-dialog/create-school-dialog.component';
 import { CreateModulesDialogComponent } from './modules/create-modules-dialog/create-modules-dialog.component';
+import { CreateFormationEventComponent } from './formation-event/create-formation-event/create-formation-event.component';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import { CreateModulesDialogComponent } from './modules/create-modules-dialog/cr
     CreateSchoolDialogComponent,
     CreateFormationDialogComponent,
     CreateModulesDialogComponent,
-    CreateModulesDialogComponent
+    CreateModulesDialogComponent,
+    CreateFormationEventComponent
   ],
   imports: [
     CommonModule,
@@ -56,7 +58,8 @@ import { CreateModulesDialogComponent } from './modules/create-modules-dialog/cr
     CreateOrganDialogComponent,
     CreateSchoolDialogComponent,
     CreateFormationDialogComponent,
-    CreateModulesDialogComponent
+    CreateModulesDialogComponent,
+    CreateFormationEventComponent
   ],
 
   providers: [

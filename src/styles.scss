@@ -136,6 +136,20 @@ button:focus {
 }
 
 /* Material design customization */
+table {
+    width: 100%;
+}
+
+.mat-header-cell {
+    flex-direction: column;
+    justify-content: center;
+}
+
+.mat-cell {
+    text-align: center;
+    justify-content: center;
+}
+
 .mat-tab-group {
     width: 100% !important;
 }
@@ -363,10 +377,10 @@ img {
 }
 
 .description-techer-place {
-        font-size: 0.8rem;
+    font-size: 0.8rem;
 }
 
-.close-view button{
+.close-view button {
     position: fixed !important;
     left: 80%;
     z-index: 1000;
@@ -375,8 +389,6 @@ img {
 /* End */
 
 /* Utils */
-
-
 
 .mat-chip-dark {
     background-color: #bdbdbd !important;
@@ -402,7 +414,7 @@ img {
 
 /* Layouts */
 
-.h-0{
+.h-0 {
     height: 0 !important;
 }
 .place-items-start {
@@ -509,7 +521,7 @@ img {
     font-weight: 500 !important;
 }
 
-.bold-normal{
+.bold-normal {
     font-weight: normal;
 }
 

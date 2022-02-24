@@ -62,6 +62,9 @@ export class Routes {
     static FORMATION_GET_ROUTE = Routes.BASE_URL + "formation/get/{id}";
     static FORMATION_GET_ALL_ROUTE = Routes.BASE_URL + "formation/getAll";
 
+    // Formation event routes
+    static FORMATION_EVENT_CREATE_ROUTE = Routes.BASE_URL + "formationEvent/create";
+
     // Teacher routes
     static TEACHER_CREATE_ROUTE = Routes.BASE_URL + "teacher/create";
     static TEACHER_GET_ROUTE = Routes.BASE_URL + "teacher/get/{id}";

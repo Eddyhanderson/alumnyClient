@@ -10,7 +10,7 @@ import { LoadingPageComponent } from './components/loading-page/loading-page.com
 import { LoadingItemComponent } from './components/loading-item/loading-item.component';
 import { LoadingDeterminateComponent } from './components/loading-determinate/loading-determinate.component';
 import { TextEditorComponent } from './components/text-editor/text-editor.component';
-import { ElapsedTimePipe } from './pipes/elapsed-time';
+import { ElapsedTimePipe } from './pipes/elapsed-time-pipe/elapsed-time';
 import { BottomSheetComponent } from './components/bottom-sheet/bottom-sheet.component';
 import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 import { TextVisualizerComponent } from './components/text-visualizer/text-visualizer.component';
@@ -21,6 +21,7 @@ import { TopicPickerComponent } from './components/topic-picker/topic-picker.com
 import { LessonDetailFormComponent } from './components/lesson-detail-form/lesson-detail-form.component';
 import { LessonTypePipe } from './pipes/lesson-type-pipe/lesson-type.pipe';
 import { ImgUrlPipe } from './pipes/img-url-pipe/img-url.pipe';
+import { PublishedInfoPipePipe } from './pipes/published-info-pipe/published-info-pipe.pipe';
 
 
 @NgModule({
@@ -41,7 +42,8 @@ import { ImgUrlPipe } from './pipes/img-url-pipe/img-url.pipe';
     TopicPickerComponent,
     LessonDetailFormComponent,
     LessonTypePipe,
-    ImgUrlPipe],
+    ImgUrlPipe,
+    PublishedInfoPipePipe],
   exports: [
     TextEditorComponent,
     VideoComponent,
@@ -59,7 +61,8 @@ import { ImgUrlPipe } from './pipes/img-url-pipe/img-url.pipe';
     TopicPickerComponent,
     LessonDetailFormComponent,
     LessonTypePipe,
-    ImgUrlPipe],
+    ImgUrlPipe,
+    PublishedInfoPipePipe],
   imports: [
     CommonModule,
     MaterialModule,

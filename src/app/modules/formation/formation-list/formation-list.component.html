@@ -24,7 +24,7 @@
 				<ng-container matColumnDef="name">
 					<mat-header-cell *matHeaderCellDef>Nome</mat-header-cell>
 					<mat-cell *matCellDef="let element">
-						<a [routerLink]="['./modules', element.id]" class="primaryLink">
+						<a [routerLink]="['./modules', element.id]" class="discretLink">
 							{{element.theme}}
 						</a>
 					</mat-cell>
@@ -32,12 +32,15 @@
 
 				<ng-container matColumnDef="initial_date">
 					<mat-header-cell *matHeaderCellDef> Data de inicio </mat-header-cell>
-					<mat-cell *matCellDef="let element"> N/A </mat-cell>
+					<mat-cell *matCellDef="let element"> {{ element.published ? (getFormationEvent(element).start |
+						date:'yyyy/MM/dd') : 'N/A'}}
+					</mat-cell>
 				</ng-container>
 
 				<ng-container matColumnDef="final_date">
 					<mat-header-cell *matHeaderCellDef> Data final </mat-header-cell>
-					<mat-cell *matCellDef="let element">N/A</mat-cell>
+					<mat-cell *matCellDef="let element">{{element.published ? (getFormationEvent(element).end | date:'yyyy/MM/dd')
+						: 'N/A'}}</mat-cell>
 				</ng-container>
 
 				<ng-container matColumnDef="price">
@@ -50,14 +53,57 @@
 					<mat-cell *matCellDef="let element">N/A</mat-cell>
 				</ng-container>
 
-				<ng-container matColumnDef="category">
-					<mat-header-cell *matHeaderCellDef> Categoria </mat-header-cell>
-					<mat-cell *matCellDef="let element">{{element.category}}</mat-cell>
-				</ng-container>
-
 				<ng-container matColumnDef="status">
 					<mat-header-cell *matHeaderCellDef> Estado </mat-header-cell>
-					<mat-cell *matCellDef="let element">{{element.situation}}</mat-cell>
+					<mat-cell *matCellDef="let element">
+						<mat-chip-list *ngIf="!element.published">
+							<mat-chip removable="false">
+								Não publicada
+							</mat-chip>
+						</mat-chip-list>
+
+						<mat-chip-list *ngIf="element.published && getFormationEvent(element).state == started" >
+							<mat-chip removable="false" color="warn">
+								{{getFormationEvent(element).state | statePublished}}
+							</mat-chip>
+						</mat-chip-list>
+
+						<mat-chip-list *ngIf="element.published && getFormationEvent(element).state == waiting" >
+							<mat-chip removable="false" color="accent">
+								{{getFormationEvent(element).state | statePublished}}
+							</mat-chip>
+						</mat-chip-list>
+
+														
+						
+					</mat-cell>
+				</ng-container>
+
+				<!-- Date Column -->
+				<ng-container matColumnDef="action">
+					<th mat-header-cell *matHeaderCellDef>
+
+					</th>
+					<td mat-cell *matCellDef="let element">
+						<div class="text-disabled-1">
+							<button mat-button mat-icon-button [matMenuTriggerFor]="actions">
+								<mat-icon>
+									more_horiz
+								</mat-icon>
+							</button>
+						</div>
+
+						<mat-menu #actions="matMenu">
+							<button mat-menu-item>
+								<mat-icon>launch</mat-icon>
+								<span>Publicar</span>
+							</button>
+							<button mat-menu-item>
+								<mat-icon>delete</mat-icon>
+								<span>Apagar</span>
+							</button>
+						</mat-menu>
+					</td>
 				</ng-container>
 
 				<mat-header-row *matHeaderRowDef="displayedColumns">

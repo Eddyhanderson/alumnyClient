@@ -80,75 +80,72 @@
 			</div>
 			<!-- End Modules filter -->
 
-			<table mat-table [dataSource]="data">
+			<mat-table [dataSource]="data">
 				
 				<!-- Sequence Lessons -->
 				<ng-container matColumnDef="sequence">
-					<th mat-header-cell *matHeaderCellDef> Sequência </th>
-					<td mat-cell *matCellDef="let element"> {{element.sequence}} </td>
+					<mat-header-cell *matHeaderCellDef> Sequência </mat-header-cell>
+					<mat-cell *matCellDef="let element"> {{element.sequence}} </mat-cell>
 				</ng-container>
 				
 				<!-- Position Column -->
 				<ng-container matColumnDef="lesson">
-					<th mat-header-cell *matHeaderCellDef>						
+					<mat-header-cell *matHeaderCellDef>						
 						<span class="ml-2">
 							Aula
 						</span>
-					</th>
-					<td mat-cell *matCellDef="let element">
-						<div class="d-flex justify-content-start align-items-center">							
-							<div class="img-profile-thumbnail-md">
-								<img [src]="buildImageUrl(element.picture)">
-							</div>
+					</mat-header-cell>
+					<mat-cell *matCellDef="let element">
+						<div class="d-flex justify-content-start align-items-center">														
 							<span>		
 								<button  class="discretButton" (click)="openLessonView(element)">
 									{{element.title}}							
 								</button>						
 							</span>
 						</div>
-					</td>
+					</mat-cell>
 				</ng-container>
 
 
 				<!-- Formation Column -->
 				<ng-container matColumnDef="formation">
-					<th mat-header-cell *matHeaderCellDef> Formação </th>
-					<td mat-cell *matCellDef="let element"> {{element.formationTheme}} </td>
+					<mat-header-cell *matHeaderCellDef> Formação </mat-header-cell>
+					<mat-cell *matCellDef="let element"> {{element.formationTheme}} </mat-cell>
 				</ng-container>
 
 				<!-- Teacher Place Column -->
 				<ng-container matColumnDef="module">
-					<th mat-header-cell *matHeaderCellDef> Módulo </th>
-					<td mat-cell *matCellDef="let element"> {{element.moduleName}} </td>
+					<mat-header-cell *matHeaderCellDef> Módulo </mat-header-cell>
+					<mat-cell *matCellDef="let element"> {{element.moduleName}} </mat-cell>
 				</ng-container>
 
 				<!-- Type Column -->
 				<ng-container matColumnDef="type">
-					<th mat-header-cell *matHeaderCellDef> Tipo </th>
-					<td mat-cell *matCellDef="let element"> {{element.lessonType | lessonType}}</td>
+					<mat-header-cell *matHeaderCellDef> Tipo </mat-header-cell>
+					<mat-cell *matCellDef="let element"> {{element.lessonType | lessonType}}</mat-cell>
 				</ng-container>
 
 				<!-- Questions count Column -->				
 				<ng-container matColumnDef="questions">
-					<th mat-header-cell *matHeaderCellDef> Questões </th>
-					<td mat-cell *matCellDef="let element"> {{element.questionCount}} </td>
+					<mat-header-cell *matHeaderCellDef> Questões </mat-header-cell>
+					<mat-cell *matCellDef="let element"> {{element.questionCount}} </mat-cell>
 				</ng-container>
 				
 				<!-- Date Column -->
 				<ng-container matColumnDef="date">
-					<th mat-header-cell *matHeaderCellDef>
+					<mat-header-cell *matHeaderCellDef>
 						Data
-					</th>
-					<td mat-cell *matCellDef="let element">
+					</mat-header-cell>
+					<mat-cell *matCellDef="let element">
 						{{element.date | date:'yyyy/MM/dd'}}
-					</td>
+					</mat-cell>
 				</ng-container>
-				<!-- Date Column -->
+				<!-- Action Column -->
 				<ng-container matColumnDef="action">
-					<th mat-header-cell *matHeaderCellDef>
+					<mat-header-cell *matHeaderCellDef>
 						
-					</th>
-					<td mat-cell *matCellDef="let element">
+					</mat-header-cell>
+					<mat-cell *matCellDef="let element">
 						<div class="text-disabled-1">
 							<button mat-button mat-icon-button [matMenuTriggerFor]="actions">
 								<mat-icon>
@@ -167,13 +164,13 @@
 								<span>Apagar</span>
 							</button>
 						</mat-menu>
-					</td>
+					</mat-cell>
 				</ng-container>
 
-				<tr mat-header-row *matHeaderRowDef="displayedColumns">
-				</tr>
-				<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-			</table>
+				<mat-header-row *matHeaderRowDef="displayedColumns">
+				</mat-header-row>
+				<mat-header-row  *matRowDef="let row; columns: displayedColumns;"></mat-header-row>
+			</mat-table>
 
 			<mat-paginator *ngIf="data.dataSource$ | async as page" [length]="page.totalElements"
 				[pageSize]="page.data.length" [pageIndex]="page.pageNumber - 1" [hidePageSize]="true"

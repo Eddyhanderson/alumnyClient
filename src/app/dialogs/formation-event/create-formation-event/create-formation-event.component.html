@@ -1,0 +1,50 @@
+<div class="d-flex justify-content-between">
+    <h2 mat-dialog-title>
+        Publicar Formação
+    </h2>
+    <button mat-icon-button>
+        <mat-icon mat-dialog-close>
+            close
+        </mat-icon>
+    </button>
+</div>
+<mat-dialog-content class="w-100 justify-content-center align-items-center d-flex m-0">
+    <form [formGroup]="formGroup" class="w-100 h-100 mt-4">
+        <div>
+            <label>Insira a data de início da formação</label>
+            <mat-form-field class="w-100" appearance="outline" color="accent">
+                <input type="date" matInput [formControl]="startControl">
+                <mat-error *ngIf="startControl.touched && startControl.hasError('required')">
+                    O campo não pode estar vazio
+                </mat-error>
+            </mat-form-field>
+        </div>
+
+        <div>
+            <label class="d-block">Escolha a data de término da formação</label>
+            <mat-form-field>
+                <input type="date" matInput [formControl]="endControl">
+                <mat-error *ngIf="endControl.touched && endControl.hasError('required')">
+                    O campo não pode estar vazio
+                </mat-error>
+            </mat-form-field>
+        </div>
+
+        <div>
+            <label>Insira o número máximo de inscrição disponíveis </label>
+            <mat-form-field class="w-100" appearance="outline" color="accent" appearance="fill">
+                <input type="number" matInput [formControl]="limitControl" min="0" class="amount" placeholder="0">
+                <mat-error *ngIf="limitControl.touched && limitControl.hasError('required')">
+                    O campo não pode estar vazio
+                </mat-error>
+            </mat-form-field>
+        </div>
+    </form>
+</mat-dialog-content>
+<div class="d-flex w-100 justify-content-center" mat-dialog-actions>
+    <button mat-flat-button color="accent" (click)="onPublish()" ngSubmit
+        class="w-25 d-flex justify-content-center align-items-center" style="height: 2rem;" [disabled]="submited">
+        <mat-spinner color="primary" diameter=20 *ngIf="submited"></mat-spinner>
+        <span *ngIf="!submited">Publicar</span>
+    </button>
+</div>

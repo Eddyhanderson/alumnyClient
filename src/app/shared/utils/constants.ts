@@ -76,7 +76,13 @@ export enum QuestionSituations {
     All = "All"
 }
 
-export enum TeacherPlaceRegistrationState{
+export enum TeacherPlaceRegistrationState {
     Registered = "Registered",
-    UnRegistered = "Unregistered"    
+    UnRegistered = "Unregistered"
 }
+
+export enum FormationEventStates {
+    Started = "Started",
+    Waiting = "Waiting"
+}
+
