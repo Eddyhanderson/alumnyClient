@@ -1,63 +1,39 @@
-@import '../../shared/styles/standard-layout';
+@import "../../shared/styles/standard-layout-0";
 
-
-.main{
-    @extend %main;    
+.main {
+    @extend %main;
+    height: auto;
 }
 
-.section{
+.section {
     @extend %section;
-    align-items: center;         
 }
 
-.container-row{
-    @extend %container-row;   
-}
-.teacher-place-suggest .background-image{
-    width: 100%;
-    height: 4rem;
-}
-.container-column{
-    @extend %container-column;    
+.item {
+    @extend %item;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    border-radius: 5px;
+    border: 1px solid transparent;
+    height: 20rem;
 }
 
-.item{
-    background-color: white;
-    position: relative;
-    width: 50%;
-    margin-bottom: 1.5rem;
+.container-items{
+    @extend %container-items;
 }
 
-.info-tps{
-    position: absolute;
-    position: absolute;
-    font-style: italic;
-    top: 5rem;
-    left: 70%;
-    color: #ccc;
-    font-weight: 400;    
+.item-link {
+    box-sizing: border-box;
+    text-decoration: none;    
 }
 
-.description{
-    font-size:.8rem;
+.background-image {
+    height: 40%;
 }
 
-.video-lesson .background-image{
-    position: relative;
-    height: 10rem;
+.background-image img{
+    border-radius: 5px;
 }
 
-.background-shadow{
-    background-color: var(--palette-black-alpha-60);
-    position: absolute;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
+.content-section{
+    height: 60%;
 }
-
-.article-lesson .background-image{
-    height: 5rem;
-}
-

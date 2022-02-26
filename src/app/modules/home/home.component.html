@@ -1,222 +1,78 @@
-<div class="main">
-    <div class="section bg-white pt-4">
-        <!-- Teacher place suggest -->
-        <div class="item teacher-place-suggest border rounded">
-            <!-- Teacher place metadata-->
-            <div>
-                <div class="background-image">
-                    <img src="../../assets/images/lesson2.jpg">
-                </div>
-                <div class="px-3 my-2 d-flex flex-column">
-                    <h4>
-                        <a href="#" class="bold-500 discretLink">
-                            Turma de Algoritmo e Programação
-                        </a>
-                    </h4>
-                    <h5 class="relevant-text-principal">
-                        Programação
-                    </h5>
-                </div>
-            </div>
-            <!-- End -->
-            <!-- Teacher information -->
-            <div class="d-flex flex-row align-items-center px-3 mb-2">
-                <div class="img-profile-xm mr-3">
-                    <img src="../../assets/images/pexels-christina-morillo-1181519.jpg">
-                </div>
-                <div>
-                    <a href="#" class="discretLink">
-                        Professor Paulo Miguel
-                    </a>
-                </div>
-            </div>
-            <!-- End -->
-
-            <!-- Suggest brand -->
-            <div class="info-tps irrelevant-text-xm d-flex align-items-center">
-                <mat-icon [style.fontSize.rem]="1.4">reply</mat-icon> Turma sugerida
-            </div>
-            <!-- End -->
-
-            <mat-divider></mat-divider>
-
-            <!-- Description -->
-            <div class="description relevant-text-normal text-justify p-3 mb-2">
-                On the other hand, we denounce with righteous
-                indignation and dislike men who are so beguiled
-                and demoralized by the charms of pleasure of the moment,
-                so blinded by desire, that they cannot foresee the pain
-                and trouble that are bound to ensue; and equal blame belongs
-                to those who fail in their duty through weakness of will, which
-                is the same as saying through shrinking from toil and pain.
-            </div>
-            <!-- End -->
-
-            <!-- Button to get in-->
-            <div class="d-flex justify-content-center">
-                <button mat-button color="primary" class="mb-2">
-                    MATRICULAR-SE
+<div class="main bg-white">
+    <div class="section">
+        <div class="border w-100 mb-4">
+            <div class="d-flex ml-2 mr-4 my-3">
+                <button mat-icon-button>
+                    <mat-icon>filter_list</mat-icon>
                 </button>
+                <div class="w-100 h-100 d-flex flex-column">
+                    <input class="form-control" #search type="text" placeholder="Pesquisar formação">
+                </div>
             </div>
-            <!-- End -->
         </div>
-        <!-- Item end -->
+        <div class="container-items">
+            <a routerLink="/formations/331/preview" class="no-link item-link item">
+                <div class="bg-white p-0 h-100">
+                    <!-- Formation Data -->
+                    <div class="background-image mb-2">
+                        <img src="../../../assets/images/lesson2.jpg">
+                    </div>
 
-        <!-- Video lesson item -->
-        <div class="item video-lesson rounded">
-            <!-- Video metadata -->
-            <div class="d-flex flex-column mb-2">
-                <div>
-                    <h4 class="">
-                        <a href="#" class="discretLink">
-                            Aula nº 3 - Declaração de variáveis e tipos de dados
-                        </a>
-                    </h4>
-                </div>
-                <div class="d-flex flex-row align-items-center">
-                    <div class="img-profile-xm mr-3">
-                        <img src="../../assets/images/lesson3.jpg">
-                    </div>
-                    <div class="flex-column d-flex ">
-                        <h5>
-                            <a href="#" class="primaryLink">
-                                Turma de Algoritmo e Programação
-                            </a>
-                        </h5>
-                        <div>
-                            <span class="irrelevant-text-xm">
-                                Há 2 dias
-                            </span>
+                    <div class="d-flex flex-column p-3 content-section">
+                        <div
+                            class="relevant-text-normal bold-500 mb-2 d-flex justify-content-between align-items-center">
+                            <h3>
+                                Fundamentos de Algoritmo e Programação
+                            </h3>
                         </div>
-                    </div>
-                </div>
-            </div>
-            <!-- End metadata -->
-            <!-- Preload video image -->
-            <a href="#">
-                <div class="background-image ">
-                    <img src="../../assets/images/pexels-christina-morillo-1181398.jpg">
-                    <div class="duration-lesson">
-                        <span class="irrelevant-text-xm bold">
-                            10:10
-                        </span>
+
+                        <div class="d-flex w-100 h-100 align-items-end">
+                            <div class="d-flex justify-content-between align-items-center w-100">
+                                <div class="d-flex align-items-center" matTooltip="Ofericido por ISPTEC">
+                                    <div class="img-profile-xm mr-2">
+                                        <img src="../../../assets/images/istpec_logo_yellow.png">
+                                    </div>
+                                    <span class="irrelevant-text bold-500">
+                                        ISPTEC
+                                    </span>
+                                </div>
+                                <div class="d-flex align-items-center text-disabled" matTooltip="Faltam 5 dias para começar">
+                                    <mat-chip-list>
+                                        <mat-chip removable="false">
+                                            <span class="bold-500">5 dias</span>
+                                        </mat-chip>
+                                    </mat-chip-list>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </a>
-            <!-- End -->
-        </div>
-        <!-- End item -->
 
-        <!-- Article lesson item -->
-        <div class="article-lesson item rounded">
-            <div class="d-flex flex-column align-self-start mb-2">
-                <!-- Article Lesson Title -->
-                <div>
-                    <h4>
-                        <a href="#" class="discretLink">
-                            Aula nº 5 - Vectores e Matrizes
-                        </a>
-                    </h4>
-                </div>
-                <!-- End -->
-                <div class="d-flex">
-                    <!-- Teacher place profile -->
-                    <div class="img-profile-xm mr-3">
-                        <img src="../../../assets/images/lesson2.jpg">
-                    </div>
-                    <!-- End -->
-                    <!-- Teacher place name -->
-                    <div class="d-flex flex-column">
-                        <h5>
-                            <a href="#" class="primaryLink">Turma de Algoritmo e Programação </a>
-                        </h5>
-                        <div>
-                            <span class="irrelevant-text-xm">
-                                Há 3 dias
-                            </span>
-                        </div>
-                    </div>
-                    <!-- End -->
-                </div>
-            </div>
-            <div class="background-image">
-                <img src="../../../assets/images/pexels-christina-morillo-1181519.jpg">
-            </div>
-            <div class="d-flex flex-column p-3 border">
-                <h3 class="bold-500">
-                    At vero eos et accusamus et iusto odio dignissimos
-                </h3>
-                <p class="text-justify">
-                    At vero eos et accusamus et iusto odio dignissimos ducimus
-                    qui blanditiis praesentium voluptatum deleniti atque corrupti
-                    quos dolores et quas molestias excepturi sint occaecati cupiditate
-                    non provident, similique sunt in culpa qui officia deserunt mollitia
-                    At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis
-                    praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias
-                    excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui
-                    officia deserunt mollitia animi, id est laborum et dolorum fuga.
-                </p>
-                <button mat-button>
-                    Continuar a ler
-                </button>
-            </div>
         </div>
-        <!-- End item -->
 
-        <!-- Question item -->
-        <div class="item question rounded">
-            <!-- Question data -->
-            <div class="d-flex flex-column mb-2">
-                <!-- Subject question -->
-                <div>
-                    <h4 class="">
-                        <a href="#" class="discretLink">
-                            Como funciona o endereçamento das variáveis na memória?
-                        </a>
-                    </h4>
-                </div>
-                <!-- End -->
 
-                <!-- Question subject -->
-                <div class="d-flex flex-row align-items-center">
-                    <div class="img-profile-xm mr-3">
-                        <img src="../../assets/images/pexels-jawm-ling-2748123.jpg">
-                    </div>
-                    <div class="flex-column d-flex ">
-                        <h5>
-                            <a href="#" class="primaryLink">
-                                Questão feita por Neida Matias
-                            </a>
-                        </h5>
-                        <div>
-                            <span class="irrelevant-text-xm">
-                                Há 1 dia   
-                            </span>
-                        </div>
-                    </div>
-                </div>
-                <!-- End -->
-            </div>
-            <!-- End -->
-            <!-- Question description -->
-            <div class="border p-3 d-flex flex-column">
-                <p class="relevant-text-normal text-justify">
-                    On the other hand, we denounce with righteous
-                    indignation and dislike men who are so beguiled
-                    and demoralized by the charms of pleasure of the
-                    moment, so blinded by desire, that they cannot foresee
-                    the pain and trouble that are bound to ensue; and equal
-                    blame belongs to those who fail in their duty through
-                    weakness of will, which is the same as saying through
-                </p>
-                <button mat-button>
-                    Ver mais
-                </button>
-            </div>
-            <!-- End -->
-        </div>
-        <!-- End item -->
+        <ng-template #loadingPage>
+            <app-loading-page class="w-100"></app-loading-page>
+        </ng-template>
     </div>
-
-
 </div>
+
+
+<ng-template #noModules>
+    <div class="d-flex align-items-center justify-content-center w-100 h-100">
+        <a class="primaryLink" (clik)="onCreateModules()">
+            Para poder adicionar aulas, crie um módulo
+        </a>
+    </div>
+</ng-template>
+
+<ng-template #loadingItems>
+    <app-loading-item></app-loading-item>
+</ng-template>
+
+<ng-template #spinner>
+    <div class="d-flex justify-content-center align-items-center p-2">
+        <mat-spinner color="primary" diameter=40 margin="auto"></mat-spinner>
+    </div>
+</ng-template>

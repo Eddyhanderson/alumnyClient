@@ -10,6 +10,7 @@ import { ManagerModel } from '../../../models/manager-model/manager.model';
 import { MatDialog } from '@angular/material/dialog';
 import { VideoLessonCreationComponent } from '../../../dialogs/lesson/video/create/video-lesson-creation.component';
 import { Router } from '@angular/router';
+import { StudantModel } from 'src/app/models/studant-model/studant.model';
 
 @Component({
   selector: 'app-navigation',
@@ -26,8 +27,11 @@ export class NavigationComponent implements OnInit {
   // Models if manager
   manager: ManagerModel;
 
+  // Models if studant
+  studant: StudantModel;
+
   // Flags 
-  questionOpened:boolean = false;
+  questionOpened: boolean = false;
 
   constructor() { }
 
@@ -37,7 +41,7 @@ export class NavigationComponent implements OnInit {
     this.getRoleData();
   }
 
-  
+
 
   private getUser() {
     this.user = JSON.parse(localStorage.user);
@@ -52,6 +56,9 @@ export class NavigationComponent implements OnInit {
       this.getSchoolData();
     } else if (this.role.toUpperCase() === Constants.MANAGER.toUpperCase()) {
       this.getManagerData();
+    } else (this.role.toUpperCase() == Constants.STUDANT.toUpperCase())
+    {
+      this.getStudantData();
     }
   }
 
@@ -61,6 +68,10 @@ export class NavigationComponent implements OnInit {
 
   private async getManagerData() {
     this.manager = JSON.parse(localStorage.manager);
+  }
+
+  private async getStudantData() {
+    this.studant = JSON.parse(localStorage.studant);
   }
 
 }

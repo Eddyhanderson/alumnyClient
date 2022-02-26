@@ -161,7 +161,9 @@ table {
 }
 
 /* Common in Components */
-
+.no-link {
+    text-decoration: none;
+}
 .shadow-f {
     width: 100%;
     height: 100%;
@@ -416,6 +418,9 @@ img {
 
 .h-0 {
     height: 0 !important;
+}
+.w-80{
+    width: 80% !important;
 }
 .place-items-start {
     place-items: flex-start !important;
