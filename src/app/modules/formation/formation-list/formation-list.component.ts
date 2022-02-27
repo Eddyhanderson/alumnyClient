@@ -33,10 +33,6 @@ export class FormationListComponent implements OnInit {
     this.initDataSource();
   }
 
-  public getFormationEvent(formation: FormationModel) {
-    return this.findFormationEvent(formation);    
-  }
-
   private initDataSource() {
     this.setQueryField();
     let initialFormationQuery: FormationQuery = {
@@ -55,10 +51,4 @@ export class FormationListComponent implements OnInit {
   private setQueryField() {
     this.schoolId = this.route.snapshot.paramMap.get('id');
   }
-
-  private findFormationEvent(formation: FormationModel): FormationEventModel {
-    return formation.formationEvents.find((fe) => fe.situation.toUpperCase() == Constants.NORMAL_MODEL_STATE.toUpperCase());
-  }
-
-
 }

@@ -32,15 +32,13 @@
 
 				<ng-container matColumnDef="initial_date">
 					<mat-header-cell *matHeaderCellDef> Data de inicio </mat-header-cell>
-					<mat-cell *matCellDef="let element"> {{ element.published ? (getFormationEvent(element).start |
-						date:'yyyy/MM/dd') : 'N/A'}}
+					<mat-cell *matCellDef="let element"> {{ element.published ? (element.start | date:'yyyy/MM/dd') : 'N/A'}}
 					</mat-cell>
 				</ng-container>
 
 				<ng-container matColumnDef="final_date">
 					<mat-header-cell *matHeaderCellDef> Data final </mat-header-cell>
-					<mat-cell *matCellDef="let element">{{element.published ? (getFormationEvent(element).end | date:'yyyy/MM/dd')
-						: 'N/A'}}</mat-cell>
+					<mat-cell *matCellDef="let element">{{element.published ? (element.end | date:'yyyy/MM/dd') : 'N/A'}}</mat-cell>
 				</ng-container>
 
 				<ng-container matColumnDef="price">
@@ -62,15 +60,15 @@
 							</mat-chip>
 						</mat-chip-list>
 
-						<mat-chip-list *ngIf="element.published && getFormationEvent(element).state == started" >
+						<mat-chip-list *ngIf="element.published && element.state == started" >
 							<mat-chip removable="false" color="warn">
-								{{getFormationEvent(element).state | statePublished}}
+								{{element.state | statePublished}}
 							</mat-chip>
 						</mat-chip-list>
 
-						<mat-chip-list *ngIf="element.published && getFormationEvent(element).state == waiting" >
+						<mat-chip-list *ngIf="element.published && element.state == waiting" >
 							<mat-chip removable="false" color="accent">
-								{{getFormationEvent(element).state | statePublished}}
+								{{element.state | statePublished}}
 							</mat-chip>
 						</mat-chip-list>
 

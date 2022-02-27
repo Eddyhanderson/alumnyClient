@@ -13,6 +13,13 @@ export class FormationModel {
     published?: boolean;
     picture?: number;
     schoolPicture?: string;
-    formationEvents?: Array<FormationEventModel>;
-
+    schoolAcronym?: string;
+    schoolName?: string;
+    end?: Date;
+    start?: Date;
+    modulesCount?: number;
+    lessonCount?: number;
+    subscriptionCount?: number;
+    studantLimit?:number;
+    state?: string;
 }

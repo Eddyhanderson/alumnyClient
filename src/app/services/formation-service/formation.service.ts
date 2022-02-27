@@ -39,6 +39,22 @@ export class FormationService {
     }
   }
 
+  public getAllPublished(query: PaginationQuery, param: FormationQuery): Observable<PageResponse<FormationModel>> {
+    
+    try {
+      return this.http.get<PageResponse<FormationModel>>(Routes.FORMATION_GET_ALL_PUBLISHED_ROUTE, {
+        params: {
+          'pageNumber': query.pageNumber.toString(),
+          'pageSize': query.pageSize.toString(),
+          'searchValue': query.searchValue ?? '',
+          ...param
+        }
+      })
+    } catch (error) {
+      console.log(error.message)
+    }
+  }
+
   public async get(id: string): Promise<FormationModel> {
     try {
       let response = await this.http.get<Response<FormationModel>>(Routes.FORMATION_GET_ROUTE.replace('{id}', id)).toPromise();
