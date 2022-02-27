@@ -40,7 +40,7 @@
                                 <mat-icon class="mr-4">
                                     topic
                                 </mat-icon>
-                                <span>{{formation.modulesCount  }} Módulos</span>
+                                <span>{{formation.modulesCount }} Módulos</span>
                             </span>
                             <span class="mb-2 d-flex align-items-center">
                                 <mat-icon class="mr-4">
@@ -78,13 +78,33 @@
                     </div>
                 </div>
                 <div class="d-flex align-items-center justify-content-center">
-                    <button mat-flat-button color="primary" class="button-lg">
-                        <div class="d-flex align-items-center">
-                            <span>INSCREVER-SE</span>
-                            <div class="circle-diviser"></div>
-                            {{formation.price | currency:'AKZ'}}
-                        </div>
-                    </button>
+                    <ng-container *ngIf="formationRequest; else noSubscribed">
+                        <ng-container>
+                            <mat-chip-list *ngIf="formationRequest.state == 'WatingResponsableAction'">
+                                <mat-chip [selectable]="false" removable="false">
+                                    Aguardando Parecer do Responsável
+                                </mat-chip>
+                            </mat-chip-list>
+
+                            <mat-chip-list *ngIf="formationRequest.state == 'WaitingManagerAction'">
+                                <mat-chip [selectable]="false" removable="false">
+                                    Aguardando Parecer da Academia
+                                </mat-chip>
+                            </mat-chip-list>
+                        </ng-container>
+                    </ng-container>
+
+                    <ng-template #noSubscribed>
+                        <button  mat-flat-button color="primary" class="button-lg"
+                            (click)="onRequestFormation()">
+                            <div class="d-flex align-items-center">
+                                <span>INSCREVER-SE</span>
+                                <div class="circle-diviser"></div>
+                                {{formation.price | currency:'AKZ'}}
+                            </div>
+                        </button>
+                    </ng-template>
+
                 </div>
             </div>
         </div>
@@ -169,8 +189,8 @@
                                             </mat-panel-title>
                                         </mat-expansion-panel-header>
                                         <mat-selection-list [multiple]="false" [formControl]="moduleControl"
-                                        (selectionChange)="onModuleListChange($event)" [compareWith]="compare">
-                                            <mat-list-option *ngFor="let lesson of module .lessons" [value]="lesson">
+                                            (selectionChange)="onModuleListChange($event)" [compareWith]="compare">
+                                            <mat-list-option *ngFor="let lesson of module.lessons" [value]="lesson">
                                                 <mat-icon matListIcon>
                                                     {{lesson.lessonType.toUpperCase() == 'VIDEO' ? 'video_library' :
                                                     'article'}}

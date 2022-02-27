@@ -19,6 +19,7 @@ import { CreateFormationDialogComponent } from './formation/create-formation-dia
 import { CreateSchoolDialogComponent } from './school/create-school-dialog/create-school-dialog.component';
 import { CreateModulesDialogComponent } from './modules/create-modules-dialog/create-modules-dialog.component';
 import { CreateFormationEventComponent } from './formation-event/create-formation-event/create-formation-event.component';
+import { CreateFormationRequestDialogComponent } from './formation-request/create-formation-request-dialog/create-formation-request-dialog.component';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { CreateFormationEventComponent } from './formation-event/create-formatio
     CreateFormationDialogComponent,
     CreateModulesDialogComponent,
     CreateModulesDialogComponent,
-    CreateFormationEventComponent
+    CreateFormationEventComponent,
+    CreateFormationRequestDialogComponent
   ],
   imports: [
     CommonModule,

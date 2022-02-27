@@ -39,7 +39,8 @@ import { UserService } from 'src/app/services/user-service/user.service';
     AppRoutingModule,    
     SharedModule,
     DialogsModule,
-    FormsModule
+    FormsModule,
+    SharedModule
   ],  
   providers: [
     {

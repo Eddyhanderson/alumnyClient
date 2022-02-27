@@ -53,6 +53,17 @@ export class StudantService {
         }
     }
 
+    public async getResponsable(id: string): Promise<StudantModel> {
+        try {
+            let response = await this.http.get<Response<StudantModel>>(Routes.STUDANT_GET_RESPONSABLE_ROUTE.replace("{id}", id)).toPromise()
+
+            return response?.data;
+
+        } catch (error) {
+            console.log(error.message);
+        }
+    }
+
     /**
      * Get all studant data
      * @param query the query string to get data from server

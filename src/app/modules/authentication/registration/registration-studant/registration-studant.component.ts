@@ -215,7 +215,7 @@ export class RegistrationStudantComponent implements OnInit {
       password: this.securityInfo.value.password,
       studantCode: this.profInfo.value.mec,
       organId: this.profInfo.value.organ,
-      resposanble: this.profInfo.value.responsable == 1 ? true : false
+      resposanble: this.profInfo.value.responsable == "1" ? true : false
     }
 
     console.dir(registration);

@@ -40,7 +40,7 @@
             </mat-icon>
         </button>
         <div class="img-profile-xm" *ngIf="user.picture">
-            <img [src]="user.picture">
+            <img [src]="user.picture | imgUrl">
         </div>
         <div class="img-profile-xm-none" *ngIf="!user.picture">
             <div></div>

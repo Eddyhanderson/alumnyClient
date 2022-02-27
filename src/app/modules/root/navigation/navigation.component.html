@@ -1,7 +1,7 @@
 <div *ngIf="role.toUpperCase()=='MANAGER'"
     class="mt-1 w-100 p-3 d-flex flex-column justify-content-center align-items-center" [style.height.px]="208">
     <div *ngIf="user.picture; else noPhoto" class="img-profile-md">
-        <img [src]="user.picture">
+        <img [src]="user.picture | imgUrl">
     </div>
     <ng-template #noPhoto>
         <div class="img-profile-md-none">
@@ -21,7 +21,7 @@
 <div *ngIf="role.toUpperCase()!='MANAGER'"
     class="mt-1 w-100 p-3 d-flex flex-column justify-content-center align-items-center" [style.height.px]="208">
     <div *ngIf="user.picture" class="img-profile-md">
-        <img [src]="user.picture">
+        <img [src]="user.picture | imgUrl">
     </div>
     <div class="img-profile-md-none" *ngIf="!user.picture">
         <div></div>

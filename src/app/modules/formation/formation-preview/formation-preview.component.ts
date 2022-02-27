@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { map } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { FormationModel } from 'src/app/models/formation-model/formation-model';
 import { ModuleModel } from 'src/app/models/module-model/modules.model';
 import { ModuleQuery } from 'src/app/queries/module-query/module-query';
@@ -12,6 +12,12 @@ import { Routes } from 'src/app/shared/utils/routing-constants';
 import { MatSelectionListChange } from '@angular/material/list';
 import { LessonModel } from 'src/app/models/lesson-model/lesson.model';
 import { FormControl } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { CreateFormationDialogComponent } from 'src/app/dialogs/formation/create-formation-dialog/create-formation-dialog.component';
+import { CreateFormationRequestDialogComponent } from 'src/app/dialogs/formation-request/create-formation-request-dialog/create-formation-request-dialog.component';
+import { FormationRequestService } from 'src/app/services/formation-request/formation-request.service';
+import { FormationRequestModel } from 'src/app/models/formation-request-model/formation-request.model';
+import { StudantModel } from 'src/app/models/studant-model/studant.model';
 
 @Component({
   selector: 'app-formation-preview',
@@ -20,22 +26,36 @@ import { FormControl } from '@angular/forms';
 })
 export class FormationPreviewComponent implements OnInit {
   // Models
+  formationRequest: FormationRequestModel;
   formation: FormationModel;
   lesson: LessonModel;
+  studant: StudantModel;
   modules$: Observable<ModuleModel[]>;
   id: string;
 
   // Form
   moduleControl: FormControl;
 
-  constructor(private service: FormationService,
+  // aux
+  private _reloadStrategy: Subscription;
+
+  constructor(
+    private formationService: FormationService,
+    private requestService: FormationRequestService,
     private moduleService: ModuleService,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    private dialog: MatDialog,
+    private router: Router) { }
 
   ngOnInit(): void {
+    this.setStrategyToReloadPage();
+    this.getAllModels();
+  }
+
+  private getAllModels() {
     this.getId();
     if (this.id) {
-      this.getormation(this.id);
+      this.getFormation(this.id);
       this.getModules(this.id)
     }
   }
@@ -51,17 +71,40 @@ export class FormationPreviewComponent implements OnInit {
     })
   }
 
+  public onRequestFormation() {
+    this.dialog.open(CreateFormationRequestDialogComponent, {
+      data: this.formation.id
+    }).afterClosed().subscribe((data) => {
+      console.dir(data);
+      if (data) {
+        this.router.navigateByUrl(this.router.url);
+      }
+    })
+  }
+
   public compare = (a1: any, a2: any) => a1.id === a2.id;
 
   private getId() {
     this.id = this.route.snapshot.params['id'];
-    console.dir(this.route)
   }
 
-  private async getormation(id: string) {
-    if (id) {
-      this.formation = await this.service.get(this.id);
+  private async getFormationRequest() {
+    if (this.formation && this.studant) {
+      this.formationRequest = await this.requestService.get(this.studant.id, this.formation.id);
+      console.dir(this.formationRequest);
     }
+  }
+
+  private async getFormation(id: string) {
+    if (id) {
+      this.formation = await this.formationService.get(this.id);
+      this.getStudant();
+      this.getFormationRequest();
+    }
+  }
+
+  private getStudant() {
+    this.studant = JSON.parse(localStorage.studant);
   }
 
   private async getModules(formationId: string) {
@@ -74,7 +117,7 @@ export class FormationPreviewComponent implements OnInit {
       formationId: formationId
     }
     this.modules$ = this.moduleService.getAll(page, query).pipe(map((p) => p.data));
-    
+
     this.modules$.subscribe((m) => {
       if (m != null) {
         this.lesson = m[0].lessons[0];
@@ -84,6 +127,14 @@ export class FormationPreviewComponent implements OnInit {
     })
   }
 
-
-
+  /* To reload component */
+  private setStrategyToReloadPage() {
+    this._reloadStrategy = this.router.events.subscribe(
+      async (evt) => {
+        if (evt instanceof NavigationEnd) {
+          await this.getFormationRequest();
+        }
+      }
+    )
+  }
 }

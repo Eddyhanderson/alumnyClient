@@ -11,6 +11,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { VideoLessonCreationComponent } from '../../../dialogs/lesson/video/create/video-lesson-creation.component';
 import { Router } from '@angular/router';
 import { StudantModel } from 'src/app/models/studant-model/studant.model';
+import { Routes } from 'src/app/shared/utils/routing-constants';
 
 @Component({
   selector: 'app-navigation',
@@ -56,7 +57,7 @@ export class NavigationComponent implements OnInit {
       this.getSchoolData();
     } else if (this.role.toUpperCase() === Constants.MANAGER.toUpperCase()) {
       this.getManagerData();
-    } else (this.role.toUpperCase() == Constants.STUDANT.toUpperCase())
+    } else if(this.role.toUpperCase() == Constants.STUDANT.toUpperCase())
     {
       this.getStudantData();
     }
@@ -74,4 +75,5 @@ export class NavigationComponent implements OnInit {
     this.studant = JSON.parse(localStorage.studant);
   }
 
+  public buildImageUrl(url: string) { return Routes.BASE_URL_SERVER_FILE.concat(url) }
 }

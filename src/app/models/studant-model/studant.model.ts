@@ -9,6 +9,10 @@ export class StudantModel {
 
     organId: string;
 
+    organName?: string;
+
+    picture?: string;
+
     firstName: string;
 
     lastName: string;
