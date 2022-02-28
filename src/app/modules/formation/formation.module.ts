@@ -7,11 +7,12 @@ import { ModuleModule } from '../module/module.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { DialogsModule } from 'src/app/dialogs/dialogs.module';
 import { FormationPreviewComponent } from './formation-preview/formation-preview.component';
+import { StudantFormationsComponent } from './studant-formations/studant-formations/studant-formations.component';
 
 
 
 @NgModule({
-  declarations: [FormationListComponent, FormationPreviewComponent],
+  declarations: [FormationListComponent, FormationPreviewComponent, StudantFormationsComponent],
   exports: [FormationListComponent, FormationPreviewComponent],
   imports: [
     CommonModule,

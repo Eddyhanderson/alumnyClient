@@ -18,7 +18,9 @@ import { CreateFormationRequestDialogComponent } from 'src/app/dialogs/formation
 import { FormationRequestService } from 'src/app/services/formation-request/formation-request.service';
 import { FormationRequestModel } from 'src/app/models/formation-request-model/formation-request.model';
 import { StudantModel } from 'src/app/models/studant-model/studant.model';
-import { Constants, FormationRequestStates } from 'src/app/shared/utils/constants';
+import { Constants, FormationEventStates, FormationRequestStates } from 'src/app/shared/utils/constants';
+import { SubscriptionService } from 'src/app/services/subscription-service/subscription.service';
+import { SubscriptionModel } from 'src/app/models/subscription-model/subscription-model';
 
 @Component({
   selector: 'app-formation-preview',
@@ -26,9 +28,12 @@ import { Constants, FormationRequestStates } from 'src/app/shared/utils/constant
   styleUrls: ['./formation-preview.component.scss']
 })
 export class FormationPreviewComponent implements OnInit {
+  waiting = FormationEventStates.Waiting;
+  started = FormationEventStates.Started;
   // Flow Control data
   isManager = localStorage.userRole == Constants.MANAGER;
   isSchool = localStorage.userRole == Constants.SCHOOL;
+  isStudant = localStorage.userRole == Constants.STUDANT;
 
   // Models
   formationRequest: FormationRequestModel;
@@ -49,11 +54,13 @@ export class FormationPreviewComponent implements OnInit {
   aproved = FormationRequestStates.Aproved;
   rejected = FormationRequestStates.Rejected;
   payed = FormationRequestStates.Payed;
+  subscription: SubscriptionModel;
 
   constructor(
     private formationService: FormationService,
     private requestService: FormationRequestService,
     private moduleService: ModuleService,
+    private subscriptionService: SubscriptionService,
     private route: ActivatedRoute,
     private dialog: MatDialog,
     private router: Router) { }
@@ -93,6 +100,13 @@ export class FormationPreviewComponent implements OnInit {
     })
   }
 
+  private async getSubscription() {
+    if (this.formation && this.studant) {
+      this.subscription = await this.subscriptionService.get(this.studant.id, this.formation.id);
+      console.dir(this.subscription);
+    }
+  }
+
   public compare = (a1: any, a2: any) => a1.id === a2.id;
 
   private getId() {
@@ -100,10 +114,9 @@ export class FormationPreviewComponent implements OnInit {
   }
 
   private async getFormationRequest() {
-    if (this.formation && this.studant) {
+    if (this.formation && this.studant)
       this.formationRequest = await this.requestService.get(this.studant.id, this.formation.id);
-      console.dir(this.formationRequest);
-    }
+
   }
 
   private async getFormation(id: string) {
@@ -111,6 +124,7 @@ export class FormationPreviewComponent implements OnInit {
       this.formation = await this.formationService.get(this.id);
       this.getStudant();
       this.getFormationRequest();
+      this.getSubscription();
     }
   }
 

@@ -77,7 +77,7 @@
             <mat-icon [style.fontSize.rem]="1.6"> home</mat-icon> <span class="ml-4">Inicío</span>
         </a>
     </li>
-    <!-- End -->    
+    <!-- End -->
 
     <!-- Schools nav item -->
     <li class="nav-item" *ngIf="role.toUpperCase() == 'SCHOOL'">
@@ -99,7 +99,7 @@
 
     <!-- School place nav item -->
     <li class="nav-item" *ngIf="role.toUpperCase() == 'STUDANT'">
-        <a class="pl-4 d-flex" [routerLink]="['studant', 'school-places']" routerLinkActive="nav-active"
+        <a class="pl-4 d-flex" [routerLink]="['studant', 'formations',  'subscribed']" routerLinkActive="nav-active"
             [routerLinkActiveOptions]="{exact:true}">
             <mat-icon [style.fontSize.rem]="1.4">class</mat-icon><span class="ml-4">Formações</span>
         </a>

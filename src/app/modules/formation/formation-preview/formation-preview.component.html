@@ -101,7 +101,7 @@
                     </ng-container>
 
                     <ng-template #noSubscribed>
-                        <button  mat-flat-button color="primary" class="button-lg" *ngIf="!isManager && !isSchool"
+                        <button  mat-flat-button color="primary" class="button-lg" *ngIf="isStudant && !subscription"
                             (click)="onRequestFormation()">
                             <div class="d-flex align-items-center">
                                 <span>INSCREVER-SE</span>
@@ -109,6 +109,14 @@
                                 {{formation.price | currency:'AKZ'}}
                             </div>
                         </button>
+                        <ng-container *ngIf="subscription">
+                            <mat-chip-list *ngIf="formation.state == waiting">
+                                <mat-chip [selectable]="false" removable="false" 
+                                [matTooltip]="(formation.start | elapsed:true) +  ' para começar'">
+                                    Em Espera
+                                </mat-chip>
+                            </mat-chip-list>
+                        </ng-container>
                     </ng-template>
 
                 </div>

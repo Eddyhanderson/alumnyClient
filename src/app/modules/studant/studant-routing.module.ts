@@ -6,6 +6,7 @@ import { StudantProfileClassematesComponent } from './studant-profile-classemate
 import { TeacherPlacesComponent } from './teacher-places/teacher-places.component';
 import { QuestionsExposedComponent } from './questions/questions-exposed/questions-exposed.component';
 import { QuestionsForMeComponent } from './questions/questions-for-me/questions-for-me.component';
+import { StudantFormationsComponent } from '../formation/studant-formations/studant-formations/studant-formations.component';
 
 
 var routes: Routes = [
@@ -17,6 +18,7 @@ var routes: Routes = [
             { path: 'class-mates', component: StudantProfileClassematesComponent }
         ]
     },
+    { path: 'formations/subscribed', component: StudantFormationsComponent },
     { path: 'teacher-places', component: TeacherPlacesComponent },
     { path: 'questions/exposed', component: QuestionsExposedComponent },
     { path: 'questions/for-me', component: QuestionsForMeComponent },

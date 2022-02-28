@@ -93,6 +93,8 @@ export enum FormationRequestStates {
 
     Payed = "Payed",
 
+    Confirmed = "Confirmed",
+
     WatingResponsableAction = "WatingResponsableAction"
 }
 

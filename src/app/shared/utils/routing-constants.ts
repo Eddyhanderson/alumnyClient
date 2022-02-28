@@ -63,6 +63,7 @@ export class Routes {
     static FORMATION_GET_ROUTE = Routes.BASE_URL + "formation/get/{id}";
     static FORMATION_GET_ALL_ROUTE = Routes.BASE_URL + "formation/getAll";
     static FORMATION_GET_ALL_PUBLISHED_ROUTE = Routes.BASE_URL + "formation/getAll/published";
+    static FORMATION_GET_ALL_STUDANT_SUBSCRIBED_ROUTE = Routes.BASE_URL + "formation/getAll/subscribed";
 
     // Formation event routes
     static FORMATION_EVENT_CREATE_ROUTE = Routes.BASE_URL + "formationEvent/create";
@@ -85,6 +86,9 @@ export class Routes {
     static STUDANT_GET_ROUTE = Routes.BASE_URL + "studant/get/{id}";
     static STUDANT_GET_RESPONSABLE_ROUTE = Routes.BASE_URL + "studant/get/responsable/{id}";
     static STUDANT_GET_ALL_ROUTE = Routes.BASE_URL + "studant/getAll";
+
+    // Subscription routes
+    static SUBSCRIPTION_GET_ROUTE = Routes.BASE_URL + "subscription/get/{studantId}/{formationId}";
 
     // TeacherSchools routes
     static TEACHER_SCHOOLS_CREATE_ROUTE = Routes.BASE_URL + "teacherSchools/create";
