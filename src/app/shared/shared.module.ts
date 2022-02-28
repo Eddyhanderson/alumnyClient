@@ -23,7 +23,6 @@ import { LessonTypePipe } from './pipes/lesson-type-pipe/lesson-type.pipe';
 import { ImgUrlPipe } from './pipes/img-url-pipe/img-url.pipe';
 import { PublishedInfoPipePipe } from './pipes/published-info-pipe/published-info-pipe.pipe';
 
-
 @NgModule({
   declarations: [
     VideoComponent,

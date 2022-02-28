@@ -80,22 +80,28 @@
                 <div class="d-flex align-items-center justify-content-center">
                     <ng-container *ngIf="formationRequest; else noSubscribed">
                         <ng-container>
-                            <mat-chip-list *ngIf="formationRequest.state == 'WatingResponsableAction'">
+                            <mat-chip-list *ngIf="formationRequest.state == awaitingResponsable">
                                 <mat-chip [selectable]="false" removable="false">
                                     Aguardando Parecer do Responsável
                                 </mat-chip>
                             </mat-chip-list>
 
-                            <mat-chip-list *ngIf="formationRequest.state == 'WaitingManagerAction'">
+                            <mat-chip-list *ngIf="formationRequest.state == aproved">
                                 <mat-chip [selectable]="false" removable="false">
-                                    Aguardando Parecer da Academia
+                                    Aguardando Pagamento da Academia
+                                </mat-chip>
+                            </mat-chip-list>
+
+                            <mat-chip-list *ngIf="formationRequest.state == payed">
+                                <mat-chip [selectable]="false" removable="false">
+                                    Aguardando Confirmação da Escola
                                 </mat-chip>
                             </mat-chip-list>
                         </ng-container>
                     </ng-container>
 
                     <ng-template #noSubscribed>
-                        <button  mat-flat-button color="primary" class="button-lg"
+                        <button  mat-flat-button color="primary" class="button-lg" *ngIf="!isManager && !isSchool"
                             (click)="onRequestFormation()">
                             <div class="d-flex align-items-center">
                                 <span>INSCREVER-SE</span>

@@ -86,3 +86,13 @@ export enum FormationEventStates {
     Waiting = "Waiting"
 }
 
+export enum FormationRequestStates {
+    Aproved = "Aproved", 
+
+    Rejected = "Rejected",
+
+    Payed = "Payed",
+
+    WatingResponsableAction = "WatingResponsableAction"
+}
+

@@ -39,8 +39,6 @@ export class FormationListComponent implements OnInit {
       schoolId: this.schoolId
     }
 
-    console.dir(initialFormationQuery);
-
     this.data = new TablePaginationAdapter<FormationModel, FormationQuery>((query, param) => this.service.getAll(query, param), initialFormationQuery);
   }
 

@@ -13,6 +13,8 @@ export class StudantModel {
 
     picture?: string;
 
+    responsable?: boolean;
+
     firstName: string;
 
     lastName: string;

@@ -7,6 +7,7 @@ import { PageResponse } from "src/app/models/page-response/page-response";
 import { OrganQuery } from "src/app/queries/organ-query/organ-query";
 import { PaginationQuery } from "src/app/queries/pagination-query/pagination-query";
 import { Routes } from "src/app/shared/utils/routing-constants";
+import { Response } from 'src/app/models/response/response';
 
 @Injectable({
     providedIn: 'root'
@@ -44,5 +45,14 @@ export class OrganService {
             console.log(error.message)
         }
     }
+
+    public async get(id: string): Promise<OrganModel> {
+        try {
+          let response = await this.http.get<Response<OrganModel>>(Routes.ORGAN_GET_ROUTE.replace('{id}', id)).toPromise();
+          return response.data;
+        } catch (error) {
+          console.log(error.message);
+        }
+      }
 
 }

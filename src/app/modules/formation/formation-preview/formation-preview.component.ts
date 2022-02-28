@@ -18,6 +18,7 @@ import { CreateFormationRequestDialogComponent } from 'src/app/dialogs/formation
 import { FormationRequestService } from 'src/app/services/formation-request/formation-request.service';
 import { FormationRequestModel } from 'src/app/models/formation-request-model/formation-request.model';
 import { StudantModel } from 'src/app/models/studant-model/studant.model';
+import { Constants, FormationRequestStates } from 'src/app/shared/utils/constants';
 
 @Component({
   selector: 'app-formation-preview',
@@ -25,6 +26,10 @@ import { StudantModel } from 'src/app/models/studant-model/studant.model';
   styleUrls: ['./formation-preview.component.scss']
 })
 export class FormationPreviewComponent implements OnInit {
+  // Flow Control data
+  isManager = localStorage.userRole == Constants.MANAGER;
+  isSchool = localStorage.userRole == Constants.SCHOOL;
+
   // Models
   formationRequest: FormationRequestModel;
   formation: FormationModel;
@@ -38,6 +43,12 @@ export class FormationPreviewComponent implements OnInit {
 
   // aux
   private _reloadStrategy: Subscription;
+
+  // Formation Request States
+  awaitingResponsable = FormationRequestStates.WatingResponsableAction;
+  aproved = FormationRequestStates.Aproved;
+  rejected = FormationRequestStates.Rejected;
+  payed = FormationRequestStates.Payed;
 
   constructor(
     private formationService: FormationService,

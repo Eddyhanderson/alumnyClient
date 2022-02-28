@@ -73,13 +73,10 @@ export class ElapsedTimePipe implements PipeTransform {
     private calculateDuration(up: boolean): number {
         let now = new Date();
 
-        if (up){
-            console.log("Entrei no up")
-            console.dir(this._date);
+        if (up){            
             return Math.floor((this._date.valueOf() - now.valueOf()) / 1000);
         }
         else{
-            console.log("Entrei no down")
             return Math.floor((now.valueOf() - this._date.valueOf()) / 1000);
         }
 

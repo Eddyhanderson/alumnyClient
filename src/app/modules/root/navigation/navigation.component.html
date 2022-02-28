@@ -106,6 +106,15 @@
     </li>
     <!-- End -->
 
+    <!-- School place nav item -->
+    <li class="nav-item">
+        <a class="pl-4 d-flex" [routerLink]="['formations-requests']" routerLinkActive="nav-active"
+            [routerLinkActiveOptions]="{exact:true}">
+            <mat-icon [style.fontSize.rem]="1.4">collections_bookmark</mat-icon><span class="ml-4">Solicitações</span>
+        </a>
+    </li>
+    <!-- End -->
+
 
 
     <li class="d-flex flex-column" *ngIf="role.toUpperCase() == 'STUDANT'" style="height: auto;">
