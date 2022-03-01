@@ -1,0 +1,65 @@
+@import "../../../shared/styles/standard-layout";
+
+button {
+    padding: 0;
+}
+
+/* Video style end */
+a:hover {
+    color: none;
+    background-color: none;
+}
+
+.video-main {
+    @extend %main;
+}
+
+.context-information {
+    @extend %section;
+}
+
+.video-title {
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+}
+
+#lesson-section {
+    display: flex;
+    height: 30rem;
+    width: 96%;
+    justify-content: space-between;
+}
+
+#article-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+#article-container-background {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+#article-container-actions{
+    position: absolute;
+    top: 40%;
+    color: white;
+}
+
+#article-container-actions button{
+    border-color: white;
+}
+
+#article-container-background img {
+    height: 100%;
+    object-fit: cover;
+}
+
+@media (max-width: 767.98px) {
+    #video-container {
+        width: 100%;
+    }
+}

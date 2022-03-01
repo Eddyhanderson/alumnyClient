@@ -8,11 +8,12 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { DialogsModule } from 'src/app/dialogs/dialogs.module';
 import { FormationPreviewComponent } from './formation-preview/formation-preview.component';
 import { StudantFormationsComponent } from './studant-formations/studant-formations/studant-formations.component';
+import { FormationWatchComponent } from './formation-watch/formation-watch.component';
 
 
 
 @NgModule({
-  declarations: [FormationListComponent, FormationPreviewComponent, StudantFormationsComponent],
+  declarations: [FormationListComponent, FormationPreviewComponent, StudantFormationsComponent, FormationWatchComponent],
   exports: [FormationListComponent, FormationPreviewComponent],
   imports: [
     CommonModule,

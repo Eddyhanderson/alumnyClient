@@ -53,7 +53,7 @@
                                                         <span class="bold-500">Em espera</span>
                                                     </mat-chip>
                                                     <mat-chip removable="false" class="irrelevant-text-xm"
-                                                        [matTooltip]="'Começou ' + (formation.start | elapsed)"
+                                                        [matTooltip]="(formation.end | elapsed:true) + ' para terminar'"
                                                         *ngIf="formation.state == started">
                                                         <span class="bold-500">A decorrer</span>
                                                     </mat-chip>

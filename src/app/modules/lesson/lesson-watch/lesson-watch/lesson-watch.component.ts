@@ -47,86 +47,86 @@ export class LessonWatchComponent implements OnInit {
   role: string = localStorage.userRole;
 
   ngOnInit(): void {
-    this.getData();
-    this.setStrategyToReloadPage();
+    // this.getData();
+    // this.setStrategyToReloadPage();
   }
 
-  public nextLesson(id: string) {
-    this.router.navigate([], {
-      queryParams: { 'lesson': id },
-      relativeTo: this.route, queryParamsHandling: 'merge'
-    })
-  }
+  // public nextLesson(id: string) {
+  //   this.router.navigate([], {
+  //     queryParams: { 'lesson': id },
+  //     relativeTo: this.route, queryParamsHandling: 'merge'
+  //   })
+  // }
 
-  public gotToArticleView(lesson: LessonModel) {
-    this.router.navigate(['./lesson', 'article-view', lesson.id])
-  }
+  // public gotToArticleView(lesson: LessonModel) {
+  //   this.router.navigate(['./lesson', 'article-view', lesson.id])
+  // }
 
-  // TODO: Load more lessons by scroll event
-  // TODO: Development in the server side of pagedResponse with totalElements
-  private async getData() {
-    let topicId = this.getTopicFromQuery();
+  // // TODO: Load more lessons by scroll event
+  // // TODO: Development in the server side of pagedResponse with totalElements
+  // private async getData() {
+  //   let topicId = this.getTopicFromQuery();
 
-    if(topicId == null) return null;
+  //   if(topicId == null) return null;
 
-    this.topic = await this.ts.get(topicId);
+  //   this.topic = await this.ts.get(topicId);
 
-    this.teacherPlace = {
-      id: this.topic.teacherPlaceId,
-      name: this.topic.teacherPlaceName,
-      profilePhotoPath: this.topic.teacherPlaceProfilePhoto
-    }
+  //   this.teacherPlace = {
+  //     id: this.topic.teacherPlaceId,
+  //     name: this.topic.teacherPlaceName,
+  //     profilePhotoPath: this.topic.teacherPlaceProfilePhoto
+  //   }
 
-    this.discipline = {
-      name: this.topic.disciplineName
-    }
+  //   this.discipline = {
+  //     name: this.topic.disciplineName
+  //   }
 
 
-    let lessonQuery: LessonQuery = {
-     /* topicId: this.topic.id*/
-    }
+  //   let lessonQuery: LessonQuery = {
+  //    /* topicId: this.topic.id*/
+  //   }
 
-    this.lessons$ = new PaginationAdapter((query, param) => this.ls.getAll(query, param), lessonQuery);
+  //   this.lessons$ = new PaginationAdapter((query, param) => this.ls.getAll(query, param), lessonQuery);
 
-    if (this.getLessonId() === undefined) {
-      this.getFirstLesson();
-    } else {
-      this.getLesson(this.getLessonId());
-    }
+  //   if (this.getLessonId() === undefined) {
+  //     this.getFirstLesson();
+  //   } else {
+  //     this.getLesson(this.getLessonId());
+  //   }
 
-  }
+  // }
 
-  private setStrategyToReloadPage() {
-    this._reloadStrategy = this.router.events.subscribe((event) => {
-      if (event instanceof NavigationEnd) {
-        let id = this.getLessonId();
+  // private setStrategyToReloadPage() {
+  //   this._reloadStrategy = this.router.events.subscribe((event) => {
+  //     if (event instanceof NavigationEnd) {
+  //       let id = this.getLessonId();
 
-        this.lessons$.getDataSource.subscribe(l => {
-          this.lesson = l.find(lk => lk.id == id);
-        });
-      }
-    })
-  }
+  //       this.lessons$.getDataSource.subscribe(l => {
+  //         this.lesson = l.find(lk => lk.id == id);
+  //       });
+  //     }
+  //   })
+  // }
 
-  private getFirstLesson() {
-    this.lessons$.getDataSource.pipe(first()).subscribe(l => {
-      this.lesson = l.find(lk => lk.sequence == 1);
-      this.nextLesson(this.lesson.id);
-    });
-  }
+  // private getFirstLesson() {
+  //   this.lessons$.getDataSource.pipe(first()).subscribe(l => {
+  //     this.lesson = l.find(lk => lk.sequence == 1);
+  //     this.nextLesson(this.lesson.id);
+  //   });
+  // }
 
-  private getLesson(id: string) {
-    this.lessons$.getDataSource.pipe(first()).subscribe(l => {
-      this.lesson = l.find(lk => lk.id == id);
-    })
-  }
+  // private getLesson(id: string) {
+  //   this.lessons$.getDataSource.pipe(first()).subscribe(l => {
+  //     this.lesson = l.find(lk => lk.id == id);
+  //   })
+  // }
 
-  private getTopicFromQuery(): string {
-    return this.route.snapshot.queryParams.topic;
-  }
+  // private getTopicFromQuery(): string {
+  //   return this.route.snapshot.queryParams.topic;
+  // }
 
-  private getLessonId() {
-    return this.route.snapshot.queryParams.lesson;
-  }
+  // private getLessonId() {
+  //   return this.route.snapshot.queryParams.lesson;
+  // }
 
 }
