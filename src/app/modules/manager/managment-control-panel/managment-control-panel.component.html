@@ -1,0 +1,251 @@
+<div class="main">
+    <div class="section">
+        <div class="mb-2 ">
+            <h1 class="bold-500">
+                Painel de controle
+            </h1>
+        </div>
+        <div class="container-row">
+            <!-- Studants requests summary-->
+            <div class="studants-requests item border rounded">
+                <!-- Title card -->
+                <div class="relevant-text-title mb-4 px-3 pt-3 d-flex align-items-center justify-content-between">
+                    <span>
+                        Certificados por emitir
+                    </span>
+                    <button mat-icon-button>
+                        <mat-icon>filter_list</mat-icon>
+                    </button>
+                </div>
+                <!-- End -->
+
+                <!-- Relvant information -->
+                <div class="irrelevant-text mb-2 px-3">
+                    Precisa avaliar os alunos para receberem os seus certificados
+                </div>
+                <!-- End -->
+
+                <mat-divider class="mb-3"></mat-divider>
+                <div class="d-flex flex-column w-100">
+                    <ng-container *ngIf="subscriptions$ | async as subscriptions; else loadingItems">
+                        <ng-container *ngIf="subscriptions.length > 0; else noSubscriptions">
+                            <div class="d-flex justify-content-between w-100 p-3" *ngFor="let subscription of subscriptions">
+                                <div class="d-flex">
+                                    <div class="img-profile-xm mr-3" *ngIf="subscription.studantPicture; else noPhoto">
+                                        <img [src] ="subscription.studantPicture | imgUrl">
+                                    </div>
+                                    <div class="d-flex">
+                                        <div class="d-flex flex-column w-100">
+                                            <span class="bold-500"> {{subscription.studantName}} </span>
+                                            <div class="irrelevant-text">
+                                                {{subscription.formationTheme}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <button mat-icon-button  (click)="onCreateCertificate(subscription.studantId, subscription.formationId, subscription.id)"
+                                    [matTooltip]="'Avaliar ' + subscription.studantName" color="accent">
+                                        <mat-icon>
+                                            pin_invoke
+                                        </mat-icon>
+                                    </button>
+                                </div>
+                            </div>
+                        </ng-container>
+                    </ng-container>
+                </div>
+            </div>
+            <!-- End -->
+
+            <!-- Finance summary -->
+            <div class="item teacher-place-finance border rounded">
+                <!-- Title card -->
+                <div class="relevant-text-title mb-4 px-3 pt-3 d-flex align-items-center justify-content-between">
+                    <span>
+                        Finanças
+                    </span>
+
+                    <button mat-icon-button matTooltip="filtrar por formação">
+                        <mat-icon>
+                            filter_list
+                        </mat-icon>
+                    </button>
+                </div>
+                <!-- End -->
+
+                <mat-divider class="mb-2"></mat-divider>
+
+                <div class="d-flex flex-column">
+                    <div class="d-flex flex-column">
+                        <!-- Subtitle card -->
+                        <div class="mb-2 px-3 ">
+                            <h4 class="bold-500">
+                                Algoritmo e Programação
+                            </h4>
+                        </div>
+                        <!-- End -->
+                        <!-- The value to receive per teacher place -->
+                        <div class="d-flex flex-column px-3 mb-2">
+                            <div class="irrelevant-text">
+                                Preço
+                            </div>
+                            <div>
+                                <h5 class="bold-400 relevant-text-info">
+                                    AKZ12.000,00
+                                </h5>
+                            </div>
+                        </div>
+                        <!-- End -->
+
+                        <!-- The value to receive per teacher place -->
+                        <div class="d-flex flex-column px-3 mb-2">
+                            <div class="irrelevant-text">
+                                Lucro
+                            </div>
+                            <div>
+                                <h2 class="bold-400">
+                                    AKZ13.000,00
+                                </h2>
+                            </div>
+                        </div>
+                        <!-- End -->
+
+                    </div>
+                </div>
+
+                <mat-divider></mat-divider>
+
+                <div class="d-flex flex-column">
+                    <!-- Title card -->
+                    <div class="relevant-text-title mb-4 px-3 pt-3 d-flex align-items-center justify-content-between">
+                        <span>
+                            Solicitações
+                        </span>
+                    </div>
+                    <!-- End -->
+                    <mat-divider></mat-divider>
+                    <div class="d-flex justify-content-between w-100 p-3">
+                        <div class="d-flex">
+                            <div class="img-profile-xm mr-3">
+                                <img src="../../../../assets/images/pexels-christina-morillo-1181519.jpg">
+                            </div>
+                            <div class="d-flex">
+                                <div class="d-flex flex-column w-100">
+                                    <span class="bold-500"> Mauro Miguel </span>
+                                    <div class="irrelevant-text">
+                                        Marketing Digital
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <button mat-icon-button matTooltip="Avaliar estudante" color="primary">
+                                <mat-icon class="text-disabled-1">
+                                    more_horiz
+                                </mat-icon>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End -->
+
+            <!-- Studants enrolled in class -->
+            <div class="item rounded teacher-place-enrolled border rounded">
+                <!-- Title card -->
+                <div class="relevant-text-title mb-4 px-3 pt-3 d-flex align-items-center justify-content-between">
+                    <span>
+                        Formações Publicadas
+                    </span>
+                    <button mat-icon-button>
+                        <mat-icon> filter_list</mat-icon>
+                    </button>
+                </div>
+                <!-- End -->
+
+
+                <div class="d-flex flex-column">
+                    <!-- Button to enroll-->
+                    <div class="w-100 d-flex justify-content-center mb-2">
+                        <button mat-raised-button class="border-radius-0" color="accent">
+                            <mat-icon [style.fontSize.rem]="1.2">
+                                create_new_folder
+                            </mat-icon>
+                            CRIAR FORMAÇÃO
+                        </button>
+                    </div>
+                    <mat-divider class="mb-2"></mat-divider>
+                    <!-- End -->
+                    <div class="d-flex flex-column">
+                        <!-- Formation name -->
+                        <div class="mb-2 px-3">
+                            <h4 class="bold-500">
+                                Turma de Análise estatística II
+                            </h4>
+                        </div>
+                        <!-- End -->
+
+                        <div class="d-flex w-100">
+                            <div class="d-flex flex-column px-3 mb-2 text-center">
+                                <div class="irrelevant-text">
+                                    Matriculados
+                                </div>
+                                <div>
+                                    <h2 class="bold-400">
+                                        36
+                                    </h2>
+                                </div>
+                            </div>
+
+                            <div class="d-flex flex-column px-3 mb-2 text-center">
+                                <div class="irrelevant-text">
+                                    Data Início
+                                </div>
+                                <div>
+                                    <h2 class="bold-400">
+                                        2022/03/02
+                                    </h2>
+                                </div>
+                            </div>
+
+                            <div class="d-flex flex-column px-3 mb-2 text-center">
+                                <div class="irrelevant-text">
+                                    Data Fim
+                                </div>
+                                <div>
+                                    <h2 class="bold-400">
+                                        2022/03/09
+                                    </h2>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End -->
+
+        </div>
+    </div>
+
+</div>
+
+<ng-template #noPhoto>
+    <div class="img-profile-xm-none mr-3">
+        <div></div>
+    </div>
+</ng-template>
+
+
+<ng-template #loadingItems>
+    <app-loading-item></app-loading-item>
+</ng-template>
+
+<ng-template #noSubscriptions>
+    <div class="d-flex align-items-center justify-content-center w-100 h-100">
+        <span class="primaryLink">
+            A escola não tem certificados por emitir
+        </span>
+    </div>
+</ng-template>

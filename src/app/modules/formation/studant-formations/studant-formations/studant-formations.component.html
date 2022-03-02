@@ -50,12 +50,22 @@
                                                     <mat-chip removable="false" class="irrelevant-text-xm"
                                                         [matTooltip]="(formation.start | elapsed:true) +  ' para começar'"
                                                         *ngIf="formation.state == waiting">
-                                                        <span class="bold-500">Em espera</span>
+                                                        <span class="bold-500">{{formation.state | statePublished}}</span>
                                                     </mat-chip>
                                                     <mat-chip removable="false" class="irrelevant-text-xm"
                                                         [matTooltip]="(formation.end | elapsed:true) + ' para terminar'"
                                                         *ngIf="formation.state == started">
-                                                        <span class="bold-500">A decorrer</span>
+                                                        <span class="bold-500">{{formation.state | statePublished}}</span>
+                                                    </mat-chip>
+                                                    <mat-chip removable="false" class="irrelevant-text-xm"
+                                                        matTooltip="A escola está a emitir o seu ceritificado"
+                                                        *ngIf="formation.state == finished">
+                                                        <span class="bold-500">{{formation.state | statePublished}}</span>
+                                                    </mat-chip>
+                                                    <mat-chip removable="false" class="irrelevant-text-xm"
+                                                        matTooltip="A escola está a emitir o seu ceritificado"
+                                                        *ngIf="formation.state == closed">
+                                                        <span class="bold-500">{{formation.state | statePublished}}</span>
                                                     </mat-chip>
                                                 </mat-chip-list>
                                             </div>

@@ -1,0 +1,114 @@
+<div class="main bg-white">
+    <div class="section">
+        <div class="mb-2 align-self-start">
+            <h1 class="bold-500">
+                Os meus certificados
+            </h1>
+        </div>
+        <div class="border w-100 mb-4">
+            <div class="d-flex ml-2 mr-4 my-3">
+                <button mat-icon-button>
+                    <mat-icon>filter_list</mat-icon>
+                </button>
+                <div class="w-100 h-100 d-flex flex-column">
+                    <input class="form-control" #search type="text" placeholder="Pesquisar formação">
+                </div>
+            </div>
+        </div>
+        <div class="container-items">
+            <ng-container *ngIf="data$ | async as subscriptions; else loadingPage">
+                <ng-container *ngIf="subscriptions.length > 0; else noSubscriptions">
+                    <ng-container *ngFor="let subscription of subscriptions">
+                        <div class="item">
+                            <div class="bg-white p-0 h-100 d-flex flex-column">
+                                <div class="w-100 d-flex justify-content-center">
+                                    <div class="img-profile-md mb-1"
+                                        *ngIf="subscription.formationSchoolPicture; else noPhoto">
+                                        <img [src]="subscription.formationSchoolPicture | imgUrl">
+                                    </div>
+                                    <ng-template #noPhoto>
+                                        <div class="img-profile-md-none">
+                                            <div></div>
+                                        </div>
+                                    </ng-template>
+                                </div>
+
+                                <div class="d-flex flex-column p-3 content-section">
+                                    <div class="w-100 relevant-text-normal bold-500 mb-2 d-flex justify-content-center">
+                                        <h2>
+                                            {{subscription.formationSchoolName}}
+                                        </h2>
+                                    </div>
+                                    <div class="w-100 d-flex justify-content-center">
+                                        <h3 class=" bold-500">
+                                            {{subscription.formationTheme}}
+                                        </h3>
+                                    </div>
+                                    <div class="w-100 d-flex justify-content-center">
+                                        <span class="bold-500 irrelevant-text">
+                                            {{subscription.formationStart | date}} - {{subscription.formationEnd |
+                                            date}}
+                                        </span>
+                                    </div>
+
+                                    <div class="d-flex w-100 h-100 justify-content-end justfy-content-end">
+                                        <div class="d-flex text-disabled align-items-end justfy-content-end">
+                                            <mat-chip-list *ngIf="subscription.state == assessment">
+                                                <mat-chip removable="false">
+                                                    <span class="bold-500 irrelevant-text-xm">
+                                                        {{subscription.state | statePublished}}
+                                                    </span>
+                                                </mat-chip>
+                                            </mat-chip-list>
+
+                                            <mat-chip-list *ngIf="subscription.state == rejected">
+                                                <mat-chip removable="false">
+                                                    <span class="bold-500 irrelevant-text-xm">
+                                                        {{subscription.state | statePublished}}
+                                                    </span>
+                                                </mat-chip>
+                                            </mat-chip-list>
+
+                                            <button matButton *ngIf="subscription.state == closed">
+                                                <span class="bold-500 irrelevant-text-xm">
+                                                    Ver certificado
+                                                </span>
+                                            </button>
+
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-container>
+                </ng-container>
+            </ng-container>
+        </div>
+
+
+        <ng-template #loadingPage>
+            <app-loading-page class="w-100"></app-loading-page>
+        </ng-template>
+    </div>
+</div>
+
+
+<ng-template #noSubscriptions>
+    <div class="d-flex align-items-center justify-content-center w-100 h-100">
+        <span class="primaryLink">
+            Parece que ainda não tem certificados, faça formações <a routerLink="/home"> clicando aqui</a>
+        </span>
+    </div>
+</ng-template>
+
+<ng-template #loadingItems>
+    <app-loading-item></app-loading-item>
+</ng-template>
+
+<ng-template #spinner>
+    <div class="d-flex justify-content-center align-items-center p-2">
+        <mat-spinner color="primary" diameter=40 margin="auto"></mat-spinner>
+    </div>
+</ng-template>

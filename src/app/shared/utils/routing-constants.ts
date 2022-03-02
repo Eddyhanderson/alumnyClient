@@ -89,6 +89,7 @@ export class Routes {
 
     // Subscription routes
     static SUBSCRIPTION_GET_ROUTE = Routes.BASE_URL + "subscription/get/{studantId}/{formationId}";
+    static SUBSCRIPTION_GET_ALL_ROUTE = Routes.BASE_URL + "subscription/getAll";
 
     // TeacherSchools routes
     static TEACHER_SCHOOLS_CREATE_ROUTE = Routes.BASE_URL + "teacherSchools/create";
@@ -141,11 +142,14 @@ export class Routes {
     static QUESTION_GET_ALL_ROUTE = Routes.BASE_URL + "question/getAll";
     static QUESTION_PATCH_ROUTE = Routes.BASE_URL + "question/patch/{questionId}";
 
-    // Comment router
-    // Lesson routes
+    // Comment router    
     static COMMENT_CREATE_ROUTE = Routes.BASE_URL + "comment/create";
     static COMMENT_GET_ALL_ROUTE = Routes.BASE_URL + "comment/getAll";
     static COMMENT_GET_ROUTE = Routes.BASE_URL + "comment/get/{commentId}";
+
+    // Certificate
+    static CERTIFICATE_CREATE_ROUTE = Routes.BASE_URL + "certificate/create";
+    static CERTIFICATE_GET_BY_SUBSCRIPTION_ROUTE = Routes.BASE_URL + "certificate/getBySubscription/{subscriptionId}";
 
     // SignalR routes
     static VIDEO_UPLOAD_WATCH = Routes.BASE_URL + "video/upload/watch/{connectionId}";

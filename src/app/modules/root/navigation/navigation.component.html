@@ -79,6 +79,14 @@
     </li>
     <!-- End -->
 
+    <!-- Certificate nav item -->
+    <li class="nav-item" *ngIf="role.toUpperCase() == 'SCHOOL'">
+        <a class="d-flex pl-4" [routerLink]='["manager/control-panel"]' routerLinkActive="nav-active">
+            <mat-icon [style.fontSize.rem]="1.6"> assignment</mat-icon> <span class="ml-4">Painel de Controlo</span>
+        </a>
+    </li>
+    <!-- End -->
+
     <!-- Schools nav item -->
     <li class="nav-item" *ngIf="role.toUpperCase() == 'SCHOOL'">
         <a class="d-flex pl-4" [routerLink]='["/formations", school.id]' routerLinkActive="nav-active">
@@ -94,6 +102,8 @@
         </a>
     </li>
     <!-- End -->
+
+
 
 
 
@@ -114,8 +124,6 @@
         </a>
     </li>
     <!-- End -->
-
-
 
     <li class="d-flex flex-column" *ngIf="role.toUpperCase() == 'STUDANT'" style="height: auto;">
 
@@ -139,6 +147,15 @@
             </li>
         </ul>
     </li>
+
+    <!-- School place nav item -->
+    <li class="nav-item" *ngIf="role.toUpperCase() == 'STUDANT'">
+        <a class="pl-4 d-flex" [routerLink]="['certificate','list']" routerLinkActive="nav-active"
+            [routerLinkActiveOptions]="{exact:true}">
+            <mat-icon [style.fontSize.rem]="1.4">school</mat-icon><span class="ml-4">Certificados</span>
+        </a>
+    </li>
+    <!-- End -->
 
 </ul>
 <!-- End-->

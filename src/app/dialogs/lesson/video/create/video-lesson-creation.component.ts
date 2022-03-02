@@ -124,8 +124,7 @@ export class VideoLessonCreationComponent implements OnInit {
         moduleId: this.data.moduleId,
         manifestPath: this.manifest        
       }
-
-      console.dir(lesson);
+      
       let stt = await this.createLesson(lesson);
 
       if (stt?.succeded) {

@@ -83,11 +83,20 @@ export enum TeacherPlaceRegistrationState {
 
 export enum FormationEventStates {
     Started = "Started",
-    Waiting = "Waiting"
+    Waiting = "Waiting",
+    Finished = "Finished",
+    Closed = "Closed",
+}
+
+export enum SubscriptionStates {
+    Learning = "Learning",
+    Assessment = "Assessment",
+    Closed = "Closed",
+    Rejected = "Rejected"
 }
 
 export enum FormationRequestStates {
-    Aproved = "Aproved", 
+    Aproved = "Aproved",
 
     Rejected = "Rejected",
 

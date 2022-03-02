@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { CreateFormationDialogComponent } from 'src/app/dialogs/formation/create-formation-dialog/create-formation-dialog.component';
 import { FormationEventModel } from 'src/app/models/formation-event-model/formation-event.model';
 import { FormationModel } from 'src/app/models/formation-model/formation-model';
@@ -15,6 +16,7 @@ import { TablePaginationAdapter } from 'src/app/shared/utils/table-pagination-ad
   styleUrls: ['./formation-list.component.scss']
 })
 export class FormationListComponent implements OnInit {
+  _reloadStrategy:Subscription
   displayedColumns: string[] = ["name", "initial_date", "final_date", "price", "inscrits", "status"];
   data: TablePaginationAdapter<FormationModel, FormationQuery>;
 
@@ -27,10 +29,12 @@ export class FormationListComponent implements OnInit {
   private schoolId: string;
   constructor(private dialog: MatDialog,
     private route: ActivatedRoute,
-    private service: FormationService) { }
+    private service: FormationService,
+    private router: Router) { }
 
-  ngOnInit(): void {
+  ngOnInit(): void {    
     this.initDataSource();
+    this.setStrategyToReloadPage();
   }
 
   private initDataSource() {
@@ -43,10 +47,26 @@ export class FormationListComponent implements OnInit {
   }
 
   public onFormationCreate() {
-    this.dialog.open(CreateFormationDialogComponent);
+    this.dialog.open(CreateFormationDialogComponent).afterClosed()
+    .subscribe((data) => {
+      if(data){
+        this.router.navigateByUrl(this.router.url);
+      }
+    });
   }
 
   private setQueryField() {
     this.schoolId = this.route.snapshot.paramMap.get('id');
+  }
+
+  /* To reload component */
+  private setStrategyToReloadPage() {
+    this._reloadStrategy = this.router.events.subscribe(
+      async (evt) => {
+        if (evt instanceof NavigationEnd) {
+          this.data.setSearchValue = '';
+        }
+      }
+    )
   }
 }

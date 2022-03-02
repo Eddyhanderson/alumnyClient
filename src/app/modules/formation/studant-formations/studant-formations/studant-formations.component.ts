@@ -16,6 +16,8 @@ import { Routes } from 'src/app/shared/utils/routing-constants';
 export class StudantFormationsComponent implements OnInit {
   waiting = FormationEventStates.Waiting;
   started = FormationEventStates.Started;
+  finished = FormationEventStates.Finished;
+  closed = FormationEventStates.Closed
 
   studant: StudantModel;
 
@@ -37,9 +39,13 @@ export class StudantFormationsComponent implements OnInit {
 
   public buildFormationUrl(formation: FormationModel) {
     if (formation.state == this.waiting)
-      return `/formations/${formation.id}/preview`;
+      return `/certificate/${formation.id}/preview`;
     else if (formation.state == this.started)
-    return `/formations/${formation.id}/watch`;
+      return `/formations/${formation.id}/watch`;
+    else if (formation.state == this.finished)
+      return `/certificate/list`;
+    else if (formation.state == this.closed)
+      return `/certificate/list`;
   }
 
   public getStudant() {

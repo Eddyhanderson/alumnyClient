@@ -43,12 +43,14 @@
 
 				<ng-container matColumnDef="price">
 					<mat-header-cell *matHeaderCellDef> Preço </mat-header-cell>
-					<mat-cell *matCellDef="let element">{{element.price}} AOA</mat-cell>
+					<mat-cell *matCellDef="let element">{{element.price | currency:'AKZ'}}</mat-cell>
 				</ng-container>
 
 				<ng-container matColumnDef="inscrits">
 					<mat-header-cell *matHeaderCellDef> Inscritos </mat-header-cell>
-					<mat-cell *matCellDef="let element">N/A</mat-cell>
+					<mat-cell *matCellDef="let element">
+						{{element.published ? element.subscriptionCount : 'N/A'}}						
+					</mat-cell>
 				</ng-container>
 
 				<ng-container matColumnDef="status">
@@ -60,20 +62,11 @@
 							</mat-chip>
 						</mat-chip-list>
 
-						<mat-chip-list *ngIf="element.published && element.state == started" >
+						<mat-chip-list *ngIf="element.published && element.state" >
 							<mat-chip removable="false" color="warn">
 								{{element.state | statePublished}}
 							</mat-chip>
-						</mat-chip-list>
-
-						<mat-chip-list *ngIf="element.published && element.state == waiting" >
-							<mat-chip removable="false" color="accent">
-								{{element.state | statePublished}}
-							</mat-chip>
-						</mat-chip-list>
-
-														
-						
+						</mat-chip-list>																				
 					</mat-cell>
 				</ng-container>
 
@@ -92,11 +85,11 @@
 						</div>
 
 						<mat-menu #actions="matMenu">
-							<button mat-menu-item>
+							<button mat-menu-item [disabled] = "element.published">
 								<mat-icon>launch</mat-icon>
 								<span>Publicar</span>
 							</button>
-							<button mat-menu-item>
+							<button mat-menu-item [disabled] = "element.published">
 								<mat-icon>delete</mat-icon>
 								<span>Apagar</span>
 							</button>

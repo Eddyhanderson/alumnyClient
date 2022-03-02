@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { CreateFormationEventComponent } from 'src/app/dialogs/formation-event/create-formation-event/create-formation-event.component';
 import { ArticleLessonCreationComponent } from 'src/app/dialogs/lesson/article/create/article-lesson-creation.component';
 import { VideoLessonCreationComponent } from 'src/app/dialogs/lesson/video/create/video-lesson-creation.component';
@@ -25,14 +26,18 @@ export class ModuleListComponent implements AfterViewInit {
   formation: FormationModel;
 
   modules$: PaginationAdapter<ModuleModel, ModuleQuery>;
+  private _reloadStrategy: Subscription;
+
   constructor(private matDialog: MatDialog,
     private route: ActivatedRoute,
     private ms: ModuleService,
-    private fs: FormationService) { }
+    private fs: FormationService,
+    private router: Router) { }
 
-    ngAfterViewInit(): void {
+  ngAfterViewInit(): void {
     this.getFormation();
     this.initDataSource();
+    this.setStrategyToReloadPage();
   }
 
   // Config view
@@ -60,7 +65,13 @@ export class ModuleListComponent implements AfterViewInit {
 
   // Events
   public onCreateModules() {
-    this.matDialog.open(CreateModulesDialogComponent);
+    var ref = this.matDialog.open(CreateModulesDialogComponent, { data: this.formationId });
+
+    ref.afterClosed().subscribe(data => {
+      if (data) {
+        this.router.navigateByUrl(this.router.url);
+      }
+    })
   }
 
   public onPublishFormation() {
@@ -69,18 +80,41 @@ export class ModuleListComponent implements AfterViewInit {
 
   public onCreateArticle(moduleId: string) {
 
-    this.matDialog.open(ArticleLessonCreationComponent, {
+    var ref = this.matDialog.open(ArticleLessonCreationComponent, {
       data: { moduleId: moduleId },
       width: '70%',
       height: '80%'
     });
+
+    ref.afterClosed().subscribe(succeeded => {
+      if (succeeded) {
+        this.router.navigate(['/lesson', 'managment']);
+      }
+    })
   }
 
   public onCreateVideo(moduleId: string) {
-    this.matDialog.open(VideoLessonCreationComponent, {
+    var ref = this.matDialog.open(VideoLessonCreationComponent, {
       data: { moduleId: moduleId },
       width: '80%',
       height: '80%'
     });
+
+    ref.afterClosed().subscribe(succeeded => {
+      if (succeeded) {
+        this.router.navigate(['/lesson', 'managment']);
+      }
+    })
+  }
+
+  /* To reload component */
+  private setStrategyToReloadPage() {
+    this._reloadStrategy = this.router.events.subscribe(
+      async (evt) => {
+        if (evt instanceof NavigationEnd) {
+          this.modules$.setSearchValue = '';
+        }
+      }
+    )
   }
 }

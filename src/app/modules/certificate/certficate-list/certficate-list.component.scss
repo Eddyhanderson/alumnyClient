@@ -1,0 +1,39 @@
+@import "../../../shared/styles/standard-layout-0";
+
+.main {
+    @extend %main;
+    height: auto;
+}
+
+.section {
+    @extend %section;
+}
+
+.item {
+    @extend %item;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    border-radius: 5px;
+    border: 1px solid transparent;
+    height: 20rem;
+}
+
+.container-items{
+    @extend %container-items;
+}
+
+.item-link {
+    box-sizing: border-box;
+    text-decoration: none;    
+}
+
+.background-image {
+    height: 40%;
+}
+
+.background-image img{
+    border-radius: 5px;
+}
+
+.content-section{
+    height: 60%;
+}

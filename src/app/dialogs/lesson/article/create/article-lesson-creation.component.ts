@@ -110,14 +110,6 @@ export class ArticleLessonCreationComponent implements OnInit {
 
       if (stt?.succeded) {
         let snackBarRef = this.snackBar.open('Parabéns! Artigo publicado com sucesso');
-
-        /*snackBarRef.afterDismissed().subscribe(() => this.router.navigate(["lesson/managment"], {
-          queryParams: {
-            'teacherPlaceId': this.teacherPlace.id,
-            'topicId': this.topic.id
-          }
-        }));*/
-
         this.dialogRef.close(true);
       } else {
         this.snackBar.open(Constants.FAIL_OPERATION_MESSAGE);    

@@ -1,0 +1,212 @@
+<div class="d-flex justify-content-between">
+    <h2 mat-dialog-title>
+        Avaliação de Desempenho
+    </h2>
+    <button mat-icon-button>
+        <mat-icon mat-dialog-close>
+            close
+        </mat-icon>
+    </button>
+</div>
+<mat-dialog-content class="w-100 justify-content-center align-items-center d-flex m-0">
+    <mat-horizontal-stepper [linear]="true">
+        <ng-template matStepperIcon="details">
+            <mat-icon>
+                panorama_fish_eye
+            </mat-icon>
+        </ng-template>
+        <ng-template matStepperIcon="confirmation">
+            <mat-icon>
+                content_paste
+            </mat-icon>
+        </ng-template>
+
+        <mat-step label="Detalhes" state="details" [stepControl]="formationGroup">
+            <div class="d-flex flex-column w-100 align-items-center justify-content-center"
+                *ngIf="studant && formation; else loadingItems">
+                <div class="img-profile-md" *ngIf="studant.picture; else noPhoto">
+                    <img [src]="studant.picture | imgUrl">
+                </div>
+                <div>
+                    <span class="bold-500">
+                        {{studant.firstName}} {{studant.lastName}}
+                    </span>
+                </div>
+                <div>
+                    <h2>
+                        {{formation.theme}}
+                    </h2>
+                </div>
+
+            </div>
+            <form [formGroup]="formationGroup" class="w-100 h-100 mt-4">
+                <div class="w-100">
+                    <label class="d-block">Escolha o tipo de avaliação</label>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Tipo de avaliação</mat-label>
+                        <mat-select [formControl]="methodControl">
+                            <mat-option value="1">
+                                Quantitativo
+                            </mat-option>
+                            <mat-option value="2">
+                                Qualitativo
+                            </mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="methodControl.hasError('required')"> Deve escolher uma das opções</mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div *ngIf="methodControl && methodControl.value && methodControl.value == 2" class="w-100">
+                    <label>Como classifica o seu Desempenho </label>
+                    <mat-form-field class="w-100" appearance="outline" color="accent">
+                        <mat-label>Classifica o desempenho</mat-label>
+                        <mat-select [formControl]="qualitativeResultControl">
+                            <mat-option value="Insuficiente">
+                                Insuficiente
+                            </mat-option>
+                            <mat-option value="Suficiente">
+                                Suficiente
+                            </mat-option>
+                            <mat-option value="Bom">
+                                Bom
+                            </mat-option>
+                            <mat-option value="Muito Bom">
+                                Muito Bom
+                            </mat-option>
+                            <mat-option value="Excelente">
+                                Excelente
+                            </mat-option>
+                        </mat-select>
+                        <mat-error
+                            *ngIf="qualitativeResultControl.touched && qualitativeResultControl.hasError('required')">
+                            O campo não pode estar vazio
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div *ngIf="methodControl && methodControl.value && methodControl.value == 1" class="w-100">
+                    <label>Insira a nota final </label>
+                    <mat-form-field class="w-100" appearance="outline" color="accent" appearance="fill">
+                        <input type="number" matInput [formControl]="scoreControl" min="0" class="amount"
+                            placeholder="0">
+                        <mat-error *ngIf="scoreControl.touched && scoreControl.hasError('required')">
+                            O campo não pode estar vazio
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div *ngIf="methodControl && methodControl.value && methodControl.value == 1" class="w-100">
+                    <label>Insira a escala considerada</label>
+                    <mat-form-field class="w-100" appearance="outline" color="accent" appearance="fill">
+                        <input type="number" matInput [formControl]="maxScoreControl" min="0" class="amount"
+                            placeholder="0">
+                        <mat-error *ngIf="maxScoreControl.touched && maxScoreControl.hasError('required')">
+                            O campo não pode estar vazio
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div class="w-100">
+                    <mat-form-field class="w-100">
+                        <mat-label>
+                            Observações
+                        </mat-label>
+                        <textarea id="description-field" [formControl]="descriptionControl" matInput></textarea>
+                    </mat-form-field>
+                </div>
+
+                <div class="d-flex w-100 justify-content-center">
+                    <button mat-flat-button color="accent" matStepperNext ngSubmit
+                        class="w-25 d-flex justify-content-center align-items-center" style="height: 2rem;">
+                        Avançar
+                    </button>
+                </div>
+            </form>
+        </mat-step>
+
+        <mat-step state="confirmation">
+            <div class="d-flex border bg-light mt-2" *ngIf="studant && formation; else loadingItems">
+                <div class="d-flex flex-column w-100 align-items-center justify-content-center mt-3">
+                    <div class="img-profile-md" *ngIf="studant.picture; else noPhoto">
+                        <img [src]="studant.picture | imgUrl">
+                    </div>
+                    <div>
+                        <span class="bold-500">
+                            {{studant.firstName}} {{studant.lastName}}
+                        </span>
+                    </div>
+
+                    <mat-divider class="bg-white w-100 my-4"></mat-divider>
+
+                    <div class="d-flex w-100 justify-content-center">
+                        <div class="d-flex flex-column px-3 mb-2 text-center">
+                            <div class="irrelevant-text">
+                                Método Avaliativo
+                            </div>
+                            <div>
+                                <h2 class="bold-400">
+                                    {{methodControl.value == 1 ? 'Quantitativo' : 'Quantitativo'}}
+                                </h2>
+                            </div>
+                        </div>
+
+                        <div class="d-flex flex-column px-3 mb-2 text-center">
+                            <div class="irrelevant-text">
+                                Classificação Final
+                            </div>
+                            <div>
+                                <h2 class="bold-400">
+                                    {{methodControl.value == 1 ? scoreControl.value + '/' + maxScoreControl.value :
+                                    qualitativeResultControl.value}}
+                                </h2>
+                            </div>
+                        </div>
+                    </div>
+
+                    <mat-divider class="bg-white w-100"></mat-divider>
+
+                    <div class="d-flex justify-content-between p-3">
+                        <div class="img-profile-md m-auto ml-3">
+                            <img [src]="formation.schoolPicture | imgUrl">
+                        </div>
+                        <div class="p-3">
+                            <p class="desclaimer-text">
+                                {{assignmentMessage}}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Forget of passowrd -->
+            <div class="d-flex flex-column my-3">
+                <span class="irrelevant-text">
+                    <span>
+                        Este certificado não tem qualquer valor fora da plataforma, caso tenha emitido
+                        um certificado reconhecido pode anexá-lo <a href="#">clicando aqui</a>                        
+                    </span>
+                </span>
+            </div>
+            <!-- End -->
+            <div class="d-flex w-100 justify-content-center" *ngIf="studant && formation; else loadingItems">
+                <button mat-flat-button color="accent"  (click) = "onEmitCertificate()" [style.height.rem] = "2"
+                ngSubmit class="d-flex justify-content-center align-items-center w-50"
+                    [disabled]="submited">
+                    <mat-spinner color="primary" diameter=20 *ngIf="submited"></mat-spinner>
+                    <span *ngIf="!submited">Emitir ceritificado</span>
+                </button>
+            </div>
+        </mat-step>
+
+    </mat-horizontal-stepper>
+</mat-dialog-content>
+
+<ng-template #noPhoto>
+    <div class="img-profile-md-none">
+        <div></div>
+    </div>
+</ng-template>
+
+<ng-template #loadingItems>
+    <app-loading-item class="mb-4"></app-loading-item>
+</ng-template>

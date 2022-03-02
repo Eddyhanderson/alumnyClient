@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 
 import { MaterialModule } from 'src/app/modules/material/material.module';
 import { SchoolRequestComponentDialog } from './school/school-request-dialog/school-request.component';
@@ -20,6 +20,7 @@ import { CreateSchoolDialogComponent } from './school/create-school-dialog/creat
 import { CreateModulesDialogComponent } from './modules/create-modules-dialog/create-modules-dialog.component';
 import { CreateFormationEventComponent } from './formation-event/create-formation-event/create-formation-event.component';
 import { CreateFormationRequestDialogComponent } from './formation-request/create-formation-request-dialog/create-formation-request-dialog.component';
+import { CreateCertificateDialogComponent } from './certificate/create-certificate-dialog/create-certificate-dialog.component';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { CreateFormationRequestDialogComponent } from './formation-request/creat
     CreateModulesDialogComponent,
     CreateModulesDialogComponent,
     CreateFormationEventComponent,
-    CreateFormationRequestDialogComponent
+    CreateFormationRequestDialogComponent,
+    CreateCertificateDialogComponent
   ],
   imports: [
     CommonModule,
@@ -65,6 +67,7 @@ import { CreateFormationRequestDialogComponent } from './formation-request/creat
   ],
 
   providers: [
+    [DatePipe],
     {
       provide: MAT_DIALOG_DEFAULT_OPTIONS,
       useValue: { hasBackdrop: true, disableClose: true }

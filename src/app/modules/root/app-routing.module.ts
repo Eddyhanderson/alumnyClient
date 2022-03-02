@@ -9,6 +9,7 @@ const routes: Routes = [
   { path: "studant", loadChildren: () => import('../../modules/studant/studant.module').then(m => m.StudantModule) },
   { path: "school", loadChildren: () => import('../../modules/school/school.module').then(m => m.SchoolModule) },
   { path: "formations", loadChildren: () => import('../../modules/formation/formation.module').then(m => m.FormationModule) },
+  { path: "certificate", loadChildren: () => import('../../modules/certificate/certificate.module').then(m => m.CertificateModule) },
   { path: "formations-requests", loadChildren: () => import('../../modules/formation-request/formation-request.module').then(m => m.FormationRequestModule) },
   { path: "module", loadChildren: () => import('../../modules/module/module.module').then(m => m.ModuleModule) },
   { path: "lesson", loadChildren: () => import('../../modules/lesson/lesson.module').then(m => m.LessonModule) },

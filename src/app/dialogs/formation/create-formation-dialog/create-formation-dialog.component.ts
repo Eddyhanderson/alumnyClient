@@ -11,6 +11,8 @@ import { FormationService } from 'src/app/services/formation-service/formation.s
   styleUrls: ['./create-formation-dialog.component.scss']
 })
 export class CreateFormationDialogComponent implements OnInit {
+  formation:FormationModel;
+
   submited: boolean = false;
   themeControl: FormControl = new FormControl('', [Validators.required]);
   categoryControl: FormControl = new FormControl('', [Validators.required]);
@@ -34,21 +36,19 @@ export class CreateFormationDialogComponent implements OnInit {
 
     this.submited = true;
 
-    var formation: FormationModel = {
+    this.formation = {
       theme: this.formationGroup.value.theme,
       category: this.formationGroup.value.category,
       description: this.formationGroup.value.description,
       price: this.formationGroup.value.price,
       schoolId: JSON.parse(localStorage.school).id
-    }
+    }    
 
-    console.dir(formation);
-
-    var result = await this.service.create(formation);
+    var result = await this.service.create(this.formation);
 
     if (result && result.succeded) {
       await this.snackBar.open("Formação criada com sucesso !").afterDismissed().toPromise();
-      this.dialogRef.close();
+      this.dialogRef.close(this.formation);
     }else{
       await this.snackBar.open("Formação não criada, tente novamente.").afterDismissed().toPromise();
       this.dialogRef.close();

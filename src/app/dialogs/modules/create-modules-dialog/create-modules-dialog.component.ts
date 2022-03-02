@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, Injectable, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ModuleModel } from 'src/app/models/module-model/modules.model';
 import { ImageService } from 'src/app/services/image-service/image.service';
@@ -17,7 +17,7 @@ export class CreateModulesDialogComponent implements OnInit {
   // Models
   public modules: ModuleModel;
   public imgUrl: string;
-  public imgDir:string;
+  public imgDir: string;
 
   // Form Controls
   public nameCtl = new FormControl('', [Validators.required, Validators.maxLength(100)])
@@ -31,7 +31,8 @@ export class CreateModulesDialogComponent implements OnInit {
     private ms: ModuleService,
     private snackBar: MatSnackBar,
     private fb: FormBuilder,
-    private matRef: MatDialogRef<CreateModulesDialogComponent>) { }
+    private matRef: MatDialogRef<CreateModulesDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) private formationId) { }
 
   ngOnInit(): void {
     this.buildFormBuilder();
@@ -54,7 +55,7 @@ export class CreateModulesDialogComponent implements OnInit {
 
     if (response?.data) {
       this.imgDir = response.data;
-      this.imgUrl = Routes.BASE_URL_SERVER_FILE + this.imgDir ;
+      this.imgUrl = Routes.BASE_URL_SERVER_FILE + this.imgDir;
       this.snackBar.open('Miniatura criada com sucesso')
     }
     else {
@@ -69,18 +70,18 @@ export class CreateModulesDialogComponent implements OnInit {
       name: this.dataFg.value.name,
       description: this.dataFg.value.description,
       picture: this.imgDir,
-      formationId: '7a15ed9b-e029-40c1-bf80-b3711d03b663'
+      formationId: this.formationId
     }
-    
+
     var result = await this.ms.create(this.modules);
 
     if (result && result.succeded) {
-      await this.snackBar.open("Modules criados com sucesso").afterDismissed().toPromise();
+      await this.snackBar.open("Modulo criado com sucesso");
 
-      this.matRef.close();
+      this.matRef.close(this.modules);
     } else {
       this.sendErrorMessage();
-      this.matRef.close() ;
+      this.matRef.close();
     }
 
   }
