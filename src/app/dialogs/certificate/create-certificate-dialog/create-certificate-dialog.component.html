@@ -166,7 +166,7 @@
                     <mat-divider class="bg-white w-100"></mat-divider>
 
                     <div class="d-flex justify-content-between p-3">
-                        <div class="img-profile-md m-auto ml-3">
+                        <div class="img-profile-md m-auto ml-3" *ngIf="formation.schoolPicture; else noPhoto">
                             <img [src]="formation.schoolPicture | imgUrl">
                         </div>
                         <div class="p-3">

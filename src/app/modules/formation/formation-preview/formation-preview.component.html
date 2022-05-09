@@ -2,7 +2,7 @@
     <ng-container *ngIf="formation; else loadingPage">
         <div class="wallpaper-container wallpaper-container-lg mb-4">
             <div class="background-container">
-                <img [src]="buildImageUrl(formation.picture)">
+                <img [src]="formation.picture | imgUrl">
                 <div class="shadow-ff" style="top: 0;"></div>
             </div>
             <div class="wallpaper-actions d-flex flex-column align-items-center justify-content-center w-100">
@@ -64,9 +64,14 @@
                     </div>
 
                     <div class="d-flex align-items-center mb-2">
-                        <div class="img-profile-xm mr-2">
-                            <img [src]="buildImageUrl(formation.schoolPicture)">
+                        <div class="img-profile-xm mr-2" *ngIf="formation.schoolPicture; else noPhoto">
+                            <img [src]="formation.schoolPicture | imgUrl">
                         </div>
+                        <ng-template #noPhoto>
+                            <div class="img-profile-xm-none mr-2">
+                                <div></div>
+                            </div>
+                        </ng-template>
                         <div class="d-flex flex-column">
                             <a>
                                 {{formation.schoolName}}
