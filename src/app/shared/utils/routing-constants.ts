@@ -115,6 +115,7 @@ export class Routes {
     static IMAGE_UPLOAD_LESSON_PROFILE = Routes.BASE_URL + "image/upload/lesson/profile";
     static IMAGE_UPLOAD_TOPIC = Routes.BASE_URL + "image/upload/topic";
     static IMAGE_UPLOAD_MODULE = Routes.BASE_URL + "image/upload/module";
+    static IMAGE_UPLOAD_FORMATION = Routes.BASE_URL + "image/upload/formation";
 
 
     // Lesson routes

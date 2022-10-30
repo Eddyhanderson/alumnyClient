@@ -11,7 +11,7 @@ export class FormationModel {
     dateSituation?: Date;
     dateCreation?: Date;
     published?: boolean;
-    picture?: number;
+    picture?: string;
     schoolPicture?: string;
     schoolAcronym?: string;
     schoolName?: string;

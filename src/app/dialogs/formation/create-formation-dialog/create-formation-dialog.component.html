@@ -49,6 +49,26 @@
                 </mat-error>
             </mat-form-field>
         </div>
+        <div class="irrelevant-text text-disabled-1 mb-1">
+            Escolha uma imagem como miniatura
+        </div>
+        <div class="d-flex justify-content-start">
+            <div class="p-relative">
+                <div [style]="{'height':'6rem', 'width':'6rem'}"
+                    class="d-flex justify-content-center align-items-center border">
+                    <mat-icon *ngIf="!imgUrl; else preview"> image </mat-icon>
+
+                    <ng-template #preview>
+                        <div class="thumbnail-preview">
+                            <img [src]="imgUrl" alt="">
+                        </div>
+                    </ng-template>
+                </div>
+
+                <input *ngIf="!imgUrl" type="file" #fileInput id="uploadFile"
+                    (change)="uploadImageEvt($event)" name="uploadFile" accept="image/*" />
+            </div>
+        </div>
         <div class="w-100">
             <mat-form-field class="w-100">
                 <mat-label>
