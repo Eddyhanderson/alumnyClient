@@ -62,7 +62,7 @@ In this section i'm gonna show you guys, how this application looks like, showin
 
 
 # Running App 🚗🚗
-To run this app you must have the Alumny Rest API first. You can find following [this link](https://github.com/Eddyhanderson/).
+To run this app you must have the Alumny Rest API first. You can find following [this link](https://github.com/Eddyhanderson/alumnyRestApi).
 After that you may need:
 - Angular CLI 11.0.6 [see how to get it up](https://angular.io/guide/setup-local)
 - NodeJs v12.18.3 [see how to get it ready](https://nodejs.org/)
