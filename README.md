@@ -68,6 +68,6 @@ After that you may need:
 - NodeJs v12.18.3 [see how to get it ready](https://nodejs.org/)
 
 # How to contribute
-Well, if you read until here, i'm sure that you're willing to get your hands in this code to helpe me improving this application.
+Well, if you read until here, i'm sure that you're willing to get your hands in this code to help me improving this application.
 For that you just need to follow the [guide to contribute in github](https://github.com/firstcontributions/first-contributions).
 If you want to deep dive in this application, please contact me in my email (edikativa@gmail.com), maybe we create some channel on discord to comunicate.
